@@ -5,6 +5,7 @@
 //    paste it, and change the text between the quotes " ".
 //  • To REMOVE a job: delete its whole { ... } block.
 //  • id: short unique name, English letters and dashes only.
+//  • page: the job's own share page (Claude makes it for you).
 //  • countries: shown as tags AND added to the country dropdown.
 //  • brief: 1–2 lines shown on the card.
 //  • The lists (responsibilities, requirements...) show on the
@@ -16,6 +17,7 @@ const APPLY_FORM = ""; // default form for jobs without their own applyLink
 const JOBS = [
   {
     id: "full-cycle-sales-executive",
+    page: "job-full-cycle-sales-executive.html",
     title: "Full-Cycle Sales Executive",
     company: "Confidential",
     industry: "Accounting, Auditing & Financial Services",
@@ -53,6 +55,7 @@ const JOBS = [
   },
   {
     id: "sales-development-representative",
+    page: "job-sales-development-representative.html",
     title: "Sales Development Representative (SDR)",
     company: "Confidential",
     industry: "ERP, SaaS, AI & Technology Services",

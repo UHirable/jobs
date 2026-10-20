@@ -85,6 +85,7 @@ const escapeHTML = (s = "") =>
   String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
 const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
 const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
 const jobChips = (j) =>
   [
@@ -149,7 +150,7 @@ if (list && typeof JOBS !== "undefined") {
           <p class="desc">${escapeHTML(j.brief || "")}</p>
           <div class="job-actions">
             <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
-            <a class="btn btn-sm btn-soft" href="job.html?id=${encodeURIComponent(jobId(j))}">More details</a>
+            <a class="btn btn-sm btn-soft" href="${jobPage(j)}">More details</a>
           </div>
         </article>`)
       .join("");
@@ -163,7 +164,7 @@ if (list && typeof JOBS !== "undefined") {
 // ---------- Single job page (job.html) ----------
 const jobContent = document.getElementById("job-content");
 if (jobContent && typeof JOBS !== "undefined") {
-  const id = new URLSearchParams(location.search).get("id");
+  const id = window.JOB_ID || new URLSearchParams(location.search).get("id");
   const j = JOBS.find((x) => jobId(x) === id);
 
   if (!j) {
@@ -181,7 +182,7 @@ if (jobContent && typeof JOBS !== "undefined") {
     const list = (title, items) =>
       arr(items).length ? `<h2>${title}</h2><ul>${arr(items).map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>` : "";
     // Share buttons
-    const url = location.href;
+    const url = new URL(jobPage(j), location.href).href;
     const msg = `${j.title} – we're hiring! Apply here:`;
     document.getElementById("share-li").href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
     document.getElementById("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(msg + " " + url);
