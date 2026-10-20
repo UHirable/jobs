@@ -79,6 +79,7 @@ main { flex: 1; }
 .btn:disabled { filter: grayscale(.4) opacity(.7); cursor: wait; }
 .btn-primary { --b: var(--brand); --t: #fff; --edge: var(--brand-800); }
 .btn-gold { --b: var(--gold); --t: var(--navy); --edge: #d99e10; }
+.btn-soft { --b: var(--brand-50); --t: var(--brand); --edge: var(--brand-100); }
 .btn-sm { padding: 10px 18px; font-size: .9rem; border-radius: 12px; }
 .btn-full { width: 100%; }
 .btn svg { width: 18px; height: 18px; }
@@ -355,24 +356,50 @@ textarea { resize: vertical; }
 }
 .empty .icon3d { margin: 0 auto 14px; }
 
-/* Job details */
+/* Job card actions + job page */
 .jobs-list { align-items: start; }
-.chip.deadline { background: #ffe9ec; color: #c42b3c; }
-.chip.closed { background: #eceef5; color: #6b7090; }
-.job-card.is-closed { opacity: .7; }
-.apply-btn.closed { --b: #c9cde3; --edge: #a3a8c4; --t: #4b5070; }
-.job-details { border-top: 1px solid #eceefa; padding-top: 12px; }
-.job-details summary {
-  cursor: pointer; font-weight: 700; color: var(--brand); list-style: none;
-  display: inline-flex; align-items: center; gap: 6px;
+.job-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.back-link { display: inline-block; color: rgba(255,255,255,.85); font-weight: 600; margin-bottom: 18px; }
+.back-link:hover { color: #fff; }
+.job-hero p { margin-bottom: 18px; }
+.job-hero .chip { background: rgba(255,255,255,.16); color: #fff; }
+.job-hero .chip.gold { background: rgba(255,201,60,.22); color: var(--gold); }
+.job-detail h2 { font-size: 1.2rem; margin: 26px 0 10px; letter-spacing: -.01em; }
+.job-detail h2:first-child { margin-top: 0; }
+.job-detail p { color: var(--muted); }
+.job-detail ul { padding-left: 20px; color: var(--muted); display: grid; gap: 8px; }
+.job-detail li::marker { color: var(--brand); }
+.detail-apply { margin-top: 30px; padding-top: 24px; border-top: 1px solid #eceefa; }
+.apply-card p { color: rgba(255,255,255,.75); margin-bottom: 20px; font-size: .95rem; }
+.side-link { display: block; text-align: center; margin-top: 16px; color: rgba(255,255,255,.75); font-weight: 600; font-size: .9rem; }
+.side-link:hover { color: #fff; }
+
+/* Hero 3D image */
+.hero-visual .hero-3d {
+  width: min(520px, 100%); margin: 0 auto;
+  filter: drop-shadow(0 40px 50px rgba(0,0,60,.4));
+  animation: float 7s ease-in-out infinite;
 }
-.job-details summary::-webkit-details-marker { display: none; }
-.job-details summary::after { content: "▾"; transition: transform .2s; }
-.job-details[open] summary::after { transform: rotate(180deg); }
-.details-body { margin-top: 10px; }
-.details-body h4 { font-size: .9rem; margin: 14px 0 6px; color: var(--ink); }
-.details-body ul { padding-left: 18px; color: var(--muted); font-size: .92rem; display: grid; gap: 4px; }
-.details-body li::marker { color: var(--brand); }
+
+/* Tally embed */
+.tally-frame { display: block; width: 100%; border: 0; min-height: 300px; }
+
+/* Share buttons */
+.share { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); text-align: center; }
+.share > span { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 12px; }
+.share-btns { display: flex; justify-content: center; gap: 12px; }
+.share-btn {
+  width: 46px; height: 46px; border-radius: 14px; border: 0; cursor: pointer;
+  display: grid; place-items: center; color: #fff;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.35), inset 0 -4px 8px rgba(0,0,0,.25), 0 10px 18px -6px rgba(0,0,0,.5);
+  transition: transform .2s;
+}
+.share-btn:hover { transform: translateY(-3px); }
+.share-btn svg { width: 22px; height: 22px; }
+.share-btn.li { background: linear-gradient(145deg, #2a8fd8, #0a66c2 60%, #064a8f); }
+.share-btn.wa { background: linear-gradient(145deg, #4be37f, #25d366 60%, #128c4a); }
+.share-btn.copy { background: linear-gradient(145deg, #3a47ff, var(--brand) 60%, var(--brand-800)); }
+.copy-status { display: block; min-height: 1.2em; margin-top: 10px; color: var(--gold); font-weight: 600; }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 44px 0; }

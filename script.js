@@ -79,6 +79,27 @@ if (form) {
   });
 }
 
+// ---------- Shared job helpers ----------
+const arr = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+const escapeHTML = (s = "") =>
+  String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+const jobCountries = (j) => arr(j.countries || j.locations || j.country);
+const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
+const jobChips = (j) =>
+  [
+    ...arr(j.tags).map((t) => `<span class="chip">${escapeHTML(t)}</span>`),
+    ...jobCountries(j).map((c) => `<span class="chip gold">📍 ${escapeHTML(c)}</span>`)
+  ].join("");
+
+document.addEventListener("click", (e) => {
+  const a = e.target.closest(".apply-btn");
+  if (a && (!a.getAttribute("href") || a.getAttribute("href") === "#")) {
+    e.preventDefault();
+    alert("Applications open soon — please check back!");
+  }
+});
+
 // ---------- Jobs list + country filter (jobs.html) ----------
 const list = document.getElementById("jobs-list");
 if (list && typeof JOBS !== "undefined") {
@@ -86,40 +107,11 @@ if (list && typeof JOBS !== "undefined") {
   const searchBox = document.getElementById("search-box");
   const countEl = document.getElementById("jobs-count");
 
-  const arr = (v) => (Array.isArray(v) ? v : v ? [v] : []);
-  const locs = (j) => arr(j.countries || j.locations || j.country);
-
-  // Build the country dropdown from the jobs' candidate locations
-  const countries = [...new Set(JOBS.flatMap(locs))].sort();
-  countries.forEach((c) => {
+  [...new Set(JOBS.flatMap(jobCountries))].sort().forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
     opt.textContent = c;
     countrySelect.appendChild(opt);
-  });
-
-  const escape = (s = "") =>
-    String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
-
-  const formLink = typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "";
-  const applyHref = (j) => j.applyLink || formLink;
-
-  const isClosed = (j) => j.deadline && new Date(j.deadline) < new Date();
-  const fmtDeadline = (d) => {
-    const dt = new Date(d);
-    if (isNaN(dt)) return d;
-    return dt.toLocaleString("en-GB", {
-      weekday: "short", day: "numeric", month: "short",
-      hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Africa/Cairo"
-    }) + " (Cairo)";
-  };
-
-  list.addEventListener("click", (e) => {
-    const a = e.target.closest(".apply-btn");
-    if (a && (a.classList.contains("closed") || !a.getAttribute("href"))) {
-      e.preventDefault();
-      alert(a.classList.contains("closed") ? "Applications for this role are closed." : "Applications open soon — please check back!");
-    }
   });
 
   function render() {
@@ -127,9 +119,8 @@ if (list && typeof JOBS !== "undefined") {
     const q = searchBox.value.trim().toLowerCase();
 
     const filtered = JOBS.filter((j) => {
-      const l = locs(j);
-      const matchCountry = country === "all" || l.includes(country);
-      const text = [j.title, j.company, j.industry, j.brief, j.description, ...arr(j.tags), ...l].join(" ").toLowerCase();
+      const matchCountry = country === "all" || jobCountries(j).includes(country);
+      const text = [j.title, j.company, j.industry, j.brief, ...arr(j.tags), ...jobCountries(j)].join(" ").toLowerCase();
       return matchCountry && (!q || text.includes(q));
     });
 
@@ -145,32 +136,73 @@ if (list && typeof JOBS !== "undefined") {
     }
 
     list.innerHTML = filtered
-      .map((j, i) => {
-        const closed = isClosed(j);
-        const l = locs(j);
-        const chips = [
-          ...arr(j.tags).map((t) => `<span class="chip">${escape(t)}</span>`),
-          ...l.map((c) => `<span class="chip gold">📍 ${escape(c)}</span>`),
-          j.deadline ? `<span class="chip ${closed ? "closed" : "deadline"}">⏰ ${closed ? "Closed" : "Apply by " + escape(fmtDeadline(j.deadline))}</span>` : ""
-        ].join("");
-        return `
-        <article class="job-card ${closed ? "is-closed" : ""}">
+      .map((j, i) => `
+        <article class="job-card">
           <div class="job-head">
-            <div class="icon3d ${i % 2 ? "gold" : ""}">${escape(j.title.charAt(0))}</div>
+            <div class="icon3d ${i % 2 ? "gold" : ""}">${escapeHTML(j.title.charAt(0))}</div>
             <div>
-              <h3>${escape(j.title)}</h3>
-              <p class="meta">${escape(j.company || "")}${j.industry ? " · " + escape(j.industry) : ""}</p>
+              <h3>${escapeHTML(j.title)}</h3>
+              <p class="meta">${escapeHTML(j.company || "")}${j.industry ? " · " + escapeHTML(j.industry) : ""}</p>
             </div>
           </div>
-          <div class="chips">${chips}</div>
-          <p class="desc">${escape(j.brief || j.description || "")}</p>
-          <a class="btn btn-primary btn-sm apply-btn ${closed ? "closed" : ""}" href="${escape(applyHref(j))}" target="_blank" rel="noopener">${closed ? "Applications closed" : "Apply now →"}</a>
-        </article>`;
-      })
+          <div class="chips">${jobChips(j)}</div>
+          <p class="desc">${escapeHTML(j.brief || "")}</p>
+          <div class="job-actions">
+            <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
+            <a class="btn btn-sm btn-soft" href="job.html?id=${encodeURIComponent(jobId(j))}">More details</a>
+          </div>
+        </article>`)
       .join("");
   }
 
   countrySelect.addEventListener("change", render);
   searchBox.addEventListener("input", render);
   render();
+}
+
+// ---------- Single job page (job.html) ----------
+const jobContent = document.getElementById("job-content");
+if (jobContent && typeof JOBS !== "undefined") {
+  const id = new URLSearchParams(location.search).get("id");
+  const j = JOBS.find((x) => jobId(x) === id);
+
+  if (!j) {
+    document.getElementById("job-title").textContent = "Job not found";
+    document.getElementById("job-meta").textContent = "This position may have been filled or removed.";
+    document.getElementById("job-body").innerHTML =
+      `<div class="panel" style="text-align:center"><a class="btn btn-primary" href="jobs.html">See all open jobs</a></div>`;
+  } else {
+    document.title = `${j.title} – U Hirable`;
+    document.getElementById("job-title").textContent = j.title;
+    document.getElementById("job-meta").textContent = [j.company, j.industry].filter(Boolean).join(" · ");
+    document.getElementById("job-chips").innerHTML = jobChips(j);
+    document.getElementById("job-apply").href = jobApply(j) || "#";
+
+    const list = (title, items) =>
+      arr(items).length ? `<h2>${title}</h2><ul>${arr(items).map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>` : "";
+    // Share buttons
+    const url = location.href;
+    const msg = `${j.title} – we're hiring! Apply here:`;
+    document.getElementById("share-li").href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
+    document.getElementById("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(msg + " " + url);
+    document.getElementById("share-copy").addEventListener("click", async () => {
+      const status = document.getElementById("copy-status");
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        const t = document.createElement("textarea");
+        t.value = url; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove();
+      }
+      status.textContent = "Link copied ✓";
+      setTimeout(() => (status.textContent = ""), 2500);
+    });
+
+    jobContent.innerHTML =
+      `<h2>Role overview</h2><p>${escapeHTML(j.overview || j.brief || "")}</p>` +
+      list("Key responsibilities", j.responsibilities) +
+      list("Requirements", j.requirements) +
+      list("Nice to have", j.preferred) +
+      list("What to submit", j.submissions) +
+      `<div class="detail-apply"><a class="btn btn-primary apply-btn" href="${escapeHTML(jobApply(j) || "#")}" target="_blank" rel="noopener">Apply now →</a></div>`;
+  }
 }
