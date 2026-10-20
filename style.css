@@ -216,6 +216,23 @@ main { flex: 1; }
 }
 .icon3d svg { width: 36px; height: 36px; }
 
+/* 3D characters on the choice cards */
+.choice-card > .character {
+  position: absolute; right: 18px; top: -46px; width: 170px;
+  transform: translateZ(90px); pointer-events: none;
+}
+.choice-card .character img {
+  width: 100%;
+  filter: drop-shadow(0 22px 22px rgba(5,11,63,.28));
+  animation: float 5s ease-in-out infinite;
+}
+.choice-card.dark .character img { animation-delay: -2.5s; filter: drop-shadow(0 22px 22px rgba(0,0,0,.45)); }
+.choice-card h2, .choice-card .tag-top { max-width: calc(100% - 150px); }
+@media (max-width: 720px) {
+  .choice-card > .character { width: 118px; top: -30px; right: 10px; }
+  .choice-card h2, .choice-card .tag-top { max-width: calc(100% - 100px); }
+}
+
 /* ---------- Sections ---------- */
 .section { padding: 96px 0; }
 .section-head { text-align: center; max-width: 620px; margin: 0 auto 50px; }

@@ -1,8 +1,15 @@
 // =========================================================
 //  ✏️  THIS IS THE ONLY FILE YOU EDIT TO ADD / REMOVE JOBS
-//  Copy one { ... } block, paste it, and change the details.
-//  The country dropdown fills itself automatically.
+//
+//  1) Paste your Google Form (or Notion form) link below.
+//     Every "Apply now" button opens it.
+//  2) To ADD a job: copy one { ... } block (with its comma),
+//     paste it, and change the details.
+//  3) To REMOVE a job: delete its whole { ... } block.
+//  The country dropdown fills itself from the jobs below.
 // =========================================================
+
+const APPLY_FORM = "PASTE_YOUR_GOOGLE_FORM_LINK_HERE";
 
 const JOBS = [
   {
@@ -11,8 +18,7 @@ const JOBS = [
     country: "Egypt",
     city: "Cairo",
     type: "Full-time · On-site",
-    description: "Lead the customer support team and improve customer satisfaction.",
-    applyLink: "mailto:you@example.com?subject=Application - Customer Experience Manager"
+    description: "Lead the customer support team and improve customer satisfaction."
   },
   {
     title: "Product Manager",
@@ -20,8 +26,7 @@ const JOBS = [
     country: "Nigeria",
     city: "Lagos",
     type: "Full-time · Hybrid",
-    description: "Own the roadmap for banking and payment products.",
-    applyLink: "mailto:you@example.com?subject=Application - Product Manager"
+    description: "Own the roadmap for banking and payment products."
   },
   {
     title: "Project Manager",
@@ -29,7 +34,8 @@ const JOBS = [
     country: "United Arab Emirates",
     city: "Dubai",
     type: "Full-time · Remote",
-    description: "Plan and deliver cross-team projects on time and on budget.",
-    applyLink: "https://forms.google.com/your-form-link"
+    description: "Plan and deliver cross-team projects on time and on budget."
   }
 ];
+
+// Optional: give one job its own form by adding  applyLink: "https://..."  inside its block.

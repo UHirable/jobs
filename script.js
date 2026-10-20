@@ -98,6 +98,17 @@ if (list && typeof JOBS !== "undefined") {
   const escape = (s = "") =>
     String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
 
+  const formLink = typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "";
+  const applyHref = (j) => j.applyLink || formLink;
+
+  list.addEventListener("click", (e) => {
+    const a = e.target.closest(".apply-btn");
+    if (a && (!a.getAttribute("href") || a.getAttribute("href").includes("PASTE_YOUR"))) {
+      e.preventDefault();
+      alert("Applications open soon — please check back!");
+    }
+  });
+
   function render() {
     const country = countrySelect.value;
     const q = searchBox.value.trim().toLowerCase();
@@ -133,7 +144,7 @@ if (list && typeof JOBS !== "undefined") {
           </div>
           <div class="chips">${tags.map((t, k) => `<span class="chip ${k ? "gold" : ""}">${escape(t)}</span>`).join("")}</div>
           <p class="desc">${escape(j.description)}</p>
-          <a class="btn btn-primary btn-sm" href="${escape(j.applyLink)}" target="_blank" rel="noopener">Apply now →</a>
+          <a class="btn btn-primary btn-sm apply-btn" href="${escape(applyHref(j))}" target="_blank" rel="noopener">Apply now →</a>
         </article>`;
       })
       .join("");
