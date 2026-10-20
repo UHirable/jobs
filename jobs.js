@@ -1,41 +1,35 @@
 // =========================================================
 //  ✏️  THIS IS THE ONLY FILE YOU EDIT TO ADD / REMOVE JOBS
 //
-//  1) Paste your Google Form (or Notion form) link below.
-//     Every "Apply now" button opens it.
-//  2) To ADD a job: copy one { ... } block (with its comma),
-//     paste it, and change the details.
-//  3) To REMOVE a job: delete its whole { ... } block.
-//  The country dropdown fills itself from the jobs below.
+//  • To ADD a job: copy one whole { ... } block (with its comma),
+//    paste it, and change the text between the quotes " ".
+//  • To REMOVE a job: delete its whole { ... } block.
+//  • countries = shown as tags AND added to the country dropdown.
+//  • deadline format: "YYYY-MM-DDTHH:MM+03:00" (leave "" for none).
+//    After the deadline the job shows "Closed" automatically.
 // =========================================================
 
-const APPLY_FORM = "PASTE_YOUR_GOOGLE_FORM_LINK_HERE";
+const APPLY_FORM = ""; // default form for jobs without their own applyLink
 
 const JOBS = [
   {
-    title: "Customer Experience Manager",
+    title: "Full-Cycle Sales Executive",
     company: "Confidential",
-    country: "Egypt",
-    city: "Cairo",
-    type: "Full-time · On-site",
-    description: "Lead the customer support team and improve customer satisfaction."
+    industry: "Accounting, Auditing & Financial Services",
+    countries: ["Saudi Arabia"],
+    tags: ["Fully Remote"],
+    deadline: "2026-10-21T16:00+03:00",
+    brief: "B2B sales role selling accounting, audit, tax and financial services to Saudi clients, owning the full cycle from prospecting to closing.",
+    applyLink: "https://tally.so/r/PRdRR0"
   },
   {
-    title: "Product Manager",
+    title: "Sales Development Representative (SDR)",
     company: "Confidential",
-    country: "Nigeria",
-    city: "Lagos",
-    type: "Full-time · Hybrid",
-    description: "Own the roadmap for banking and payment products."
-  },
-  {
-    title: "Project Manager",
-    company: "Confidential",
-    country: "United Arab Emirates",
-    city: "Dubai",
-    type: "Full-time · Remote",
-    description: "Plan and deliver cross-team projects on time and on budget."
+    industry: "ERP, SaaS, AI & Technology Services",
+    countries: ["Lebanon", "Jordan", "Egypt", "UAE", "Saudi Arabia"],
+    tags: ["Fully Remote"],
+    deadline: "2026-10-21T16:00+03:00",
+    brief: "Outbound B2B role prospecting and booking meetings with decision-makers for ERP, SaaS and AI solutions across the UAE and KSA.",
+    applyLink: "https://tally.so/r/xVXXE5"
   }
 ];
-
-// Optional: give one job its own form by adding  applyLink: "https://..."  inside its block.

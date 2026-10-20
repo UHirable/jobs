@@ -86,8 +86,11 @@ if (list && typeof JOBS !== "undefined") {
   const searchBox = document.getElementById("search-box");
   const countEl = document.getElementById("jobs-count");
 
-  // Build the country dropdown from the jobs themselves
-  const countries = [...new Set(JOBS.map((j) => j.country))].sort();
+  const arr = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+  const locs = (j) => arr(j.countries || j.locations || j.country);
+
+  // Build the country dropdown from the jobs' candidate locations
+  const countries = [...new Set(JOBS.flatMap(locs))].sort();
   countries.forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
@@ -101,11 +104,21 @@ if (list && typeof JOBS !== "undefined") {
   const formLink = typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "";
   const applyHref = (j) => j.applyLink || formLink;
 
+  const isClosed = (j) => j.deadline && new Date(j.deadline) < new Date();
+  const fmtDeadline = (d) => {
+    const dt = new Date(d);
+    if (isNaN(dt)) return d;
+    return dt.toLocaleString("en-GB", {
+      weekday: "short", day: "numeric", month: "short",
+      hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Africa/Cairo"
+    }) + " (Cairo)";
+  };
+
   list.addEventListener("click", (e) => {
     const a = e.target.closest(".apply-btn");
-    if (a && (!a.getAttribute("href") || a.getAttribute("href").includes("PASTE_YOUR"))) {
+    if (a && (a.classList.contains("closed") || !a.getAttribute("href"))) {
       e.preventDefault();
-      alert("Applications open soon — please check back!");
+      alert(a.classList.contains("closed") ? "Applications for this role are closed." : "Applications open soon — please check back!");
     }
   });
 
@@ -114,8 +127,9 @@ if (list && typeof JOBS !== "undefined") {
     const q = searchBox.value.trim().toLowerCase();
 
     const filtered = JOBS.filter((j) => {
-      const matchCountry = country === "all" || j.country === country;
-      const text = `${j.title} ${j.company} ${j.description} ${j.city}`.toLowerCase();
+      const l = locs(j);
+      const matchCountry = country === "all" || l.includes(country);
+      const text = [j.title, j.company, j.industry, j.brief, j.description, ...arr(j.tags), ...l].join(" ").toLowerCase();
       return matchCountry && (!q || text.includes(q));
     });
 
@@ -132,24 +146,28 @@ if (list && typeof JOBS !== "undefined") {
 
     list.innerHTML = filtered
       .map((j, i) => {
-        const tags = String(j.type || "").split("·").map((t) => t.trim()).filter(Boolean);
+        const closed = isClosed(j);
+        const l = locs(j);
+        const chips = [
+          ...arr(j.tags).map((t) => `<span class="chip">${escape(t)}</span>`),
+          ...l.map((c) => `<span class="chip gold">📍 ${escape(c)}</span>`),
+          j.deadline ? `<span class="chip ${closed ? "closed" : "deadline"}">⏰ ${closed ? "Closed" : "Apply by " + escape(fmtDeadline(j.deadline))}</span>` : ""
+        ].join("");
         return `
-        <article class="job-card" data-tilt data-tilt-max="6">
+        <article class="job-card ${closed ? "is-closed" : ""}">
           <div class="job-head">
             <div class="icon3d ${i % 2 ? "gold" : ""}">${escape(j.title.charAt(0))}</div>
             <div>
               <h3>${escape(j.title)}</h3>
-              <p class="meta">${escape(j.company)} · 📍 ${escape(j.city ? j.city + ", " : "")}${escape(j.country)}</p>
+              <p class="meta">${escape(j.company || "")}${j.industry ? " · " + escape(j.industry) : ""}</p>
             </div>
           </div>
-          <div class="chips">${tags.map((t, k) => `<span class="chip ${k ? "gold" : ""}">${escape(t)}</span>`).join("")}</div>
-          <p class="desc">${escape(j.description)}</p>
-          <a class="btn btn-primary btn-sm apply-btn" href="${escape(applyHref(j))}" target="_blank" rel="noopener">Apply now →</a>
+          <div class="chips">${chips}</div>
+          <p class="desc">${escape(j.brief || j.description || "")}</p>
+          <a class="btn btn-primary btn-sm apply-btn ${closed ? "closed" : ""}" href="${escape(applyHref(j))}" target="_blank" rel="noopener">${closed ? "Applications closed" : "Apply now →"}</a>
         </article>`;
       })
       .join("");
-
-    bindTilt(list);
   }
 
   countrySelect.addEventListener("change", render);
