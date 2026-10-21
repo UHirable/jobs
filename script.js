@@ -31,6 +31,33 @@ function bindTilt(root = document) {
 }
 bindTilt();
 
+// ---------- Hero typing bubble ----------
+const typedEl = document.getElementById("typed");
+if (typedEl) {
+  const lines = [
+    "Hi, I'm Amel 👋",
+    "I help people find the right job…",
+    "…and help companies find their best fit."
+  ];
+  if (reduceMotion) {
+    typedEl.textContent = lines.join(" ");
+  } else {
+    let li = 0, ci = 0, deleting = false;
+    const tick = () => {
+      const full = lines[li];
+      const chars = Array.from(full);
+      ci += deleting ? -1 : 1;
+      typedEl.textContent = chars.slice(0, ci).join("");
+      let wait = deleting ? 28 : 55;
+      if (!deleting && ci === chars.length) { deleting = true; wait = 1700; }
+      else if (deleting && ci === 0) { deleting = false; li = (li + 1) % lines.length; wait = 350; }
+      setTimeout(tick, wait);
+    };
+    typedEl.textContent = "";
+    setTimeout(tick, 500);
+  }
+}
+
 // ---------- Reveal on scroll ----------
 const io = "IntersectionObserver" in window
   ? new IntersectionObserver((entries) => {
@@ -83,6 +110,7 @@ if (form) {
 const arr = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 const escapeHTML = (s = "") =>
   String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+const WORLDWIDE = "Worldwide";
 const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
@@ -90,7 +118,7 @@ const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPL
 const jobChips = (j) =>
   [
     ...arr(j.tags).map((t) => `<span class="chip">${escapeHTML(t)}</span>`),
-    ...jobCountries(j).map((c) => `<span class="chip gold">📍 ${escapeHTML(c)}</span>`)
+    ...jobCountries(j).map((c) => `<span class="chip gold">${c === WORLDWIDE ? "🌍" : "📍"} ${escapeHTML(c)}</span>`)
   ].join("");
 
 document.addEventListener("click", (e) => {
@@ -108,10 +136,13 @@ if (list && typeof JOBS !== "undefined") {
   const searchBox = document.getElementById("search-box");
   const countEl = document.getElementById("jobs-count");
 
-  [...new Set(JOBS.flatMap(jobCountries))].sort().forEach((c) => {
+  const all = JOBS.flatMap(jobCountries);
+  const opts = [...new Set(all.filter((c) => c !== WORLDWIDE))].sort();
+  if (all.includes(WORLDWIDE)) opts.unshift(WORLDWIDE);
+  opts.forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
-    opt.textContent = c;
+    opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : c;
     countrySelect.appendChild(opt);
   });
 
@@ -120,7 +151,7 @@ if (list && typeof JOBS !== "undefined") {
     const q = searchBox.value.trim().toLowerCase();
 
     const filtered = JOBS.filter((j) => {
-      const matchCountry = country === "all" || jobCountries(j).includes(country);
+      const matchCountry = country === "all" || jobCountries(j).includes(country) || jobCountries(j).includes(WORLDWIDE);
       const text = [j.title, j.company, j.industry, j.brief, ...arr(j.tags), ...jobCountries(j)].join(" ").toLowerCase();
       return matchCountry && (!q || text.includes(q));
     });
@@ -200,7 +231,12 @@ if (jobContent && typeof JOBS !== "undefined") {
 
     jobContent.innerHTML =
       `<h2>Role overview</h2><p>${escapeHTML(j.overview || j.brief || "")}</p>` +
+      (j.compensation ? `<h2>Compensation</h2><p>${escapeHTML(j.compensation)}</p>` : "") +
       list("Key responsibilities", j.responsibilities) +
+      (arr(j.responsibilityGroups).length
+        ? `<h2>Key responsibilities</h2>` + j.responsibilityGroups.map(([g, items]) =>
+            `<h3>${escapeHTML(g)}</h3><ul>${arr(items).map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`).join("")
+        : "") +
       list("Requirements", j.requirements) +
       list("Nice to have", j.preferred) +
       list("What to submit", j.submissions) +

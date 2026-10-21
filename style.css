@@ -367,12 +367,68 @@ textarea { resize: vertical; }
 .job-detail h2 { font-size: 1.2rem; margin: 26px 0 10px; letter-spacing: -.01em; }
 .job-detail h2:first-child { margin-top: 0; }
 .job-detail p { color: var(--muted); }
+.job-detail h3 { font-size: .98rem; margin: 18px 0 8px; color: var(--brand); }
 .job-detail ul { padding-left: 20px; color: var(--muted); display: grid; gap: 8px; }
 .job-detail li::marker { color: var(--brand); }
 .detail-apply { margin-top: 30px; padding-top: 24px; border-top: 1px solid #eceefa; }
 .apply-card p { color: rgba(255,255,255,.75); margin-bottom: 20px; font-size: .95rem; }
 .side-link { display: block; text-align: center; margin-top: 16px; color: rgba(255,255,255,.75); font-weight: 600; font-size: .9rem; }
 .side-link:hover { color: #fff; }
+
+/* Hero: Amel */
+.hero-visual { width: 100%; }
+.me-stage { position: relative; width: min(440px, 100%); margin: 0 auto; padding-top: 70px; }
+.me-glow {
+  position: absolute; left: 8%; right: 8%; top: 70px; bottom: 30px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 65%);
+  filter: blur(10px);
+}
+.me-arch {
+  position: relative; z-index: 1; width: 78%; margin: 0 auto; aspect-ratio: 4 / 5;
+  border-radius: 999px 999px 28px 28px; overflow: hidden;
+  background: linear-gradient(170deg, #4a57ff 0%, #2533ff 45%, #0a17c9 100%);
+  border: 6px solid rgba(255,255,255,.9);
+  box-shadow: 0 0 0 10px rgba(255,201,60,.35), 0 40px 60px -20px rgba(0,0,60,.55), inset 0 -40px 60px rgba(0,0,80,.35);
+}
+.me-arch img { position: absolute; left: 50%; bottom: 0; width: 96%; transform: translateX(-50%); filter: drop-shadow(0 10px 18px rgba(0,0,60,.35)); }
+.me-podium {
+  position: relative; z-index: 2; width: 92%; height: 46px; margin: -26px auto 0; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, #e3e7ff 55%, #9aa3ff 100%);
+  box-shadow: 0 16px 0 #6a76ff, 0 34px 40px -10px rgba(0,0,60,.5);
+}
+.me-bubble {
+  position: absolute; z-index: 4; top: 0; left: -6%; max-width: 78%;
+  background: #fff; color: var(--ink); font-weight: 700; font-size: 1.02rem; line-height: 1.35;
+  padding: 14px 18px; border-radius: 20px 20px 20px 6px; min-height: 52px;
+  box-shadow: var(--shadow-3d);
+  animation: float 6s ease-in-out infinite;
+}
+.me-bubble::after {
+  content: ""; position: absolute; left: 34px; bottom: -12px; width: 22px; height: 22px; background: #fff;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; vertical-align: -3px; background: var(--brand); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.me-badge {
+  position: absolute; z-index: 4; background: #fff; color: var(--ink); border-radius: 16px; padding: 10px 14px;
+  font-weight: 700; font-size: .86rem; display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow-3d); animation: float 7s ease-in-out infinite;
+}
+.me-badge small { display: block; font-weight: 500; color: var(--muted); font-size: .72rem; }
+.me-badge .ico { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: #fff6dd; }
+.me-b1 { right: -8%; top: 38%; animation-delay: -2s; }
+.me-b2 { left: -10%; top: 62%; animation-delay: -4s; }
+.me-b2 .ico { background: var(--brand-50); }
+.me-name {
+  position: relative; z-index: 3; text-align: center; margin-top: 30px; color: #fff; font-weight: 800; font-size: 1.05rem;
+}
+.me-name small { display: block; font-weight: 600; color: var(--gold); font-size: .82rem; }
+@media (max-width: 920px) { .me-stage { width: min(380px, 92%); } .me-bubble { left: 0; } }
+@media (max-width: 720px) {
+  .me-badge { display: none; }
+  .me-bubble { font-size: .92rem; max-width: 86%; left: 2%; }
+  .me-stage { padding-top: 64px; }
+}
 
 /* Hero 3D image */
 .hero-visual .hero-3d {
