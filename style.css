@@ -592,3 +592,6 @@ textarea { resize: vertical; }
   .nav .btn { margin-left: 0; padding: 8px 10px; font-size: .8rem; flex: 1; text-align: center; justify-content: center; }
 }
 @media (max-width: 720px) { .choice-card > .character.person { height: 175px; top: -14px; right: 14px; } }
+
+.match-note{background:var(--brand-50);color:var(--ink);border-left:4px solid var(--gold);border-radius:12px;padding:10px 14px;font-weight:600;font-size:.9rem;margin:4px 0 14px}
+.match-note.big{font-size:1rem;margin-top:22px}

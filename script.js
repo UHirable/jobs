@@ -58,6 +58,22 @@ if (typedEl) {
   }
 }
 
+// ---------- Intro video modal ----------
+const introBtn = document.getElementById("play-intro");
+const introModal = document.getElementById("intro-modal");
+const introVideo = document.getElementById("intro-video");
+if (introBtn && introModal && introVideo) {
+  const close = () => { introVideo.pause(); introModal.hidden = true; };
+  introBtn.addEventListener("click", () => {
+    introModal.hidden = false;
+    introVideo.currentTime = 0;
+    introVideo.play().catch(() => {});
+  });
+  document.getElementById("close-intro").addEventListener("click", close);
+  introModal.addEventListener("click", (e) => { if (e.target === introModal) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !introModal.hidden) close(); });
+}
+
 // ---------- Reveal on scroll ----------
 const io = "IntersectionObserver" in window
   ? new IntersectionObserver((entries) => {
@@ -115,10 +131,21 @@ const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
 const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
+const FLAGS = {
+  "United States": "🇺🇸", "Canada": "🇨🇦", "United Kingdom": "🇬🇧", "Germany": "🇩🇪", "Egypt": "🇪🇬",
+  "Saudi Arabia": "🇸🇦", "UAE": "🇦🇪", "United Arab Emirates": "🇦🇪", "Jordan": "🇯🇴", "Lebanon": "🇱🇧",
+  "Qatar": "🇶🇦", "Kuwait": "🇰🇼", "Bahrain": "🇧🇭", "Oman": "🇴🇲", "France": "🇫🇷", "Netherlands": "🇳🇱",
+  "Spain": "🇪🇸", "Ireland": "🇮🇪", "India": "🇮🇳", "Singapore": "🇸🇬", "Australia": "🇦🇺", "Brazil": "🇧🇷", "Mexico": "🇲🇽"
+};
+const flagOf = (c) => (c === WORLDWIDE ? "🌍" : FLAGS[c] || "📍");
+const MATCH_NOTE = "Apply through U Hirable and get matched with this role and 1,000+ top companies.";
 const jobChips = (j) =>
   [
+    j.location
+      ? `<span class="chip gold">${jobCountries(j).map(flagOf).join(" ")} ${escapeHTML(j.location)}</span>`
+      : "",
     ...arr(j.tags).map((t) => `<span class="chip">${escapeHTML(t)}</span>`),
-    ...jobCountries(j).map((c) => `<span class="chip gold">${c === WORLDWIDE ? "🌍" : "📍"} ${escapeHTML(c)}</span>`)
+    ...(j.location ? [] : jobCountries(j).map((c) => `<span class="chip gold">${flagOf(c)} ${escapeHTML(c)}</span>`))
   ].join("");
 
 document.addEventListener("click", (e) => {
@@ -142,7 +169,7 @@ if (list && typeof JOBS !== "undefined") {
   opts.forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
-    opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : c;
+    opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : `${flagOf(c)} ${c}`;
     countrySelect.appendChild(opt);
   });
 
@@ -179,6 +206,7 @@ if (list && typeof JOBS !== "undefined") {
           </div>
           <div class="chips">${jobChips(j)}</div>
           <p class="desc">${escapeHTML(j.brief || "")}</p>
+          ${j.matchNote ? `<p class="match-note">✨ ${MATCH_NOTE}</p>` : ""}
           <div class="job-actions">
             <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
             <a class="btn btn-sm btn-soft" href="${jobPage(j)}">More details</a>
@@ -240,6 +268,11 @@ if (jobContent && typeof JOBS !== "undefined") {
       list("Requirements", j.requirements) +
       list("Nice to have", j.preferred) +
       list("What to submit", j.submissions) +
+      (j.matchNote ? `<p class="match-note big">✨ ${MATCH_NOTE}</p>` : "") +
       `<div class="detail-apply"><a class="btn btn-primary apply-btn" href="${escapeHTML(jobApply(j) || "#")}" target="_blank" rel="noopener">Apply now →</a></div>`;
+    if (j.matchNote) {
+      const p = document.querySelector(".apply-card > p");
+      if (p) p.textContent = MATCH_NOTE;
+    }
   }
 }
