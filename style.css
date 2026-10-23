@@ -595,3 +595,5 @@ textarea { resize: vertical; }
 
 .match-note{background:var(--brand-50);color:var(--ink);border-left:4px solid var(--gold);border-radius:12px;padding:10px 14px;font-weight:600;font-size:.9rem;margin:4px 0 14px}
 .match-note.big{font-size:1rem;margin-top:22px}
+.chip .flag{width:20px;height:15px;object-fit:cover;border-radius:3px;vertical-align:-2px;margin-right:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.chip .flag + .flag{margin-left:2px}

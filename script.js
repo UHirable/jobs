@@ -131,13 +131,17 @@ const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
 const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
-const FLAGS = {
-  "United States": "🇺🇸", "Canada": "🇨🇦", "United Kingdom": "🇬🇧", "Germany": "🇩🇪", "Egypt": "🇪🇬",
-  "Saudi Arabia": "🇸🇦", "UAE": "🇦🇪", "United Arab Emirates": "🇦🇪", "Jordan": "🇯🇴", "Lebanon": "🇱🇧",
-  "Qatar": "🇶🇦", "Kuwait": "🇰🇼", "Bahrain": "🇧🇭", "Oman": "🇴🇲", "France": "🇫🇷", "Netherlands": "🇳🇱",
-  "Spain": "🇪🇸", "Ireland": "🇮🇪", "India": "🇮🇳", "Singapore": "🇸🇬", "Australia": "🇦🇺", "Brazil": "🇧🇷", "Mexico": "🇲🇽"
+const FLAG_CODES = {
+  "United States": "us", "Canada": "ca", "United Kingdom": "gb", "Germany": "de", "Egypt": "eg",
+  "Saudi Arabia": "sa", "UAE": "ae", "United Arab Emirates": "ae", "Jordan": "jo", "Lebanon": "lb",
+  "Qatar": "qa", "Kuwait": "kw", "Bahrain": "bh", "Oman": "om", "France": "fr", "Netherlands": "nl",
+  "Spain": "es", "Ireland": "ie", "India": "in", "Singapore": "sg", "Australia": "au", "Brazil": "br", "Mexico": "mx"
 };
-const flagOf = (c) => (c === WORLDWIDE ? "🌍" : FLAGS[c] || "📍");
+// real flag images (emoji flags don't render on Windows)
+const flagOf = (c) =>
+  c === WORLDWIDE ? "🌍"
+  : FLAG_CODES[c] ? `<img class="flag" src="https://flagcdn.com/w40/${FLAG_CODES[c]}.png" alt="${escapeHTML(c)}" width="20" height="15" loading="lazy">`
+  : "📍";
 const MATCH_NOTE = "Apply through U Hirable and get matched with this role and 1,000+ top companies.";
 const jobChips = (j) =>
   [
@@ -169,7 +173,7 @@ if (list && typeof JOBS !== "undefined") {
   opts.forEach((c) => {
     const opt = document.createElement("option");
     opt.value = c;
-    opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : `${flagOf(c)} ${c}`;
+    opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : c;
     countrySelect.appendChild(opt);
   });
 
