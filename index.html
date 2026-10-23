@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
   <header class="topbar">
@@ -26,8 +26,9 @@
       <a href="index.html" class="logo"><img src="logo-white.png" alt="U Hirable"></a>
       <nav class="nav">
         <a href="index.html" class="active">Home</a>
-        <a href="jobs.html">Open Jobs</a>
+        <a href="jobs.html" class="btn btn-sm btn-gold">Open Jobs</a>
         <a href="employer.html" class="btn btn-sm">Hire Talent</a>
+        <a href="partners.html" class="btn btn-sm btn-ghost-w">For Companies</a>
       </nav>
     </div>
   </header>
@@ -36,7 +37,6 @@
     <!-- HERO -->
     <section class="hero">
       <div class="shapes" aria-hidden="true">
-        <div class="sphere s3"></div>
         <div class="ring"></div>
       </div>
 
@@ -48,6 +48,7 @@
           <div class="hero-actions">
             <a href="jobs.html" class="btn btn-gold">Find a Job</a>
             <a href="employer.html" class="btn">Hire Talent</a>
+            <a href="partners.html" class="btn btn-ghost-w">For Companies</a>
           </div>
         </div>
 
@@ -55,14 +56,13 @@
           <div class="me-stage">
             <div class="me-glow" aria-hidden="true"></div>
             <div class="me-arch">
-              <img src="amel-3d.png" alt="Amel Moussa, Global Talent Acquisition Partner">
+              <img src="amel-3d-v2.png" alt="Amel Moussa, Global Talent Acquisition Partner">
             </div>
             <div class="me-podium" aria-hidden="true"></div>
             <div class="me-bubble" aria-live="polite"><span id="typed">Hi, I'm Amel 👋</span><i class="caret" aria-hidden="true"></i></div>
             <div class="me-badge me-b1"><span class="ico">💼</span><div>People hired<small>Right job, right fit</small></div></div>
             <div class="me-badge me-b2"><span class="ico">🎯</span><div>Best-fit talent<small>For growing companies</small></div></div>
             <div class="me-name">Amel Moussa<small>Global Talent Acquisition Partner</small></div>
-            <button type="button" class="btn btn-gold btn-sm me-play" id="play-intro">▶ Watch my intro</button>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <div class="container">
         <div class="choices">
           <a href="employer.html" class="choice-card" data-tilt>
-            <div class="character" aria-hidden="true"><img src="reviewer-3d.svg" alt=""></div>
+            <div class="character person" aria-hidden="true"><img src="recruiter-woman-3d.png" alt=""></div>
             <div class="icon3d">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
             </div>
@@ -87,17 +87,32 @@
             <span class="btn btn-primary">Post a job request →</span>
           </a>
 
-          <a href="jobs.html" class="choice-card dark" data-tilt>
-            <div class="character" aria-hidden="true"><img src="searcher-3d.svg" alt=""></div>
+          <a href="jobs.html" class="choice-card" data-tilt>
+            <div class="character person" aria-hidden="true"><img src="jobseeker-man-3d.png" alt=""></div>
             <div class="icon3d gold">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
             <span class="tag-top">For Job Seekers</span>
             <h2>I'm looking for a job</h2>
             <p>Browse the open positions we're recruiting for and filter them by country. Find the one that fits you and apply in a click.</p>
-            <span class="btn btn-gold">Browse open jobs →</span>
+            <span class="btn btn-primary">Browse open jobs →</span>
           </a>
         </div>
+
+        <a href="partners.html" class="remote-card reveal" data-tilt data-tilt-max="4">
+          <img class="rc-char" src="company-3d.svg" alt="" aria-hidden="true">
+          <div class="rc-text">
+            <span class="tag-top">For Companies</span>
+            <h2>Build your remote team</h2>
+            <p>Pre-vetted remote professionals ready to join your team, through our trusted staffing partner.</p>
+            <span class="rc-gift">🎁 Get <b>$500 off</b> when you hire through U Hirable</span>
+            <span class="btn">Explore remote roles →</span>
+          </div>
+          <div class="rc-roles" aria-hidden="true">
+            <span>🗂️ Administrative</span><span>📞 Lead Generation (SDR)</span><span>🤝 Sales (BDR)</span><span>📱 Social Media</span>
+            <span>📣 Marketing</span><span>📊 Accounting &amp; Bookkeeping</span><span>🎧 Customer Support</span><span>✨ Custom Role</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -162,6 +177,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>
