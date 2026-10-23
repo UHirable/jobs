@@ -146,10 +146,10 @@ const MATCH_NOTE = "Apply through U Hirable and get matched with this role and 1
 const jobChips = (j) =>
   [
     j.location
-      ? `<span class="chip gold">${jobCountries(j).map(flagOf).join(" ")} ${escapeHTML(j.location)}</span>`
+      ? `<span class="chip gold">📍 ${escapeHTML(j.location)}</span>`
       : "",
     ...arr(j.tags).map((t) => `<span class="chip">${escapeHTML(t)}</span>`),
-    ...(j.location ? [] : jobCountries(j).map((c) => `<span class="chip gold">${flagOf(c)} ${escapeHTML(c)}</span>`))
+    ...(j.location ? [] : jobCountries(j).map((c) => `<span class="chip gold">${c === WORLDWIDE ? "🌍" : "📍"} ${escapeHTML(c)}</span>`))
   ].join("");
 
 document.addEventListener("click", (e) => {
@@ -210,7 +210,6 @@ if (list && typeof JOBS !== "undefined") {
           </div>
           <div class="chips">${jobChips(j)}</div>
           <p class="desc">${escapeHTML(j.brief || "")}</p>
-          ${j.matchNote ? `<p class="match-note">✨ ${MATCH_NOTE}</p>` : ""}
           <div class="job-actions">
             <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
             <a class="btn btn-sm btn-soft" href="${jobPage(j)}">More details</a>
