@@ -32,7 +32,7 @@ function bindTilt(root = document) {
 bindTilt();
 
 // ---------- Hero typing bubble ----------
-const typedEl = document.getElementById("typed");
+const typedEl = window.__cloud ? null : document.getElementById("typed");
 if (typedEl) {
   const lines = [
     "Hi, I'm Amel 👋",
@@ -40,7 +40,7 @@ if (typedEl) {
     "…it can change the life of an entire family.",
     "As a Global Talent Acquisition Partner, I see it every day.",
     "That's why I built U Hirable…",
-    "…to help you find a job, hire great talent and boost your career."
+    "…to help job seekers get hired, companies hire great talent, and everyone grow their careers."
   ];
   if (reduceMotion) {
     typedEl.textContent = lines.join(" ");

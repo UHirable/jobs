@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>window.__cloud=true</script>
   <meta charset="UTF-8">
   <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A8040640-4f82-4e9e-88e3-a8eeb6c00c991.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20">
-</head>
+<style>
+.me-stage{padding-top:100px}
+.me-bubble.cloud{left:50%;right:auto;top:0;transform:translateX(-50%);width:max-content;max-width:92%;text-align:center;
+ border-radius:20px;padding:14px 22px;min-height:0;animation:cloudfloat 6s ease-in-out infinite;
+ box-shadow:0 18px 34px -12px rgba(0,0,40,.45)}
+.me-bubble.cloud::after{left:50%;bottom:-13px;width:26px;height:16px;transform:translateX(-50%);clip-path:polygon(0 0,100% 0,50% 100%)}
+@keyframes cloudfloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+#typed{display:inline-block;transition:opacity .45s ease,transform .45s ease}
+#typed.out{opacity:0;transform:translateY(6px)}
+@media (max-width:720px){.me-bubble.cloud{font-size:.9rem;padding:12px 18px;max-width:94%}.me-stage{padding-top:110px}}
+</style></head>
 <body>
   <header class="topbar">
     <div class="container">
@@ -62,7 +72,7 @@
               <img src="amel-3d-v2.png" alt="Amel Moussa, Global Talent Acquisition Partner">
             </div>
             <div class="me-podium" aria-hidden="true"></div>
-            <div class="me-bubble" aria-live="polite"><span id="typed">Hi, I'm Amel 👋</span><i class="caret" aria-hidden="true"></i></div>
+            <div class="me-bubble cloud" aria-live="polite"><span id="typed">Hi, I'm Amel 👋</span></div>
             <div class="me-name">Amel Moussa<small>Global Talent Acquisition Partner</small></div>
           </div>
         </div>
@@ -176,6 +186,10 @@
     </div>
   </div>
 
-  <script src="script.js?v=12"></script>
-</body>
+  <script src="script.js?v=13"></script>
+<script>
+(function(){const el=document.getElementById("typed");if(!el)return;
+const lines=["Hi, I'm Amel 👋","I've always believed the right job changes more than a career…","…it can change the life of an entire family.","As a Global Talent Acquisition Partner, I see it every day.","That's why I built U Hirable…","…to help job seekers get hired, companies hire great talent, and everyone grow their careers."];
+let i=0;setInterval(()=>{el.classList.add("out");setTimeout(()=>{i=(i+1)%lines.length;el.textContent=lines[i];el.classList.remove("out")},450)},3200);})();
+</script></body>
 </html>
