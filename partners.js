@@ -24,5 +24,15 @@ const PARTNERS = [
     cta: "Try it Free",
     roles: ["Applicant Tracking (ATS)", "Client CRM", "AI Resume Parsing", "Candidate Matching", "Email Sequences", "Chrome Sourcing Extension", "Reports & Dashboards", "24/7 Live Support"],
     link: "https://recruitcrm.io?fpr=uhirable"
+  },
+  {
+    name: "RemotePass",
+    logo: "",
+    tag: "Global Payroll & EOR",
+    tagline: "Hire, onboard and pay your global team compliantly, all from one platform.",
+    perk: "First month free when you sign up through U Hirable",
+    cta: "Get Started",
+    roles: ["Employer of Record (EOR)", "Contractor Payments", "Global Payroll", "Compliant Contracts", "Onboarding", "Time Off & Expenses", "Health Insurance", "Multi-currency Payouts"],
+    link: "https://www.remotepass.com/re?grsf=amel-91f9uz"
   }
 ];

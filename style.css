@@ -597,3 +597,8 @@ textarea { resize: vertical; }
 .match-note.big{font-size:1rem;margin-top:22px}
 .chip .flag{width:20px;height:15px;object-fit:cover;border-radius:3px;vertical-align:-2px;margin-right:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .chip .flag + .flag{margin-left:2px}
+
+/* partners share bar */
+.partners-share-wrap{padding-bottom:90px;margin-top:-50px}
+.partners-share{margin:0 auto;max-width:640px;background:linear-gradient(135deg,var(--brand-800,#0a14a8),var(--brand,#0112ff));color:#fff;border-radius:var(--radius);padding:24px 24px 14px;border-top:none}
+@media (min-width:1100px){.partners:has(.partner:nth-child(3)){grid-template-columns:repeat(3,1fr)}}
