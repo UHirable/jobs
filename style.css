@@ -637,3 +637,11 @@ textarea { resize: vertical; }
 .p-logo.txt{background:#fff;color:#3b5ea8;border:1px solid var(--brand-100);font-family:Georgia,serif;font-style:italic}
 @media (max-width:720px){.nav a.nav-home{display:none}}
 @media (max-width:560px){.topbar .container{height:auto;padding-top:10px;padding-bottom:12px}}
+
+/* colorful AI tags */
+.p-roles span.ai{color:#fff;border:0;display:inline-flex;align-items:center;gap:6px;box-shadow:0 6px 14px -8px rgba(0,0,0,.5)}
+.p-roles span.ai i{font-style:normal;font-size:.62rem;font-weight:900;letter-spacing:.06em;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:6px}
+.p-roles span.ai.c0{background:linear-gradient(135deg,#7b2ff7,#a35cff)}.p-roles span.ai.c1{background:linear-gradient(135deg,#ff5a36,#ff8a5c)}
+.p-roles span.ai.c2{background:linear-gradient(135deg,#0a9488,#12c2b4)}.p-roles span.ai.c3{background:linear-gradient(135deg,#d6336c,#f06595)}
+.p-roles span.ai.c4{background:linear-gradient(135deg,#1a6ad6,#4c8dff)}.p-roles span.ai.c5{background:linear-gradient(135deg,#c98a00,#f2b705)}
+@media (min-width:861px){.partners.boost{grid-template-columns:repeat(2,1fr)!important}.partners.boost .partner:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 13px)}}
