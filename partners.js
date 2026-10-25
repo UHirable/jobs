@@ -10,7 +10,7 @@ const PARTNERS = [
   {
     name: "Remote Leverage",
     deal: "$500 OFF",
-    logo: "",
+    logo: "logo-remote-leverage.png",
     tag: "Remote Staffing",
     tagline: "Pre-vetted remote professionals for growing businesses.",
     perk: "Get $500 off when you hire through U Hirable",
@@ -20,7 +20,7 @@ const PARTNERS = [
   {
     name: "Recruit CRM",
     deal: "FREE TRIAL",
-    logo: "",
+    logo: "logo-recruit-crm.png",
     tag: "Recruiting Software",
     tagline: "The highest-rated ATS + CRM for recruitment agencies and in-house hiring teams.",
     perk: "Free trial with no time limit",
@@ -31,7 +31,7 @@ const PARTNERS = [
   {
     name: "RemotePass",
     deal: "1ST MONTH FREE",
-    logo: "",
+    logo: "logo-remotepass.png",
     tag: "Global Payroll & EOR",
     tagline: "Hire, onboard and pay your global team compliantly, all from one platform.",
     perk: "First month free when you sign up through U Hirable",
@@ -43,7 +43,7 @@ const PARTNERS = [
     name: "Oyster",
     deal: "30 DAYS FREE",
     dealLabel: "Free to start",
-    logo: "",
+    logo: "logo-oyster.png",
     tag: "Global Hiring & EOR",
     tagline: "Hire, pay and take care of your team in 180+ countries, with no setup fees.",
     perk: "30-day free trial for contractors + startups save up to $1,200",
