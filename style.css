@@ -602,6 +602,7 @@ textarea { resize: vertical; }
 .partners-share-wrap{padding-bottom:90px;margin-top:-50px}
 .partners-share{margin:0 auto;max-width:640px;background:linear-gradient(135deg,var(--brand-800,#0a14a8),var(--brand,#0112ff));color:#fff;border-radius:var(--radius);padding:24px 24px 14px;border-top:none}
 @media (min-width:1100px){.partners:has(.partner:nth-child(3)):not(:has(.partner:nth-child(4))){grid-template-columns:repeat(3,1fr)}}
+@media (min-width:861px){.partners:has(.partner:nth-child(4)) .partner:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 13px)}}
 
 /* big perk highlight – green coupon */
 .p-deal{position:relative;display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#0fbf6a,#08a35a 55%,#067a44);color:#fff;border-radius:18px;padding:18px 20px;overflow:hidden;box-shadow:0 14px 28px -12px rgba(6,122,68,.65)}

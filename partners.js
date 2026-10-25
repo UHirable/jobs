@@ -50,5 +50,16 @@ const PARTNERS = [
     cta: "Start Free",
     roles: ["Employer of Record (120+ countries)", "Contractors (180+ countries)", "Global Payroll", "No Setup Fees", "Free Onboarding & Offboarding", "HR Expert Support", "Benefits & Perks", "Free Cost Calculator"],
     link: "https://oyster.partnerlinks.io/iqgrt27whv78"
+  },
+  {
+    name: "greytHR",
+    deal: "10% OFF",
+    logo: "logo-greythr.png",
+    tag: "HR & Payroll Software",
+    tagline: "All-in-one HR and payroll trusted by 33,000+ companies across the GCC, India and 30+ countries.",
+    perk: "10% off annual plans through U Hirable + a free account to start",
+    cta: "Get 10% Off",
+    roles: ["Payroll for UAE, KSA, Qatar, Oman, Bahrain & Kuwait", "WPS File Generation", "Multi-country Payroll", "Leave & Attendance", "Employee Self-Service App", "Performance Management", "Recruitment", "Expense Management"],
+    link: "https://greythr.referralrock.com/l/AMELMOUSSA04/"
   }
 ];
