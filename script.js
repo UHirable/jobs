@@ -36,8 +36,11 @@ const typedEl = document.getElementById("typed");
 if (typedEl) {
   const lines = [
     "Hi, I'm Amel 👋",
-    "I help people find the right job…",
-    "…and help companies find their best fit."
+    "I've always believed the right job changes more than a career…",
+    "…it can change the life of an entire family.",
+    "As a Global Talent Acquisition Partner, I see it every day.",
+    "That's why I built U Hirable…",
+    "…to help you find a job, hire great talent and boost your career."
   ];
   if (reduceMotion) {
     typedEl.textContent = lines.join(" ");
