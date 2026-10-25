@@ -4,10 +4,12 @@
 //  paste it, and change the text between the quotes.
 //  logo: optional image file name (e.g. "partner-logo.png") – leave "" to show initials.
 //  tag: small label above the name (default "Partner")   cta: button text (default "Hire Now")
+//  deal: big highlighted perk (e.g. "$500 OFF")   perk: perk details
 // =========================================================
 const PARTNERS = [
   {
     name: "Remote Leverage",
+    deal: "$500 OFF",
     logo: "",
     tag: "Remote Staffing",
     tagline: "Pre-vetted remote professionals for growing businesses.",
@@ -17,6 +19,7 @@ const PARTNERS = [
   },
   {
     name: "Recruit CRM",
+    deal: "FREE TRIAL",
     logo: "",
     tag: "Recruiting Software",
     tagline: "The highest-rated ATS + CRM for recruitment agencies and in-house hiring teams.",
@@ -27,6 +30,7 @@ const PARTNERS = [
   },
   {
     name: "RemotePass",
+    deal: "1ST MONTH FREE",
     logo: "",
     tag: "Global Payroll & EOR",
     tagline: "Hire, onboard and pay your global team compliantly, all from one platform.",
@@ -34,5 +38,17 @@ const PARTNERS = [
     cta: "Get Started",
     roles: ["Employer of Record (EOR)", "Contractor Payments", "Global Payroll", "Compliant Contracts", "Onboarding", "Time Off & Expenses", "Health Insurance", "Multi-currency Payouts"],
     link: "https://www.remotepass.com/re?grsf=amel-91f9uz"
+  },
+  {
+    name: "Oyster",
+    deal: "30 DAYS FREE",
+    dealLabel: "Free to start",
+    logo: "",
+    tag: "Global Hiring & EOR",
+    tagline: "Hire, pay and take care of your team in 180+ countries, with no setup fees.",
+    perk: "30-day free trial for contractors + startups save up to $1,200",
+    cta: "Start Free",
+    roles: ["Employer of Record (120+ countries)", "Contractors (180+ countries)", "Global Payroll", "No Setup Fees", "Free Onboarding & Offboarding", "HR Expert Support", "Benefits & Perks", "Free Cost Calculator"],
+    link: "https://oyster.partnerlinks.io/iqgrt27whv78"
   }
 ];

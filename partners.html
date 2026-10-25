@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
   <header class="topbar">
@@ -37,7 +37,7 @@
   <section class="page-hero"><div class="container">
     <span class="eyebrow"><span class="dot"></span> For Companies</span>
     <h1>Everything you need to <span class="hl">hire better</span></h1>
-    <p class="lead">From remote staffing and recruiting software to global payroll, trusted partners and tools to help your company find, hire and manage great talent.</p>
+    <p class="lead">From remote staffing and recruiting software to global payroll, trusted partners and tools with exclusive perks to help your company find, hire and manage great talent.</p>
   </div></section>
   <section class="container partners-wrap"><div class="partners" id="partners"></div></section>
   <section class="container partners-share-wrap"><div class="partners-share share">
@@ -50,15 +50,16 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script src="partners.js?v=13"></script>
+<script src="partners.js?v=14"></script>
 <script>
 const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 document.getElementById("partners").innerHTML=PARTNERS.map(p=>`
  <article class="partner">
   <div class="p-head">${p.logo?`<img class="p-logo img" src="${esc(p.logo)}" alt="">`:`<div class="p-logo">${esc((p.name.match(/[A-Z]/g)||[p.name[0]]).slice(0,2).join(""))}</div>`}
    <div><span class="p-tag">${esc(p.tag||"Partner")}</span><h2>${esc(p.name)}</h2><p>${esc(p.tagline)}</p></div></div>
+  ${p.deal?`<div class="p-deal" data-label="${esc(p.dealLabel||"U Hirable Perk")}"><b>${esc(p.deal)}</b>${p.perk?`<span>${esc(p.perk)}</span>`:""}</div>`:""}
   <div class="p-roles">${p.roles.map(r=>`<span>${esc(r)}</span>`).join("")}</div>
-  <div class="p-foot">${p.perk?`<span class="p-perk">🎁 ${esc(p.perk)}</span>`:""}<a class="btn btn-gold" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">${esc(p.cta||"Hire Now")} →</a></div>
+  <div class="p-foot">${p.perk&&!p.deal?`<span class="p-perk">🎁 ${esc(p.perk)}</span>`:""}<a class="btn btn-gold" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">${esc(p.cta||"Hire Now")} →</a></div>
  </article>`).join("");
 </script>
 <script>
