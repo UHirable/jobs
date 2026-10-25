@@ -687,3 +687,37 @@ textarea { resize: vertical; }
 .h4-boost{background:linear-gradient(145deg,#ff8a5c,#ff5a36 60%,#e0401c);color:#fff}
 .h4-boost .h4-tag{background:#fff;color:#e0401c}.h4-boost li:before{background:#fff}.h4-boost .h4-btn{background:#fff;color:#e0401c;box-shadow:0 6px 0 #b32e10}.h4-boost p{color:rgba(255,255,255,.92)}
 @media (max-width:860px){.hub4{grid-template-columns:1fr;row-gap:56px}.h4 p{max-width:none}.h4-char{height:150px;top:-40px}.h4 h2{margin-top:10px}}
+
+/* Events nav button with live halo */
+.nav a.btn.btn-events,.nav a.btn.btn-events:hover{position:relative;background:linear-gradient(145deg,#a35cff,#7b2ff7 60%,#5a17c9);color:#fff;box-shadow:0 6px 0 #45109c,0 14px 24px -8px rgba(90,23,201,.6);gap:7px}
+.nav a.btn.btn-events::before{content:"";position:absolute;inset:-4px;border-radius:16px;border:2px solid rgba(201,164,255,.9);animation:evhalo 1.8s ease-out infinite;pointer-events:none}
+.nav a.btn.btn-events::after{content:"";position:absolute;inset:-4px;border-radius:16px;border:2px solid rgba(201,164,255,.7);animation:evhalo 1.8s ease-out .9s infinite;pointer-events:none}
+@keyframes evhalo{0%{transform:scale(1);opacity:.95}100%{transform:scale(1.35,1.7);opacity:0}}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.7);animation:livedot 1.4s infinite;display:inline-block}
+@keyframes livedot{70%{box-shadow:0 0 0 8px rgba(255,77,109,0)}100%{box-shadow:0 0 0 0 rgba(255,77,109,0)}}
+@media (prefers-reduced-motion:reduce){.nav a.btn.btn-events::before,.nav a.btn.btn-events::after,.live-dot{animation:none}}
+/* events page */
+.page-hero.events{background:radial-gradient(520px 380px at 85% 20%,rgba(163,92,255,.55),transparent 70%),linear-gradient(135deg,#0a14a8,#0112ff 60%,#3a1fd6)}
+.page-hero.events .hl{color:#fff;background:linear-gradient(135deg,#a35cff,#7b2ff7);padding:0 .25em .06em;border-radius:14px;box-shadow:0 8px 0 #45109c;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ev-wrap{margin-top:-60px;position:relative;z-index:3;padding-bottom:40px}
+.ev-bar{background:#fff;border-radius:20px;padding:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;box-shadow:0 20px 40px -24px rgba(5,11,63,.4);margin-bottom:22px}
+.ev-bar select{font:inherit;font-weight:700;padding:12px 14px;border-radius:12px;border:2px solid #e3e6ff;color:#050b3f;background:#fff;min-width:240px}
+.ev-bar .count{margin-left:auto;font-weight:800;color:#7b2ff7}
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ev{background:#fff;border-radius:22px;padding:22px;box-shadow:0 24px 50px -28px rgba(5,11,63,.45);border-top:6px solid #7b2ff7;display:flex;flex-direction:column;gap:10px}
+.ev .d{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7b2ff7,#a35cff);color:#fff;font-weight:800;font-size:.85rem;padding:7px 12px;border-radius:10px;align-self:flex-start}
+.ev h3{font-size:1.15rem;color:#050b3f;line-height:1.25}
+.ev .loc{font-weight:700;color:#4a5280;font-size:.9rem}
+.ev p{color:#5a6290;font-size:.9rem;line-height:1.5}
+.ev .tags{display:flex;gap:6px;flex-wrap:wrap}
+.ev .tags span{font-size:.72rem;font-weight:800;letter-spacing:.05em;padding:5px 9px;border-radius:999px;background:#f1eaff;color:#5a17c9}
+.ev .tags span.s{background:#fff4d6;color:#8a6200}.ev .tags span.h{background:#eef0ff;color:#0112ff}
+.ev .perk{background:linear-gradient(135deg,#0fbf6a,#067a44);color:#fff;font-weight:800;font-size:.82rem;padding:8px 12px;border-radius:10px}
+.ev .share-row{display:flex;align-items:center;gap:8px}
+.ev .share-row small{font-weight:800;color:#5a6290;font-size:.75rem;margin-right:2px}
+.ev .sb{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;cursor:pointer;border:0}
+.ev .sb svg{width:17px;height:17px}.ev .sb.li{background:#0a66c2}.ev .sb.wa{background:#25d366}.ev .sb.cp{background:#0112ff}
+.ev a.go{margin-top:auto;text-align:center;font-weight:800;color:#fff;background:#7b2ff7;padding:12px;border-radius:12px;box-shadow:0 5px 0 #45109c;text-decoration:none}
+.ev-grid.single{display:block;max-width:640px;margin:0 auto}.ev-grid.single .ev{padding:30px}.ev-grid.single .ev h3{font-size:1.6rem}
+.backall{display:inline-block;margin-top:18px;font-weight:800;color:#7b2ff7}
+@media (max-width:980px){.ev-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:640px){.ev-grid{grid-template-columns:1fr}.ev-bar select{min-width:0;flex:1}}
