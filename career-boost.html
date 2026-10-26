@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Career Boost – U Hirable</title>
-  <meta name="description" content="Free and discounted career tools to help you build a better resume, beat the ATS and grow on LinkedIn.">
+  <title>Free AI Career Tools: ATS Resume Check, Auto-Apply &amp; LinkedIn Growth | U Hirable</title>
+  <meta name="description" content="Free and discounted AI tools for job seekers: check your resume against the ATS, auto-apply to jobs on LinkedIn and Indeed, and grow your LinkedIn presence.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="U Hirable">
   <meta property="og:title" content="Career Boost: tools to help you get hired | U Hirable">
@@ -52,7 +52,11 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script src="careers.js?v=2"></script>
+<script>
+const PASTELS=[["#ffe3ec","#a3214f"],["#e3f4ff","#0b5f9e"],["#e6f9ee","#18794e"],["#fff3d6","#8a5a00"],["#efe6ff","#5a2bb5"],["#ffe9dc","#b4471b"],["#e0faf7","#0f766e"],["#f3f0e6","#6b5a2a"],["#fde7ff","#9b2c9e"],["#e8edff","#2f43b8"],["#eaf7d9","#4d7c0f"],["#ffe6e6","#b42318"]];
+function pastel(t){const k=t.toLowerCase().replace(/[^a-z]/g,"");let h=0;for(const c of k)h=(h*31+c.charCodeAt(0))>>>0;const [bg,fg]=PASTELS[h%PASTELS.length];return `background:${bg};color:${fg};border-color:transparent`;}
+</script>
+<script src="careers.js?v=3"></script>
 <script>
 const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 document.getElementById("partners").innerHTML=CAREER_TOOLS.map(p=>`
@@ -61,7 +65,7 @@ document.getElementById("partners").innerHTML=CAREER_TOOLS.map(p=>`
    <div><span class="p-tag">${esc(p.tag||"Partner")}</span><h2>${esc(p.name)}</h2><p>${esc(p.tagline)}</p></div></div>
   ${p.deal?`<div class="p-deal"><div class="d-ic"><svg viewBox="0 0 24 24"><path d="M20 12v9H4v-9"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="d-tx"><span class="d-lb">${esc(p.dealLabel||"U Hirable Perk")}</span> <b>${esc(p.deal)}</b> ${p.perk?`<span class="d-sub">${esc(p.perk)}</span>`:""}</div></div>`:""}
   ${p.steps?`<div class="p-steps">${p.steps.map((s,i)=>`<div><b>STEP ${i+1}</b>${esc(s)}</div>`).join("")}</div>`:""}
-  <div class="p-roles">${p.roles.map((r,i)=>/^AI /.test(r)?`<span class="ai c${i%6}"><i>AI</i> ${esc(r.replace(/^AI /,""))}</span>`:`<span>${esc(r)}</span>`).join("")}</div>
+  <div class="p-roles">${p.roles.map((r,i)=>/^AI /.test(r)?`<span class="ai c${i%6}"><i>AI</i> ${esc(r.replace(/^AI /,""))}</span>`:`<span class="pt" style="${pastel(r)}">${esc(r)}</span>`).join("")}</div>
   <div class="p-foot">${p.perk&&!p.deal?`<span class="p-perk">🎁 ${esc(p.perk)}</span>`:""}<a class="btn btn-gold" href="${esc(p.link)}" target="_blank" rel="sponsored noopener noreferrer" referrerpolicy="no-referrer">${esc(p.cta||"Try Free")} →</a></div>
  </article>`).join("");
 </script>
