@@ -133,7 +133,14 @@ const WORLDWIDE = "Worldwide";
 const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
-const jobApply = (j) => j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
+const jobApply = (j) => {
+  const link = j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
+  // Tally forms: pass the job name into the hidden "job" field
+  if (/^https:\/\/tally\.so\//.test(link)) {
+    return link + (link.includes("?") ? "&" : "?") + "job=" + encodeURIComponent(`${j.title} – ${j.company}`);
+  }
+  return link;
+};
 const FLAG_CODES = {
   "United States": "us", "Canada": "ca", "United Kingdom": "gb", "Germany": "de", "Egypt": "eg",
   "Saudi Arabia": "sa", "UAE": "ae", "United Arab Emirates": "ae", "Jordan": "jo", "Lebanon": "lb",

@@ -15,8 +15,10 @@
 
 const APPLY_FORM = ""; // default form for jobs without their own applyLink
 
-// Paraform Connector referral link (Apply button for Paraform roles)
-const PARAFORM_LINK = "https://www.paraform.com/connectors/refer/cmvl2n90r001e0hjj7722k3jt";
+// Paraform roles: candidates apply through the U Hirable Tally form.
+// The job name is filled in automatically (hidden field "job").
+// Amel reviews each applicant and refers strong ones from her Paraform Connectors account.
+const PARAFORM_LINK = "https://tally.so/r/X554AY";
 
 const JOBS = [
   // ================= Paraform roles – batch 2 (AI/ML, 26 Oct 2026) =================
