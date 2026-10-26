@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=26">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
   <header class="topbar">
@@ -52,11 +52,11 @@
   </div></section>
 </main>
 <script src="tags.js?v=1"></script>
-<script src="partners.js?v=18"></script>
+<script src="partners.js?v=19"></script>
 <script>
 const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 document.getElementById("partners").innerHTML=PARTNERS.map(p=>`
- <article class="partner">
+ <article class="partner${p.popular?" is-pop":""}">${p.popular?`<span class="pop-rib">★ Most popular</span>`:""}
   <div class="p-head">${p.logo?`<img class="p-logo img" src="${esc(p.logo)}" alt="">`:`<div class="p-logo">${esc((p.name.match(/[A-Z]/g)||[p.name[0]]).slice(0,2).join(""))}</div>`}
    <div><span class="p-tag">${esc(p.tag||"Partner")}</span><h2>${esc(p.name)}</h2><p>${esc(p.tagline)}</p></div></div>
   ${p.deal?`<div class="p-deal"><div class="d-ic"><svg viewBox="0 0 24 24"><path d="M20 12v9H4v-9"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="d-tx"><span class="d-lb">${esc(p.dealLabel||"U Hirable Perk")}</span> <b>${esc(p.deal)}</b> ${p.perk?`<span class="d-sub">${esc(p.perk)}</span>`:""}</div></div>`:""}

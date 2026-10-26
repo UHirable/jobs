@@ -11,6 +11,7 @@
 const CAREER_TOOLS = [
   {
     name: "Taplio",
+    popular: true,
     logo: "logo-taplio.png",
     tag: "LinkedIn Growth",
     tagline: "Grow your LinkedIn presence with AI: write better posts, schedule content and see what works.",
