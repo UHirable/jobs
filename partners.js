@@ -61,5 +61,17 @@ const PARTNERS = [
     cta: "Get 10% Off",
     roles: ["Payroll for UAE, KSA, Qatar, Oman, Bahrain & Kuwait", "WPS File Generation", "Multi-country Payroll", "Leave & Attendance", "Employee Self-Service App", "Performance Management", "Recruitment", "Expense Management"],
     link: "https://greythr.referralrock.com/l/AMELMOUSSA04/"
+  },
+  {
+    name: "Kinetic Staff",
+    deal: "SAVE UP TO 65%",
+    dealLabel: "Free quote",
+    logo: "logo-kinetic.png",
+    tag: "Offshore Staffing",
+    tagline: "Dedicated offshore professionals from the Philippines, with payroll, HR and admin handled for you.",
+    perk: "Save up to 65% vs local hiring + a free quote and candidate shortlist in about a week",
+    cta: "Get a Free Quote",
+    roles: ["Customer Service", "Virtual Assistants", "Data Entry", "Technical Support", "Legal Assistants", "Finance & Accounting", "Sales & Marketing", "Web Developers", "Engineering Support"],
+    link: "https://www.kineticstaff.com/share/v1/?ref=6ecA3tl&linkId=1"
   }
 ];
