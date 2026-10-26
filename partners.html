@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="style.css?v=25">
 </head>
 <body>
   <header class="topbar">
@@ -39,7 +39,7 @@
     <h1>Everything you need to <span class="hl">hire better</span></h1>
     <p class="lead">From remote staffing and recruiting software to HR and global payroll, trusted partners and tools with exclusive perks to help your company find, hire and manage great talent.</p>
   </div></section>
-  <section class="container partners-wrap"><div class="partners" id="partners"></div></section>
+  <section class="container partners-wrap"><div class="tag-legend" id="tag-legend" aria-label="Tag colors"></div><div class="partners" id="partners"></div></section>
   <section class="container partners-share-wrap"><div class="partners-share share">
     <span>Know a company that's hiring? Share this page</span>
     <div class="share-btns">
@@ -50,11 +50,8 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script>
-const PASTELS=[["#ffe3ec","#a3214f"],["#e3f4ff","#0b5f9e"],["#e6f9ee","#18794e"],["#fff3d6","#8a5a00"],["#efe6ff","#5a2bb5"],["#ffe9dc","#b4471b"],["#e0faf7","#0f766e"],["#f3f0e6","#6b5a2a"],["#fde7ff","#9b2c9e"],["#e8edff","#2f43b8"],["#eaf7d9","#4d7c0f"],["#ffe6e6","#b42318"]];
-function pastel(t){const k=t.toLowerCase().replace(/[^a-z]/g,"");let h=0;for(const c of k)h=(h*31+c.charCodeAt(0))>>>0;const [bg,fg]=PASTELS[h%PASTELS.length];return `background:${bg};color:${fg};border-color:transparent`;}
-</script>
-<script src="partners.js?v=17"></script>
+<script src="tags.js?v=1"></script>
+<script src="partners.js?v=18"></script>
 <script>
 const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 document.getElementById("partners").innerHTML=PARTNERS.map(p=>`
@@ -62,9 +59,10 @@ document.getElementById("partners").innerHTML=PARTNERS.map(p=>`
   <div class="p-head">${p.logo?`<img class="p-logo img" src="${esc(p.logo)}" alt="">`:`<div class="p-logo">${esc((p.name.match(/[A-Z]/g)||[p.name[0]]).slice(0,2).join(""))}</div>`}
    <div><span class="p-tag">${esc(p.tag||"Partner")}</span><h2>${esc(p.name)}</h2><p>${esc(p.tagline)}</p></div></div>
   ${p.deal?`<div class="p-deal"><div class="d-ic"><svg viewBox="0 0 24 24"><path d="M20 12v9H4v-9"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="d-tx"><span class="d-lb">${esc(p.dealLabel||"U Hirable Perk")}</span> <b>${esc(p.deal)}</b> ${p.perk?`<span class="d-sub">${esc(p.perk)}</span>`:""}</div></div>`:""}
-  <div class="p-roles">${p.roles.map(r=>`<span class="pt" style="${pastel(r)}">${esc(r)}</span>`).join("")}</div>
+  <div class="p-roles">${p.roles.map(tagHTML).join("")}</div>
   <div class="p-foot">${p.perk&&!p.deal?`<span class="p-perk">🎁 ${esc(p.perk)}</span>`:""}<a class="btn btn-gold" href="${esc(p.link)}" target="_blank" rel="sponsored noopener noreferrer" referrerpolicy="no-referrer">${esc(p.cta||"Hire Now")} →</a></div>
  </article>`).join("");
+tagLegend(PARTNERS,document.getElementById("tag-legend"));
 </script>
 <script>
 (function(){

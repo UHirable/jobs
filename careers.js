@@ -46,5 +46,18 @@ const CAREER_TOOLS = [
     cta: "Start Free with LoopCV",
     roles: ["AI Job Application Agent", "AI Auto-Apply", "AI CV Builder", "AI CV Checker", "AI Cover Letter", "AI Mock Interview", "AI Career Coach", "AI Question Answering", "Recruiter Email Finder", "Job Application Tracker", "20+ Job Boards"],
     link: "https://loopcv.pro/?via=uhirable"
+    },
+  {
+    name: "SkillSyncer",
+    logo: "logo-skillsyncer.png",
+    tag: "Resume Scanner & Job Tracker",
+    tagline: "Scan your resume against any job description, find the missing keywords and track every application in one place.",
+    deal: "FREE PLAN",
+    dealLabel: "Free forever",
+    perk: "Free weekly resume scans + 1 year of Premium free for students with a .edu email",
+    steps: ["Paste the job description", "Upload your resume", "Add the missing keywords"],
+    cta: "Scan My Resume Free",
+    roles: ["AI Auto-Optimize", "AI Bullet Point Writer", "Resume Match Score", "Keyword Gap Analysis", "Job Application Tracker", "Chrome Extension for LinkedIn & Indeed", "Free Premium for Students"],
+    link: "https://skillsyncer.com/?via=uhirable"
   }
 ];
