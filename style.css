@@ -685,7 +685,7 @@ textarea { resize: vertical; }
 .h4-comp{background:linear-gradient(145deg,#1a1a1a,#050505);color:#fff}
 .h4-comp .h4-tag{background:#ffc93c;color:#050505}.h4-comp li:before{background:#0fbf6a}.h4-comp .h4-btn{background:#fff;color:#050505;box-shadow:0 6px 0 #9aa0b8}.h4-comp p{color:rgba(255,255,255,.8)}
 .h4-boost{background:linear-gradient(145deg,#ff8a5c,#ff5a36 60%,#e0401c);color:#fff}
-.h4-boost .h4-tag{background:#fff;color:#e0401c}.h4-boost li:before{background:#fff}.h4-boost .h4-btn{background:#fff;color:#e0401c;box-shadow:0 6px 0 #b32e10}.h4-boost p{color:rgba(255,255,255,.92)}
+.h4-boost .h4-tag{background:#fff;color:#b8320f}.h4-boost li:before{background:#fff}.h4-boost .h4-btn{background:#fff;color:#b8320f;box-shadow:0 6px 0 #b32e10}.h4-boost p{color:rgba(255,255,255,.92)}
 @media (max-width:860px){.hub4{grid-template-columns:1fr;row-gap:56px}.h4 p{max-width:none}.h4-char{height:150px;top:-40px}.h4 h2{margin-top:10px}}
 
 /* Events nav button with live halo */
@@ -721,3 +721,4 @@ textarea { resize: vertical; }
 .ev-grid.single{display:block;max-width:640px;margin:0 auto}.ev-grid.single .ev{padding:30px}.ev-grid.single .ev h3{font-size:1.6rem}
 .backall{display:inline-block;margin-top:18px;font-weight:800;color:#7b2ff7}
 @media (max-width:980px){.ev-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:640px){.ev-grid{grid-template-columns:1fr}.ev-bar select{min-width:0;flex:1}}
+.h4-char img{width:auto}.me-arch img{height:auto}.logo img,img.logo,.footer img{width:auto}
