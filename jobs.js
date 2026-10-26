@@ -19,6 +19,123 @@ const APPLY_FORM = ""; // default form for jobs without their own applyLink
 const PARAFORM_LINK = "https://www.paraform.com/connectors/refer/cmvl2n90r001e0hjj7722k3jt";
 
 const JOBS = [
+  // ================= Paraform roles – batch 2 (AI/ML, 26 Oct 2026) =================
+  {
+    id: "ifs-senior-applied-ai-engineer",
+    page: "job-ifs-senior-applied-ai-engineer.html",
+    title: "Senior Applied AI Engineer",
+    company: "IFS",
+    industry: "Industrial AI · Enterprise Software",
+    countries: ["United Kingdom", "UAE"],
+    location: "UK or Dubai",
+    tags: ["Hybrid", "Full-time", "€100K – €160K", "No visa sponsorship"],
+    brief: "Join IFS's new AI Software Factory moonshot team and own the architecture of an agentic AI product built on top of enterprise data, hybrid in the UK or Dubai.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "IFS is a global leader in Industrial AI software with 7,000+ employees in 80 countries. It is building a small moonshot team inside R&D, the AI Software Factory, to change how software gets built. The first project is an intelligence layer on top of IFS's enterprise databases, not a chatbot bolted on. As the senior engineer, you set the engineering rigor for the team and own the architecture and evaluation approach.",
+    responsibilities: [
+      "Ship the first product: build the AI intelligence layer on IFS's enterprise data with a small, flat team.",
+      "Own the architecture: decide how work is split across agents, how concurrent changes are isolated and merged, and how results are verified.",
+      "Design the evals, regression tests and drift checks that show whether an agentic workflow is safe to expand.",
+      "Stay hands-on: write orchestration, evaluation and codebase-analysis components and wire them into real codebases and CI.",
+      "Review hard technical calls and guide engineers building on your architecture (no direct reports)."
+    ],
+    requirements: [
+      "8+ years of production software engineering experience.",
+      "Hands-on experience building with LLM agents or tool-using systems.",
+      "Strong background in distributed systems, CI/CD and system evaluation.",
+      "Tech stack: Agentic AI Systems, Distributed Systems, DAG Scheduling, Static Analysis, CI/CD.",
+      "Must already have the right to work in the UK or the UAE (no visa sponsorship)."
+    ],
+    compensation: "€100K – €160K base, based on experience and qualifications. Hybrid role based in the UK or Dubai."
+  },
+  {
+    id: "dwelly-ai-applied-engineer",
+    page: "job-dwelly-ai-applied-engineer.html",
+    title: "AI Applied Engineer",
+    company: "Dwelly",
+    industry: "PropTech · AI-First Property Management",
+    countries: ["United Kingdom", "Spain", "Portugal", "Poland", "Germany", "Netherlands"],
+    location: "Remote · UK or Europe",
+    tags: ["Remote", "Full-time", "€100K – €150K", "UK working hours"],
+    brief: "Fully remote from the UK or Europe: scale the AI engine behind a $263M-funded property platform that automates tenant finding, property management and finance.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Dwelly is a UK-based, AI-first lettings and property management platform that grows by acquiring traditional letting agencies and moving them onto its technology within two months. Backed by $263M in funding, it aims to lead the £100 billion UK lettings market. As AI Applied Engineer you'll unify existing AI flows, build a robust evaluation layer and scale the agentic infrastructure for future acquisitions.",
+    responsibilities: [
+      "Scale Dwelly's AI engine that automates tenant finding, property management and finance.",
+      "Unify existing AI flows into one consistent, reliable system.",
+      "Build a robust evaluation layer for AI and agentic workflows.",
+      "Scale the agentic infrastructure to support new agency acquisitions.",
+      "Work in a small cross-functional squad with high autonomy and ownership."
+    ],
+    requirements: [
+      "3+ years of software engineering experience.",
+      "Experience with LLM orchestration and agentic workflows.",
+      "Tech stack: TypeScript, Node.js, PostgreSQL, Python.",
+      "Based in the UK or Europe and able to work UK hours (preferred: London, Spain, Portugal, Poland).",
+      "Must already have the right to work in your country (no visa sponsorship)."
+    ],
+    compensation: "€100K – €150K base + competitive equity. Fully remote across UK and European time zones, with occasional in-person team gatherings."
+  },
+  {
+    id: "altas-ai-engineer",
+    page: "job-altas-ai-engineer.html",
+    title: "AI Engineer",
+    company: "Altas Partners",
+    industry: "Private Equity · Applied AI",
+    countries: ["Canada"],
+    location: "Toronto, ON",
+    tags: ["On-site", "Full-time", "CA$100K – CA$150K", "Early-career friendly"],
+    brief: "A rare early-career AI role (1–5 years) at a $10B+ private equity firm: build AI agents and tools for investors and portfolio companies in Toronto.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Altas Partners is a North American private equity firm managing more than $10 billion, with offices in Toronto and New York. The AI Engineer will build AI tools, apps and systems for the investment team and portfolio companies, working directly with senior investors and the AI & Advanced Analytics team. It's an ideal role for a recent graduate or early-career engineer who combines strong technical skills with business judgment.",
+    responsibilities: [
+      "Build and ship AI agents, apps and systems that help the investment team source and diligence companies.",
+      "Partner with portfolio company teams to deliver AI solutions that improve how those businesses operate.",
+      "Take work from prototype to production: write, test, deploy and support it.",
+      "Build AI search over the firm's knowledge base, plus the data pipelines behind it.",
+      "Build evaluation infrastructure to keep AI systems accurate, reliable and cost-effective."
+    ],
+    requirements: [
+      "1–5 years of hands-on software engineering or applied AI experience.",
+      "Degree in Computer Science, Engineering, Mathematics, Statistics or a related field.",
+      "Experience building on LLM APIs: agents, tool use, retrieval and evaluations.",
+      "Strong Python and SQL; TypeScript, React, AWS/GCP or Snowflake are a plus.",
+      "Able to work in Toronto 4 days a week (open to visa transfers, e.g. OPT or H-1B transfers)."
+    ],
+    compensation: "CA$100K – CA$150K base + discretionary bonus. On-site in Toronto Monday to Thursday, remote Fridays."
+  },
+  {
+    id: "protege-forward-deployed-ml-engineer",
+    page: "job-protege-forward-deployed-ml-engineer.html",
+    title: "Forward Deployed ML Engineer",
+    company: "Protege",
+    industry: "AI Training Data Infrastructure",
+    countries: ["United States"],
+    location: "Remote · United States",
+    tags: ["Remote", "Full-time", "$170K – $270K", "US citizens / Green Card"],
+    brief: "Be the first ML engineer on Protege's Benchmarks & Evaluations team at an a16z-backed AI data company that hit its 2026 goals by June.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Protege is building the infrastructure layer for AI training data, connecting data holders with vetted AI companies. Backed by $65M from Andreessen Horowitz, CRV and others, it hit its entire 2026 goal by June. As the first Forward Deployed ML Engineer on the Benchmarks & Evaluations team, you'll work with the GM, researchers and frontier AI customers to build the technical foundation for AI model evaluation.",
+    responsibilities: [
+      "Partner with the GM and early customers to design and build benchmarks and evals across domains and modalities.",
+      "Build and own backend infrastructure: data pipelines, execution environments, storage and orchestration.",
+      "Stand up sandboxed environments for agentic evals with tools, code execution and multi-step tasks.",
+      "Own the engineering side of customer engagements end to end.",
+      "Spot repeatable eval patterns and infrastructure gaps that become product opportunities."
+    ],
+    requirements: [
+      "4–8 years of engineering experience with hands-on ML model evaluation work.",
+      "Ownership of backend and infrastructure (data pipelines, execution environments).",
+      "Experience building benchmarks, evals or human data pipelines for LLMs.",
+      "Strong written communication for customer-facing work.",
+      "Must be US-based and a US citizen or Green Card holder (no visa sponsorship)."
+    ],
+    compensation: "$170K – $270K base + competitive equity. Fully remote within the United States."
+  },
   // ================= Paraform roles – batch 1 =================
   {
     id: "blacksmith-staff-product-engineer",

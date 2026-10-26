@@ -138,7 +138,7 @@ const FLAG_CODES = {
   "United States": "us", "Canada": "ca", "United Kingdom": "gb", "Germany": "de", "Egypt": "eg",
   "Saudi Arabia": "sa", "UAE": "ae", "United Arab Emirates": "ae", "Jordan": "jo", "Lebanon": "lb",
   "Qatar": "qa", "Kuwait": "kw", "Bahrain": "bh", "Oman": "om", "France": "fr", "Netherlands": "nl",
-  "Spain": "es", "Ireland": "ie", "India": "in", "Singapore": "sg", "Australia": "au", "Brazil": "br", "Mexico": "mx"
+  "Spain": "es", "Portugal": "pt", "Poland": "pl", "Ireland": "ie", "India": "in", "Singapore": "sg", "Australia": "au", "Brazil": "br", "Mexico": "mx"
 };
 // real flag images (emoji flags don't render on Windows)
 const flagOf = (c) =>
