@@ -20,6 +20,258 @@ const APPLY_FORM = ""; // default form for jobs without their own applyLink
 const PARAFORM_LINK = "https://www.paraform.com/connectors/refer/cmvl2n90r001e0hjj7722k3jt";
 
 const JOBS = [
+  // ================= Paraform roles – batch 3 (GTM, 26 Oct 2026) =================
+  {
+    id: "ancep-founding-gtm",
+    page: "job-ancep-founding-gtm.html",
+    title: "Founding GTM",
+    company: "Ancep",
+    industry: "AI for Commercial Insurance",
+    countries: ["United Kingdom"],
+    location: "London, UK",
+    tags: ["On-site", "Full-time", "£70K – £140K", "Visa sponsorship"],
+    brief: "Be the first commercial hire at a stealth AI startup already working with 3 of the top 10 global insurance brokers, with visa sponsorship and relocation to London.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Ancep is building the AI agent layer for the $3T commercial insurance market, automating submission intake, data extraction, insurer outreach and quote comparison for brokers. Still in stealth, it already works with 3 of the top 10 global brokers and is backed by top European and American investors. As Founding GTM you'll be the first commercial hire, selling hands-on while building the go-to-market motion from scratch alongside the founders.",
+    responsibilities: [
+      "Own the full sales cycle, from outbound prospecting to closing deals with insurance brokers.",
+      "Build the go-to-market motion and sales playbook from scratch.",
+      "Work directly with the founders to shape how the product goes to market.",
+      "Act as a player-coach: carry a quota now and build the sales team as the company grows."
+    ],
+    requirements: [
+      "1–5 years of full-cycle sales experience at an early-stage company, selling to large enterprises.",
+      "Proven track record of building real revenue with high ownership.",
+      "Excited to build from scratch without a playbook; insurance knowledge is not required.",
+      "Able to work 5 days a week in the London office (visa sponsorship and relocation available)."
+    ],
+    compensation: "£70K – £140K base + commission + meaningful equity + relocation. On-site 5 days a week in London. Open to visa sponsorship."
+  },
+  {
+    id: "fireworks-ai-enterprise-account-executive",
+    page: "job-fireworks-ai-enterprise-account-executive.html",
+    title: "Enterprise Account Executive",
+    company: "Fireworks AI",
+    industry: "Generative AI Infrastructure",
+    countries: ["United States"],
+    location: "Remote · United States",
+    tags: ["Remote", "Full-time", "$155K – $175K", "US citizens / Green Card"],
+    brief: "Sell the AI inference platform behind Uber, DoorDash, Notion and Cursor, fully remote anywhere in the US, with uncapped commission and equity in a $4B company.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Fireworks AI is building the future of generative AI infrastructure, independently benchmarked as the fastest LLM inference platform. Founded by veterans of Meta PyTorch and Google Vertex AI, it's a $4B Series C company backed by Benchmark, Sequoia and Lightspeed. As Enterprise Account Executive you'll drive new business with large enterprises and technical buyers.",
+    responsibilities: [
+      "Develop and execute a sales strategy within targeted enterprise accounts.",
+      "Own the full sales cycle, from prospecting to procurement.",
+      "Generate pipeline and work with channel and alliance partners to close deals.",
+      "Forecast accurately and keep a high level of customer satisfaction.",
+      "Travel for client visits and presentations as needed."
+    ],
+    requirements: [
+      "6+ years of SaaS sales, including 3+ years selling to technical audiences.",
+      "Track record of closing six-figure deals in large, complex enterprise accounts.",
+      "Experience selling technical or infrastructure products (APIs, SDKs, DevOps) is a strong plus.",
+      "Based in the US; US citizen or Green Card holder (no visa sponsorship)."
+    ],
+    compensation: "$155K – $175K base, $310K – $350K OTE (50/50 split) with no commission cap, plus meaningful equity. Fully remote anywhere in the US."
+  },
+  {
+    id: "elise-ai-senior-enterprise-sales-manager",
+    page: "job-elise-ai-senior-enterprise-sales-manager.html",
+    title: "Senior Enterprise Sales Manager, Housing",
+    company: "EliseAI",
+    industry: "Agentic AI for Housing & Healthcare",
+    countries: ["United States"],
+    location: "Austin, TX",
+    tags: ["On-site", "Full-time", "$210K – $240K", "Visa transfers"],
+    brief: "Build and lead EliseAI's new Texas office as a player-coach at an a16z-backed AI unicorn that powers 1 in 6 US apartments.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "EliseAI builds agentic AI for housing and healthcare and powers 1 in 6 apartments in the US. Backed by a $250M Series E led by Andreessen Horowitz, its ARR has grown to $200M. You'll build and lead the new Texas office from the ground up, closing enterprise deals yourself while hiring and developing a team, with a clear path to second-line leadership within 12 months.",
+    responsibilities: [
+      "Personally close enterprise deals with regional and national property management companies.",
+      "Stand up the new Texas office: help find the space, hire AEs and grow the regional presence.",
+      "Lead, mentor and manage enterprise AEs across the full sales cycle.",
+      "Partner with Customer Success, Product and Marketing on new business and expansion.",
+      "Run pipeline reviews and forecasting, and represent EliseAI at industry conferences."
+    ],
+    requirements: [
+      "7+ years of B2B SaaS enterprise sales, including 3+ years as an enterprise AE.",
+      "2–3+ years managing AEs at companies with fewer than 1,000 employees.",
+      "Experience with challenger-style, full-cycle enterprise selling.",
+      "Able to work on-site in Austin 4 days a week (open to visa transfers)."
+    ],
+    compensation: "$210K – $240K base, $350K – $400K OTE (60/40 split) + competitive equity. On-site 4 days a week in Austin, Texas."
+  },
+  {
+    id: "candex-head-of-product-marketing",
+    page: "job-candex-head-of-product-marketing.html",
+    title: "Head of Product Marketing",
+    company: "Candex",
+    industry: "B2B Fintech · Procurement",
+    countries: ["United States"],
+    location: "Remote · Miami, Boston or New York",
+    tags: ["Remote", "Full-time", "$210K – $250K", "Visa sponsorship"],
+    brief: "Build the product marketing function from scratch, reporting to the CEO of a Goldman Sachs and JP Morgan-backed fintech operating in 50 countries.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Candex is a fast-growing global B2B fintech that makes enterprise purchasing fast and simple, serving Global 2,000 companies in almost 50 countries. It has raised $130M+ from investors including Goldman Sachs, JP Morgan and American Express. As the first Product Marketing hire, reporting directly to the CEO, you'll build the entire function from scratch.",
+    responsibilities: [
+      "Build the product marketing function: processes, launch frameworks and operating cadence.",
+      "Develop clear positioning and messaging that turns complex fintech into simple value propositions.",
+      "Own go-to-market for new products, partnerships and country launches.",
+      "Equip sales and customer success with battle cards, pitch decks and competitive intel.",
+      "Run customer interviews and win/loss analysis, and set KPIs that tie marketing to business impact."
+    ],
+    requirements: [
+      "5–15 years of experience in product marketing or product management.",
+      "Experience building marketing functions or launch frameworks.",
+      "Able to tailor messaging by segment, industry, region and buyer persona.",
+      "Based in or near Miami, Boston or New York; travel 4–5 times a year (visa sponsorship available)."
+    ],
+    compensation: "$210K – $250K base + annual bonus + equity, with medical, dental, vision, 401K and unlimited PTO. Remote on East Coast hours."
+  },
+  {
+    id: "pointr-senior-enterprise-account-executive",
+    page: "job-pointr-senior-enterprise-account-executive.html",
+    title: "Sr. Enterprise Account Executive",
+    company: "Pointr",
+    industry: "Indoor Location Technology · Healthcare",
+    countries: ["United States"],
+    location: "Boston, MA",
+    tags: ["Hybrid", "Full-time", "$115K – $140K", "US citizens / Green Card"],
+    brief: "Drive new business into hospitals and health systems for a global leader in indoor location technology, hybrid in Boston.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Pointr is a global leader in indoor location technology, live in thousands of venues and powering geolocation for 25 million people, with customers like UCHealth and the U.S. Department of Homeland Security. You'll join the growing healthcare vertical to drive new-business growth into hospitals and health systems, owning complex, multi-stakeholder sales cycles.",
+    responsibilities: [
+      "Run complex enterprise sales cycles into hospitals, from discovery through RFP, negotiation and close.",
+      "Manage existing enterprise health system accounts to drive renewals and expansions.",
+      "Generate new pipeline through outbound, your network, partners and industry conferences.",
+      "Navigate large buying committees across IT, facilities, clinical leadership and the C-suite.",
+      "Work closely with Sales Engineering, Customer Success, Marketing and partners."
+    ],
+    requirements: [
+      "5+ years of complex B2B enterprise sales with a record of closing large deals.",
+      "Healthcare or healthcare IT sales experience strongly preferred.",
+      "Experience with competitive RFPs and methodologies like MEDDIC or MEDDPICC.",
+      "Based in Boston (in office 2 days a week); US citizen or Green Card holder."
+    ],
+    compensation: "$115K – $140K base, $230K – $280K OTE + stock options, uncapped renewal commission, 401(k), 18 days PTO and paid parental leave."
+  },
+  {
+    id: "govdash-account-executive",
+    page: "job-govdash-account-executive.html",
+    title: "Account Executive",
+    company: "GovDash",
+    industry: "AI for Government Contracting",
+    countries: ["United States"],
+    location: "Washington, DC",
+    tags: ["Hybrid", "Full-time", "$120K – $150K", "US citizens / Green Card"],
+    brief: "Sell the AI platform that helped customers win $5B+ in government contracts, at a fast-growing $42M-funded startup.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "GovDash helps businesses win and deliver government contracts with a secure AI platform covering the full contracting lifecycle. In 2025 alone its customers won more than $5B in contracts, and the company has raised $42M. They're hiring 2–3 Account Executives to round out a sales team of seven.",
+    responsibilities: [
+      "Run the full sales cycle from discovery calls to closing deals with government contractors.",
+      "Become an expert on the GovDash platform and deliver compelling demos.",
+      "Build relationships with C-level executives and heads of growth.",
+      "Work with the engagement team to onboard new customers.",
+      "Share customer feedback to help shape the product."
+    ],
+    requirements: [
+      "3–5 years in full-cycle B2B software sales (minimum 2 years as an AE).",
+      "Experience demoing a complex product.",
+      "Curious and quick to learn the government procurement space.",
+      "4 days in office in Arlington, VA or New York; US citizen or Green Card holder."
+    ],
+    compensation: "$120K – $150K base, $240K – $300K OTE + competitive equity. Relocation support available."
+  },
+  {
+    id: "timescapes-account-executive",
+    page: "job-timescapes-account-executive.html",
+    title: "Account Executive",
+    company: "Timescapes",
+    industry: "Construction Tech",
+    countries: ["United States"],
+    location: "Dallas, TX",
+    tags: ["Hybrid", "Full-time", "$125K – $140K", "US citizens / Green Card"],
+    brief: "Own a greenfield Texas territory selling visual progress tracking to top construction contractors, with logos like NASA already on board.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Timescapes provides construction cameras and software for real-time visual progress tracking, used on 400+ projects across Australia, Canada, New Zealand and the US, with customers like NASA and Hensel Phelps. You'll own and build the greenfield Texas territory, helping scale US revenue from ~$600K to $2–3M+ within a year.",
+    responsibilities: [
+      "Run full-cycle sales: self-source, prospect and close new logos among top general contractors.",
+      "Build relationships in the field through job site visits, associations and lunch-and-learns.",
+      "Make 50–100 outbound calls a day, supported by a BDR and marketing team.",
+      "Manage pipeline in HubSpot and drive 5–7 closed deals a month.",
+      "Work with Marketing and Customer Success to grow accounts over time."
+    ],
+    requirements: [
+      "4–8 years of full-cycle B2B SaaS sales.",
+      "Experience selling into construction (Tier 1 and Tier 2 general contractors).",
+      "An existing network in the construction industry is a strong plus.",
+      "Hybrid in Plano/Dallas, TX; US citizen or Green Card holder."
+    ],
+    compensation: "$125K – $140K base, $250K – $280K OTE (50/50 split) + competitive equity. Top performers are exceeding 150% attainment."
+  },
+  {
+    id: "garage-account-executive",
+    page: "job-garage-account-executive.html",
+    title: "Account Executive",
+    company: "Garage",
+    industry: "AI Marketplace · Y Combinator",
+    countries: ["United States"],
+    location: "Remote · Philadelphia, NYC, Miami & more",
+    tags: ["Remote", "Full-time", "$93K – $118K", "US citizens / Green Card"],
+    brief: "Join a Y Combinator-backed AI marketplace that grew revenue 10x in under a year, remote from Philadelphia, NYC, Miami, Nashville, Charlotte, St. Louis or Houston.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Garage is the AI-powered marketplace transforming how America's essential assets, like fire trucks and specialty vehicles, are bought and sold. Backed by Y Combinator and $18M in funding, it has expanded to all 50 states and grown revenue more than 10x in under a year. They're hiring multiple Account Executives.",
+    responsibilities: [
+      "Own the full sales cycle, from sourcing and discovery to closing new logos.",
+      "Balance inbound and outbound to build your own pipeline.",
+      "Travel to meet customers in person and build strong relationships.",
+      "Represent Garage at conferences and with customers like fire chiefs and fleet managers.",
+      "Manage a growing book of business with discipline in your CRM."
+    ],
+    requirements: [
+      "2–6 years as a full-cycle Account Executive, ideally at an early-stage startup.",
+      "Competitive, self-driven and comfortable with ambiguity.",
+      "Experience selling to government municipalities is a strong plus.",
+      "Based in Philadelphia, Houston, St. Louis, Nashville, NYC, Charlotte or Miami; US citizen or Green Card holder."
+    ],
+    compensation: "$93K – $118K base, $186K – $236K OTE + competitive equity. Fully remote within the listed cities."
+  },
+  {
+    id: "first-resonance-senior-account-executive",
+    page: "job-first-resonance-senior-account-executive.html",
+    title: "Senior Account Executive",
+    company: "First Resonance",
+    industry: "Manufacturing Software · Factory OS",
+    countries: ["United States"],
+    location: "Los Angeles, CA",
+    tags: ["Hybrid", "Full-time", "$100K – $140K", "US citizens / Green Card"],
+    brief: "Sell the factory operating system used by companies building rockets, nuclear reactors and eVTOLs, in a small high-impact team reporting to the COO.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "First Resonance builds ION Factory OS, the leading operating system for modern manufacturers, used by teams building NASA's lunar lander, eVTOLs, micro nuclear reactors and more. The Series A company has raised $34M+. You'll join a small sales team selling to the most ambitious hardware companies, in a hunting role reporting directly to the COO.",
+    responsibilities: [
+      "Own the full sales cycle for enterprise deals from $50K to several hundred thousand in ACV.",
+      "Hunt for new business, mainly through outbound.",
+      "Sell a technical, AI-native product to engineers, operators and manufacturing leaders.",
+      "Translate MES/PLM/ERP value into business outcomes for C-suite stakeholders.",
+      "Share market insights with product and engineering."
+    ],
+    requirements: [
+      "5+ years of closing experience in B2B sales.",
+      "Direct experience selling MES, PLM or ERP software, ideally to manufacturers.",
+      "Comfortable in a ~50-person startup with ambiguity and a fast pace.",
+      "Based in Los Angeles, in office 3–4 days a week; US citizen or Green Card holder."
+    ],
+    compensation: "$100K – $140K base, $200K – $280K OTE + competitive equity. Hybrid in El Segundo, Los Angeles."
+  },
   // ================= Paraform roles – batch 2 (AI/ML, 26 Oct 2026) =================
   {
     id: "ifs-senior-applied-ai-engineer",
