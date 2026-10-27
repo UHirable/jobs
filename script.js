@@ -289,3 +289,15 @@ if (jobContent && typeof JOBS !== "undefined") {
     }
   }
 }
+
+// Nav dropdown (For Job Seekers): click to open on touch screens
+document.querySelectorAll(".dd-t").forEach((b) => {
+  b.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const d = b.parentElement;
+    document.querySelectorAll(".dd.open").forEach((x) => { if (x !== d) x.classList.remove("open"); });
+    d.classList.toggle("open");
+    b.setAttribute("aria-expanded", d.classList.contains("open"));
+  });
+});
+document.addEventListener("click", () => document.querySelectorAll(".dd.open").forEach((d) => d.classList.remove("open")));
