@@ -352,3 +352,38 @@ document.querySelectorAll(".dd-t").forEach((b) => {
   });
 });
 document.addEventListener("click", () => document.querySelectorAll(".dd.open").forEach((d) => d.classList.remove("open")));
+
+// ---------- Site search (header) ----------
+(function(){
+  const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
+  if(!q)return;
+  let loading=null;
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=2";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
+  const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
+  function run(){
+    const v=norm(q.value.trim());
+    if(v.length<2||!window.SEARCH_INDEX){res.hidden=true;return;}
+    const words=v.split(/\s+/);
+    const hits=window.SEARCH_INDEX.map(e=>{const t=norm(e.t),all=t+" "+norm(e.d)+" "+norm(e.k);
+      if(!words.every(w=>all.includes(w)))return null;
+      let s=0;if(t.startsWith(v))s+=6;if(t.includes(v))s+=3;words.forEach(w=>{if(t.includes(w))s+=2;});
+      return {e,s};}).filter(Boolean).sort((a,b)=>b.s-a.s||ORDER[a.e.k]-ORDER[b.e.k]).slice(0,8);
+    res.innerHTML=hits.length?hits.map(({e})=>`<a href="${esc(e.u)}"${e.x?' target="_blank" rel="noopener"':""}><span class="hs-k k-${esc(e.k.replace(/\s+/g,"-").toLowerCase())}">${esc(e.k)}</span><span class="hs-t"><b>${esc(e.t)}</b><small>${esc(e.d)}</small></span>${e.x?"<i>↗</i>":""}</a>`).join("")
+      :`<div class="hs-none">No results for “${esc(q.value.trim())}”</div>`;
+    res.hidden=false;
+  }
+  q.addEventListener("focus",()=>load().then(run));
+  q.addEventListener("input",()=>load().then(run));
+  q.addEventListener("keydown",e=>{
+    const links=[...res.querySelectorAll("a")];const i=links.indexOf(document.activeElement);
+    if(e.key==="Enter"&&links[0]){e.preventDefault();links[0].click();}
+    if(e.key==="ArrowDown"&&links[0]){e.preventDefault();links[0].focus();}
+    if(e.key==="Escape"){res.hidden=true;q.blur();}
+  });
+  res.addEventListener("keydown",e=>{const links=[...res.querySelectorAll("a")];const i=links.indexOf(document.activeElement);
+    if(e.key==="ArrowDown"){e.preventDefault();(links[i+1]||links[i]).focus();}
+    if(e.key==="ArrowUp"){e.preventDefault();i>0?links[i-1].focus():q.focus();}});
+  document.addEventListener("click",e=>{if(!e.target.closest(".hsearch"))res.hidden=true;});
+})();

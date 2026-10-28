@@ -23,20 +23,6 @@ const CAREER_TOOLS = [
     link: "https://taplio.com/?via=uhirable"
   },
   {
-    name: "Got Resume Builder",
-    logo: "",
-    logoText: "GR",
-    tag: "Resume Builder & ATS",
-    tagline: "Build an ATS-friendly resume with AI and check how well it matches the job, in minutes.",
-    deal: "FREE ATS CHECK",
-    dealLabel: "Free to start",
-    perk: "Free ATS resume check, keyword scanner and a free plan to start",
-    steps: ["Write your resume with AI", "Pick a design and font", "Download and email it"],
-    cta: "Check My Resume Free",
-    roles: ["AI Resume Assistant", "AI Resume Writer", "AI Cover Letter", "ATS Resume Checker", "Keyword Scanner", "Job Application Tracker", "Professional Templates"],
-    link: "https://www.gotresumebuilder.com/?via=uhirable"
-  },
-  {
     name: "LoopCV",
     logo: "logo-loopcv.png",
     tag: "AI Auto-Apply",
@@ -60,5 +46,18 @@ const CAREER_TOOLS = [
     cta: "Scan My Resume Free",
     roles: ["AI Auto-Optimize", "AI Bullet Point Writer", "Resume Match Score", "Keyword Gap Analysis", "Job Application Tracker", "Chrome Extension for LinkedIn & Indeed", "Free Premium for Students"],
     link: "https://skillsyncer.com/?via=uhirable"
+  },
+  {
+    name: "Contra",
+    logo: "",
+    logoText: "Co",
+    tag: "Freelance Platform",
+    tagline: "Find freelance work, show your portfolio and get paid, with 0% commission taken from your earnings.",
+    deal: "0% COMMISSION",
+    dealLabel: "Free to join",
+    perk: "Free to join; keep 100% of what you earn from clients",
+    cta: "Join Contra Free",
+    roles: ["Freelance Jobs", "Portfolio Website", "Contracts & Invoices", "Commission-free Payments"],
+    link: "https://on.contra.com/RgQhmJ"
   }
 ];
