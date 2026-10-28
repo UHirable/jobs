@@ -49,7 +49,7 @@ const CAREER_TOOLS = [
   },
   {
     name: "Contra",
-    logo: "",
+    logo: "logo-contra.png",
     logoText: "Co",
     tag: "Freelance Platform",
     tagline: "Find freelance work, show your portfolio and get paid, with 0% commission taken from your earnings.",

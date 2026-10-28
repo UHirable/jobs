@@ -965,3 +965,11 @@ textarea { resize: vertical; }
 .tt-stat.tt-ico{display:flex;flex-direction:column;align-items:center;gap:12px;padding:30px 40px}
 .tt-ico svg{width:84px;height:84px;color:#5cf2b0;filter:drop-shadow(0 8px 18px rgba(92,242,176,.35))}
 .tt-ico span{font-size:1.15rem!important;line-height:1.35}
+
+/* logos in Job Sites list + CV tools */
+.jl-logo.img{padding:0;overflow:hidden;background:#fff!important;border:1px solid #e8ecf2}
+.jl-logo.img img{width:100%;height:100%;object-fit:cover;display:block}
+.jl-row:hover .jl-logo.img{transform:rotate(-6deg) scale(1.05)}
+/* Events purple; hero Job Sites = CV Tools color */
+.nav a.btn.btn-events,.nav a.btn.btn-events:hover{background:linear-gradient(180deg,#9a82ff,#6d4dff)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.35),0 6px 0 #4b2fd1,0 14px 24px -10px rgba(109,77,255,.6)!important}
+.hero-float .btn:nth-child(3){--c1:#ff8a6b;--c2:#ff5a36;--sh:#c93d1e;--gl:rgba(255,107,74,.55)}

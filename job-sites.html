@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=34">
+  <link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
   <header class="topbar">
@@ -59,7 +59,7 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script src="sites.js?v=3"></script>
+<script src="sites.js?v=4"></script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);
@@ -78,12 +78,12 @@
     order.forEach(reg=>{
       const g=list.filter(s=>s.region===reg); if(!g.length) return;
       html+=`<section class="jl-group"><h2>${esc(reg)} <span>${g.length}</span></h2><div class="jl">`+g.map(s=>{
-        const host=s.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"");
+        const host=s.link.replace(/^https?:\/\/(www\.)?/,"").replace(/[\/?#].*$/,"");
         
         const arab=s.countries.filter(x=>ARAB.includes(x)), other=s.countries.filter(x=>!ARAB.includes(x));
         const where=(arab.length?`<span class="ar">${esc(arab.length>2?(s.region==="North Africa"?"North Africa":"Gulf & Middle East"):arab.join(" · "))}</span>`:"")+other.slice(0,5).map(flag).join("")+(other.length>5?`<span class="more">+${other.length-5}</span>`:"");
         const badges=(s.remote?'<em class="rm">Remote</em>':'')+s.tags.map(t=>`<em class="${t==="NGOs"?"ngo":"st"}">${t==="NGOs"?"NGO":esc(t)}</em>`).join("");
-        return `<a class="jl-row" href="${esc(s.link)}" target="_blank" rel="noopener"><span class="jl-logo">${esc(s.name[0])}</span><span class="jl-main"><b>${esc(s.name)}${badges}</b><small>${esc(s.desc)}</small></span><span class="jl-flags">${where}</span><span class="jl-go"><span class="jl-host">${esc(host)}</span><i>↗</i></span></a>`;
+        return `<a class="jl-row" href="${esc(s.link)}" target="_blank" rel="noopener">${s.logo?`<span class="jl-logo img"><img src="${esc(s.logo)}" alt="" width="44" height="44" loading="lazy"></span>`:`<span class="jl-logo">${esc(s.name[0])}</span>`}<span class="jl-main"><b>${esc(s.name)}${badges}</b><small>${esc(s.desc)}</small></span><span class="jl-flags">${where}</span><span class="jl-go"><span class="jl-host">${esc(host)}</span><i>↗</i></span></a>`;
       }).join("")+`</div></section>`;
     });
     $("js-grid").innerHTML=html||'<p class="js-empty">No job sites match yet. Try another country or region.</p>';
@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=19"></script>
+  <script src="script.js?v=20"></script>
   <script data-goatcounter="https://uhirable.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

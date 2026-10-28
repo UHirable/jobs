@@ -7,6 +7,7 @@
 const CV_TOOLS = [
   {
     name: "Got Resume Builder",
+    logo: "logo-gotresumebuilder.png",
     popular: true,
     price: "start",
     logoText: "GR",
@@ -23,6 +24,7 @@ const CV_TOOLS = [
   },
   {
     name: "StylingCV",
+    logo: "logo-stylingcv.png",
     price: "start",
     arabic: true,
     logoText: "SC",
@@ -37,6 +39,7 @@ const CV_TOOLS = [
   },
   {
     name: "Sirity",
+    logo: "logo-sirity.png",
     price: "start",
     arabic: true,
     logoText: "Si",
@@ -51,6 +54,7 @@ const CV_TOOLS = [
   },
   {
     name: "Canva",
+    logo: "logo-canva.png",
     price: "start",
     arabic: true,
     logoText: "Ca",
@@ -66,6 +70,7 @@ const CV_TOOLS = [
   },
   {
     name: "Reactive Resume",
+    logo: "logo-reactive-resume.png",
     price: "free",
     logoText: "RR",
     tag: "Open-Source Builder",
@@ -77,19 +82,8 @@ const CV_TOOLS = [
     link: "https://rxresu.me/"
   },
   {
-    name: "Google Docs",
-    price: "free",
-    logoText: "GD",
-    tag: "Simple Templates",
-    tagline: "Ready-made resume templates inside Google Docs, easy to edit, share and save as PDF.",
-    deal: "100% FREE",
-    dealLabel: "With a Google account",
-    cta: "Open Templates",
-    roles: ["Resume Templates", "Cover Letter Templates", "Download as PDF or Word"],
-    link: "https://docs.google.com/document/u/0/?ftv=1&tgif=d"
-  },
-  {
     name: "Microsoft Create",
+    logo: "logo-microsoft-create.png",
     price: "free",
     logoText: "MC",
     tag: "Word Templates",
@@ -102,6 +96,7 @@ const CV_TOOLS = [
   },
   {
     name: "Rezi",
+    logo: "logo-rezi.png",
     price: "start",
     logoText: "Rz",
     tag: "AI Resume Builder",
@@ -115,6 +110,7 @@ const CV_TOOLS = [
   },
   {
     name: "Kickresume",
+    logo: "logo-kickresume.png",
     price: "start",
     logoText: "Kr",
     tag: "AI Resume Builder",
@@ -128,6 +124,7 @@ const CV_TOOLS = [
   },
   {
     name: "Enhancv",
+    logo: "logo-enhancv.png",
     price: "start",
     logoText: "En",
     tag: "Resume Builder",
@@ -141,6 +138,7 @@ const CV_TOOLS = [
   },
   {
     name: "Resume.io",
+    logo: "logo-resume-io.png",
     price: "start",
     logoText: "Ri",
     tag: "Resume Builder",
@@ -154,6 +152,7 @@ const CV_TOOLS = [
   },
   {
     name: "Novorésumé",
+    logo: "logo-novoresume.png",
     price: "start",
     logoText: "Nr",
     tag: "Resume Builder",
@@ -167,6 +166,7 @@ const CV_TOOLS = [
   },
   {
     name: "FlowCV",
+    logo: "logo-flowcv.png",
     price: "start",
     logoText: "FC",
     tag: "Online Resume Builder",
@@ -179,6 +179,7 @@ const CV_TOOLS = [
   },
   {
     name: "Overleaf",
+    logo: "logo-overleaf.png",
     price: "start",
     logoText: "Ov",
     tag: "LaTeX CV Templates",
@@ -191,6 +192,7 @@ const CV_TOOLS = [
   },
   {
     name: "Resume Worded",
+    logo: "logo-resume-worded.png",
     price: "start",
     logoText: "RW",
     tag: "Resume & LinkedIn Review",
@@ -204,6 +206,7 @@ const CV_TOOLS = [
   },
   {
     name: "TopResume",
+    logo: "logo-topresume.png",
     price: "paid",
     logoText: "TR",
     tag: "Professional Resume Writing",
