@@ -20,6 +20,172 @@ const APPLY_FORM = ""; // default form for jobs without their own applyLink
 const PARAFORM_LINK = "https://www.paraform.com/connectors/refer/cmvl2n90r001e0hjj7722k3jt";
 
 const JOBS = [
+  {
+    id: "palantir-forward-deployed-software-engineer-us-government",
+    page: "job-palantir-forward-deployed-software-engineer-us-government.html",
+    title: "Forward Deployed Software Engineer, US Government",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United States"],
+    location: "Washington, DC or New York, NY",
+    tags: ["On-site", "Full-time", "$135K – $200K", "US citizens / Green Card"],
+    brief: "Work directly with US Government customers on Palantir's top initiatives, with the direct attention of the CTO, building data solutions to their hardest problems.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. Forward Deployed Software Engineers work directly with customers to understand their biggest problems, then design and build solutions that use data against them, on projects followed directly by Palantir's CTO.",
+    responsibilities: [
+      "Work directly with customers to understand their problems and implement data-driven solutions.",
+      "Design and implement technical solutions and code custom web applications.",
+      "Work in small teams with minimal supervision and own high-stakes projects end to end.",
+      "Discuss architecture with fellow engineers and interact with customer executives.",
+      "Help set strategy for the team."
+    ],
+    requirements: [
+      "1+ years of experience with a strong computer science or software engineering background.",
+      "US citizen or Green Card holder (no visa sponsorship).",
+      "Able to work on-site in Washington, DC or New York City."
+    ],
+    compensation: "$135K – $200K base. Full-time, on-site in Washington, DC or New York City."
+  },
+  {
+    id: "palantir-senior-software-engineer-autonomous-systems",
+    page: "job-palantir-senior-software-engineer-autonomous-systems.html",
+    title: "Senior Software Engineer, Autonomous Systems",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United States"],
+    location: "Seattle, New York, Washington DC or Palo Alto",
+    tags: ["Hybrid", "Full-time", "$145K – $275K", "US citizens / Green Card"],
+    brief: "Build command and control and agentic AI software for drones and autonomous systems, using LLMs and real-time sensor data, at Palantir.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. This customer-facing product team builds Command and Control (C2) and agentic autonomy software that lets users manage robotic and autonomous systems, combining sensors, unmanned vehicles, LLMs and real-time decision making.",
+    responsibilities: [
+      "Design, build and optimize software for mission-critical autonomous systems.",
+      "Develop algorithms that process data from many sensors for real-time state estimation and threat detection.",
+      "Build LLM and AI-driven systems that assess threats and make fast decisions.",
+      "Integrate with sensors, effectors and autonomous platforms.",
+      "Engineer scalable, reliable and fail-safe systems for high-stakes environments."
+    ],
+    requirements: [
+      "4–10 years of backend or service-layer software engineering, currently hands-on.",
+      "Experience with Rust, Python, C++ or Java.",
+      "US citizen or Green Card holder (no visa sponsorship).",
+      "Hybrid, with travel to client sites."
+    ],
+    compensation: "$145K – $275K base + RSUs. Hybrid in Seattle, New York, Washington DC or Palo Alto."
+  },
+  {
+    id: "palantir-forward-deployed-software-engineer-edge-autonomous-systems",
+    page: "job-palantir-forward-deployed-software-engineer-edge-autonomous-systems.html",
+    title: "Forward Deployed Software Engineer, Edge Autonomous Systems",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United States"],
+    location: "Washington, DC",
+    tags: ["Hybrid", "Full-time", "$135K – $200K", "US clearance eligible"],
+    brief: "Join a new Palantir team building and deploying software that runs drones and autonomous systems in the field, from edge devices to control systems.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. This newly formed team builds software that runs on compute-constrained, intermittently connected systems such as drones and other unmanned vehicles, and connects it to Palantir's platform, AI and data fusion services.",
+    responsibilities: [
+      "Build, test, integrate and deploy mission-critical autonomy software for autonomous systems.",
+      "Connect autonomy solutions to Palantir's platform, AI, sensor and data fusion services.",
+      "Make things work in the field: deployment, integration, security, testing and flight testing.",
+      "Partner with experts in sensing, AI, systems engineering, hardware and robotics."
+    ],
+    requirements: [
+      "2+ years of professional software development experience.",
+      "2+ years integrating and deploying software to edge or autonomous systems (drones, self-driving, edge servers).",
+      "Strong skills in Rust, Python, Go or similar, plus Linux, CI, networking and security.",
+      "Active US security clearance, or eligible and willing to obtain one.",
+      "Able to travel 25–75%."
+    ],
+    compensation: "$135K – $200K base + RSUs. Hybrid in Washington, DC."
+  },
+  {
+    id: "palantir-front-end-engineer-defense",
+    page: "job-palantir-front-end-engineer-defense.html",
+    title: "Front-End Engineer, Defense",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United States"],
+    location: "Washington, DC",
+    tags: ["On-site", "Full-time", "$135K – $200K", "Clearance sponsored"],
+    brief: "Build the TypeScript and React applications behind Gotham, Palantir's defense platform, used daily in command centers around the world.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. You'll join Gotham, Palantir's defense product, building data-intensive interfaces such as geospatial workflows and real-time collaboration tools that make complex work simple for non-technical users.",
+    responsibilities: [
+      "Build high-scale, collaborative geospatial workflows.",
+      "Design frameworks that power complex workflows across applications in one workspace.",
+      "Develop real-time collaborative tooling and data-analysis solutions.",
+      "Own the APIs and schemas behind your frontend code, working with backend engineers."
+    ],
+    requirements: [
+      "2–5 years of frontend or full-stack engineering experience.",
+      "Strong JavaScript, TypeScript and React skills.",
+      "Bachelor's in Computer Science or equivalent understanding of algorithms and systems design.",
+      "Eligible and willing to obtain a US security clearance (Palantir sponsors the process)."
+    ],
+    compensation: "$135K – $200K base + RSUs, plus relocation assistance. On-site 4–5 days a week in Washington, DC."
+  },
+  {
+    id: "palantir-forward-deployed-infrastructure-engineer-uk-government",
+    page: "job-palantir-forward-deployed-infrastructure-engineer-uk-government.html",
+    title: "Forward Deployed Infrastructure Engineer, UK Government",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United Kingdom"],
+    location: "London, UK",
+    tags: ["Hybrid", "Full-time", "£90K – £105K", "Active UK DV clearance"],
+    brief: "Run and automate the production infrastructure behind Palantir's UK Government deployments, using Kubernetes, Foundry, Apollo and AI tools.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. On the UK Government team, you'll build, operate and maintain the high-performance services behind Palantir's platforms, and lead automation using Palantir's own Foundry and Apollo platforms and LLM tools.",
+    responsibilities: [
+      "Build, operate and maintain reliable, scalable services for UK Government deployments.",
+      "Own production reliability: monitoring, alerting, configuration management and upgrades.",
+      "Deploy new Palantir products and migrate to the latest infrastructure.",
+      "Lead automation to reduce manual operations, using Foundry, Apollo and AI tools.",
+      "Join an on-call rotation about every 5–6 weeks."
+    ],
+    requirements: [
+      "1–5 years in infrastructure engineering, SRE or a related field.",
+      "Hands-on experience running large-scale production systems; Kubernetes is a plus.",
+      "Active UK DV clearance already held, and sole British nationality.",
+      "Hybrid in London, with in-office work for classified tasks."
+    ],
+    compensation: "£90K – £105K base + RSUs, plus relocation assistance. Hybrid in London."
+  },
+  {
+    id: "palantir-forward-deployed-infrastructure-engineer-us-government",
+    page: "job-palantir-forward-deployed-infrastructure-engineer-us-government.html",
+    title: "Forward Deployed Infrastructure Engineer, US Government",
+    company: "Palantir",
+    industry: "Data & AI Platforms · Defense & Government",
+    countries: ["United States"],
+    location: "Honolulu, HI",
+    tags: ["Hybrid", "Full-time", "$135K – $200K", "Active Top Secret clearance"],
+    brief: "Join Palantir's global Baseline team in Honolulu, keeping Palantir's software running across US Government networks, with relocation available.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Palantir (NYSE: PLTR) builds the data and AI platforms that governments, defense organizations and the world's largest companies rely on for their most critical work. Baseline is Palantir's forward deployed infrastructure team of about 90 engineers worldwide, keeping operations seamless across every environment, from on-prem to cloud and from commercial to government networks.",
+    responsibilities: [
+      "Support and operate Palantir software: monitoring, alerting, configuration and upgrades.",
+      "Deploy new Palantir products and migrate to the latest infrastructure.",
+      "Debug and optimize services for long-term reliability and scale.",
+      "Automate workflows and runbooks, including with LLM and AI tools.",
+      "Join the support on-call schedule."
+    ],
+    requirements: [
+      "1–3 years in infrastructure engineering, SRE or a related field.",
+      "Experience with Java, Kubernetes, Terraform, Ansible, Linux and cloud (AWS, Azure, GCP).",
+      "US citizen or permanent resident with an active Top Secret clearance.",
+      "Based in Honolulu, with travel up to 50%."
+    ],
+    compensation: "$135K – $200K base + equity, with relocation sponsored. Hybrid in Honolulu."
+  },
   // ================= Paraform roles – batch 3 (GTM, 26 Oct 2026) =================
   {
     id: "ancep-founding-gtm",
