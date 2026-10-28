@@ -170,6 +170,21 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Job icons: AI engineer → computer + AI, software/tech engineer → laptop, everything else → briefcase
+const ICON_SVG = (p) => `<svg class="ji" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const JOB_ICONS = {
+  ai: ICON_SVG('<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M7.6 13l1.9-6 1.9 6M8.2 11.2h2.6M14.6 7v6" stroke-width="1.8"/>'),
+  tech: ICON_SVG('<rect x="4" y="4.5" width="16" height="11" rx="1.6"/><path d="M2 19.5h20"/><path d="M10 9l-2 1.5 2 1.5M14 9l2 1.5-2 1.5" stroke-width="1.7"/>'),
+  job: ICON_SVG('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18M12 12v2"/>')
+};
+const jobIcon = (j) => {
+  const t = j.title || "";
+  if (/tooling engineer/i.test(t)) return JOB_ICONS.job;
+  if (/\b(AI|ML)\b|machine learning/i.test(t) && /engineer|research|technical staff|scientist/i.test(t)) return JOB_ICONS.ai;
+  if (/engineer|developer|software|technical staff|programmer/i.test(t)) return JOB_ICONS.tech;
+  return JOB_ICONS.job;
+};
+
 // ---------- Jobs list + country filter (jobs.html) ----------
 const list = document.getElementById("jobs-list");
 if (list && typeof JOBS !== "undefined") {
@@ -186,6 +201,42 @@ if (list && typeof JOBS !== "undefined") {
     opt.textContent = c === WORLDWIDE ? "🌍 Worldwide (remote, any country)" : c;
     countrySelect.appendChild(opt);
   });
+
+  // Promo cards (Paraform + Remotive) shown first; Paraform only for its countries
+  const PF_COUNTRIES = ["United States","United Kingdom","Canada","Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland"];
+  const REMOTIVE_LINK = "https://remotive.com/join?via=uhirable";
+  function promoCards(country, q) {
+    if (q) return "";
+    const pf = (country === "all" || PF_COUNTRIES.includes(country)) ? `
+        <article class="job-card promo-card pf-card">
+          <span class="promo-badge">Get matched</span>
+          <div class="job-head">
+            <img class="promo-logo pf-logo" src="logo-paraform.svg" width="52" height="52" alt="Paraform">
+            <div>
+              <h3>Get matched with 1,000+ top companies</h3>
+              <p class="meta">Paraform · AI, Tech, Sales &amp; GTM roles</p>
+            </div>
+          </div>
+          <div class="chips"><span class="chip pc">📍 United States</span><span class="chip pc">📍 United Kingdom</span><span class="chip pc">📍 Canada</span><span class="chip pc">📍 Europe</span><span class="chip">Remote</span><span class="chip">Hybrid</span><span class="chip">On-site</span></div>
+          <p class="desc">Didn't find your role? Share your profile once and get matched with open roles at top startups and tech companies.</p>
+          <div class="job-actions"><a class="btn btn-sm promo-btn" href="${PARAFORM_LINK}" target="_blank" rel="noopener">Get matched →</a></div>
+        </article>` : "";
+    const rm = `
+        <article class="job-card promo-card rm-card">
+          <span class="promo-badge">More remote jobs</span>
+          <div class="job-head">
+            <img class="promo-logo" src="logo-remotive.svg" width="52" height="52" alt="Remotive">
+            <div>
+              <h3>Browse more remote jobs on Remotive</h3>
+              <p class="meta">Remotive · Remote job board</p>
+            </div>
+          </div>
+          <div class="chips"><span class="chip pc">🌍 Worldwide</span><span class="chip pc">100% Remote</span><span class="chip">Tech</span><span class="chip">Marketing</span><span class="chip">Sales</span><span class="chip">Customer Support</span></div>
+          <p class="desc">Hand-picked remote jobs at tech companies, updated every day. Work from anywhere.</p>
+          <div class="job-actions"><a class="btn btn-sm promo-btn" href="${REMOTIVE_LINK}" target="_blank" rel="noopener sponsored">Browse remote jobs →</a></div>
+        </article>`;
+    return pf + rm;
+  }
 
   function render() {
     const country = countrySelect.value;
@@ -208,11 +259,11 @@ if (list && typeof JOBS !== "undefined") {
       return;
     }
 
-    list.innerHTML = filtered
+    list.innerHTML = promoCards(country, q) + filtered
       .map((j, i) => `
         <article class="job-card">
           <div class="job-head">
-            <div class="icon3d ${i % 2 ? "gold" : ""}">${escapeHTML(j.title.charAt(0))}</div>
+            <div class="icon3d ${i % 2 ? "gold" : ""}">${jobIcon(j)}</div>
             <div>
               <h3>${escapeHTML(j.title)}</h3>
               <p class="meta">${escapeHTML(j.company || "")}${j.industry ? " · " + escapeHTML(j.industry) : ""}</p>
@@ -240,8 +291,8 @@ if (jobContent && typeof JOBS !== "undefined") {
   const j = JOBS.find((x) => jobId(x) === id);
 
   if (!j) {
-    document.getElementById("job-title").textContent = "Job not found";
-    document.getElementById("job-meta").textContent = "This position may have been filled or removed.";
+    document.getElementById("job-title").textContent = "This position has been filled";
+    document.getElementById("job-meta").textContent = "Thanks for your interest! Browse our other open roles.";
     document.getElementById("job-body").innerHTML =
       `<div class="panel" style="text-align:center"><a class="btn btn-primary" href="jobs.html">See all open jobs</a></div>`;
   } else {

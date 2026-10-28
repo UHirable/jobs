@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=31">
 </head>
 <body>
   <header class="topbar">
@@ -59,24 +59,37 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script src="sites.js?v=1"></script>
+<script src="sites.js?v=3"></script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const ARAB=["UAE", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman", "Jordan", "Lebanon", "Egypt", "Morocco", "Algeria", "Tunisia"];const flag=c=>c==="Worldwide"?'<span class="fl w">🌍</span>':CC[c]?`<img class="fl" src="https://flagcdn.com/w40/${CC[c]}.png" alt="${esc(c)}" title="${esc(c)}" width="22" height="16" loading="lazy">`:`<span class="fl t">${esc(c)}</span>`;
   const uniq=a=>[...new Set(a)].sort();
   uniq(SITES.flatMap(s=>s.countries).filter(c=>c!=="Worldwide")).forEach(c=>$("f-country").add(new Option(c,c)));
-  const order=["Worldwide","Remote","Middle East & Gulf","North Africa","Africa","Europe","United Kingdom","US & Canada"];
+  const order=["Worldwide","Remote","Middle East & Gulf","North Africa","Africa","Europe","UK & Ireland","US & Canada","Latin America & Caribbean","Asia & Pacific"];
   order.filter(r=>SITES.some(s=>s.region===r)).forEach(r=>$("f-region").add(new Option(r,r)));
   let remoteOnly=false;
   function render(){
     const c=$("f-country").value,r=$("f-region").value;
     const list=SITES.filter(s=>(!c||s.countries.includes(c)||s.countries.includes("Worldwide"))&&(!r||s.region===r)&&(!remoteOnly||s.remote));
     $("js-count").textContent=list.length+" job site"+(list.length===1?"":"s");
-    $("js-grid").innerHTML=list.map(s=>`<article class="js-card"><div class="js-h"><div class="js-logo">${esc(s.name[0])}</div><div><h3>${esc(s.name)}</h3><span class="js-reg">📍 ${s.countries.includes("Worldwide")?(s.region==="Remote"?"Remote · Worldwide":"Worldwide"):esc(s.countries.slice(0,4).join(", ")+(s.countries.length>4?" +"+(s.countries.length-4):""))}</span></div></div><p>${esc(s.desc)}</p><div class="js-tags">${s.remote?'<span class="rm">🏠 Remote</span>':''}${s.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div><a class="js-btn" href="${esc(s.link)}" target="_blank" rel="noopener">Visit site ↗</a></article>`).join("")||'<p class="js-empty">No job sites match yet. Try another country or region.</p>';
+    let html="";
+    order.forEach(reg=>{
+      const g=list.filter(s=>s.region===reg); if(!g.length) return;
+      html+=`<section class="jl-group"><h2>${esc(reg)} <span>${g.length}</span></h2><div class="jl">`+g.map(s=>{
+        const host=s.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"");
+        
+        const arab=s.countries.filter(x=>ARAB.includes(x)), other=s.countries.filter(x=>!ARAB.includes(x));
+        const where=(arab.length?`<span class="ar">${esc(arab.length>2?(s.region==="North Africa"?"North Africa":"Gulf & Middle East"):arab.join(" · "))}</span>`:"")+other.slice(0,5).map(flag).join("")+(other.length>5?`<span class="more">+${other.length-5}</span>`:"");
+        const badges=(s.remote?'<em class="rm">Remote</em>':'')+s.tags.map(t=>`<em class="${t==="NGOs"?"ngo":"st"}">${t==="NGOs"?"NGO":esc(t)}</em>`).join("");
+        return `<a class="jl-row" href="${esc(s.link)}" target="_blank" rel="noopener"><span class="jl-logo">${esc(s.name[0])}</span><span class="jl-main"><b>${esc(s.name)}${badges}</b><small>${esc(s.desc)}</small></span><span class="jl-flags">${where}</span><span class="jl-go"><span class="jl-host">${esc(host)}</span><i>↗</i></span></a>`;
+      }).join("")+`</div></section>`;
+    });
+    $("js-grid").innerHTML=html||'<p class="js-empty">No job sites match yet. Try another country or region.</p>';
   }
   $("f-country").onchange=render;$("f-region").onchange=render;
-  $("f-remote").onclick=()=>{remoteOnly=!remoteOnly;$("f-remote").classList.toggle("on",remoteOnly);$("f-remote").setAttribute("aria-pressed",remoteOnly);render();};
+  $("f-remote").onclick=()=>{remoteOnly=!remoteOnly;$("f-remote").classList.toggle("on",remoteOnly);render();};
   render();
 })();
 </script>
@@ -115,7 +128,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=17"></script>
+  <script src="script.js?v=18"></script>
   <script data-goatcounter="https://uhirable.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -42,6 +42,18 @@ const PARTNERS = [
     link: "https://recruitcrm.io?fpr=uhirable"
   },
   {
+    name: "Manatal",
+    deal: "14-DAY FREE TRIAL",
+    dealLabel: "No card needed",
+    logo: "logo-manatal.png",
+    tag: "AI Recruitment Software",
+    tagline: "AI-powered ATS + CRM used by 10,000+ recruiting teams in 135+ countries.",
+    perk: "14-day free trial, no credit card required",
+    cta: "Try it Free",
+    roles: ["Applicant Tracking (ATS)", "Recruitment CRM", "AI Candidate Recommendations", "AI Candidate Enrichment", "Candidate Sourcing", "Careers Page", "Reports & Analytics", "Unlimited Hiring Managers"],
+    link: "https://www.manatal.com/?via=uhirable"
+  },
+  {
     name: "RemotePass",
     deal: "1ST MONTH FREE",
     logo: "logo-remotepass.png",
