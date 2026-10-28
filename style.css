@@ -961,3 +961,7 @@ textarea { resize: vertical; }
 @media(max-width:980px){.topbar .container{flex-wrap:wrap}.hsearch{flex:1 1 200px;max-width:none}}
 @media(max-width:560px){.logo img{height:40px}.hsearch{flex:1 1 0;min-width:0;margin:0 0 0 10px}.hsearch input{padding:9px 10px 9px 34px;font-size:.85rem}.hsearch svg{left:11px}.hs-res{left:auto;right:0;width:calc(100vw - 32px)}}
 .cv-filter button[hidden]{display:none}.cv-filter{margin-top:18px}
+
+.tt-stat.tt-ico{display:flex;flex-direction:column;align-items:center;gap:12px;padding:30px 40px}
+.tt-ico svg{width:84px;height:84px;color:#5cf2b0;filter:drop-shadow(0 8px 18px rgba(92,242,176,.35))}
+.tt-ico span{font-size:1.15rem!important;line-height:1.35}
