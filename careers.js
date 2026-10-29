@@ -23,6 +23,18 @@ const CAREER_TOOLS = [
     link: "https://taplio.com/?via=uhirable"
   },
   {
+    name: "AIApply",
+    logo: "logo-aiapply.png",
+    tag: "AI Job Search Agent",
+    tagline: "An AI agent that finds jobs that fit you every day, writes a tailored resume and cover letter for each one, and applies for you.",
+    deal: "FREE TO START",
+    dealLabel: "Free plan",
+    perk: "Start for free; paid plans unlock unlimited auto-apply and more AI tools",
+    cta: "Try AIApply Free",
+    roles: ["AI Auto-Apply", "AI Job Matching", "AI Resume Tailoring", "AI Cover Letter", "AI Interview Practice", "Application Tracker"],
+    link: "https://www.aiapply.co/?via=uhirable"
+  },
+  {
     name: "LoopCV",
     logo: "logo-loopcv.png",
     tag: "AI Auto-Apply",
