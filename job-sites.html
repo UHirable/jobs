@@ -59,7 +59,7 @@
     <small id="copy-status" class="copy-status" role="status"></small>
   </div></section>
 </main>
-<script src="sites.js?v=4"></script>
+<script src="sites.js?v=5"></script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);
@@ -72,7 +72,7 @@
   let remoteOnly=false;
   function render(){
     const c=$("f-country").value,r=$("f-region").value;
-    const list=SITES.filter(s=>(!c||s.countries.includes(c)||s.countries.includes("Worldwide"))&&(!r||s.region===r)&&(!remoteOnly||s.remote));
+    const list=SITES.filter(s=>(!c||s.countries.includes(c))&&(!r||s.region===r)&&(!remoteOnly||s.remote));
     $("js-count").textContent=list.length+" job site"+(list.length===1?"":"s");
     let html="";
     order.forEach(reg=>{
@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=21"></script>
+  <script src="script.js?v=22"></script>
   <script data-goatcounter="https://uhirable.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
