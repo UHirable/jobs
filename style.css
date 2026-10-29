@@ -978,3 +978,14 @@ textarea { resize: vertical; }
 @media(max-width:560px){.ph-badge{display:block;width:max-content;margin:18px auto 0}}
 
 .foot-explore{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:6px 0 2px}.foot-explore a{color:rgba(255,255,255,.75);font-size:.88rem;font-weight:600}.foot-explore a:hover{color:#ffd23f}
+
+/* ===== Product Hunt eyebrow + new footer (F1) ===== */
+.ph-eye{display:inline-flex;align-items:center;gap:9px;background:#fff;color:#16163a;font-weight:700;font-size:.9rem;padding:7px 14px 7px 8px;border-radius:999px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.18);transition:transform .2s}.ph-eye:hover{transform:translateY(-2px)}.ph-eye b{color:#ff6154}.ph-eye i{font-style:normal;color:#ff6154}
+.ph-mini{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#16163a!important;font-weight:800;font-size:.85rem;padding:7px 14px 7px 8px;border-radius:999px;white-space:nowrap}
+.footer.f1 .container{display:block!important;text-align:left}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12)}
+.fbrand img{height:58px;width:auto}.fbrand p{color:rgba(255,255,255,.7);margin:10px 0 14px}.fbrand .socials{display:flex;align-items:center;gap:12px;margin:0}
+.f1 h4{color:#ffd23f;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin:6px 0 14px}
+.f1 .fcols nav a{display:block;color:rgba(255,255,255,.8);font-weight:600;margin-bottom:10px}.f1 .fcols nav a:hover{color:#ffd23f}
+.fbot{display:flex;justify-content:space-between;gap:20px;padding-top:18px;color:rgba(255,255,255,.55);font-size:.8rem}
+@media(max-width:760px){.fcols{grid-template-columns:1fr 1fr;gap:22px 18px}.fbrand{grid-column:1/-1;text-align:center}.fbrand img{margin:0 auto}.fbrand .socials{justify-content:center}.fcols>nav:last-child{grid-column:1/-1}.fcols>nav:last-child a{display:inline-block;margin:0 14px 8px 0}.fbot{flex-direction:column;align-items:center;text-align:center;gap:8px}}
