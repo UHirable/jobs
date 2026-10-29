@@ -989,3 +989,8 @@ textarea { resize: vertical; }
 .f1 .fcols nav a{display:block;color:rgba(255,255,255,.8);font-weight:600;margin-bottom:10px}.f1 .fcols nav a:hover{color:#ffd23f}
 .fbot{display:flex;justify-content:space-between;gap:20px;padding-top:18px;color:rgba(255,255,255,.55);font-size:.8rem}
 @media(max-width:760px){.fcols{grid-template-columns:1fr 1fr;gap:22px 18px}.fbrand{grid-column:1/-1;text-align:center}.fbrand img{margin:0 auto}.fbrand .socials{justify-content:center}.fcols>nav:last-child{grid-column:1/-1}.fcols>nav:last-child a{display:inline-block;margin:0 14px 8px 0}.fbot{flex-direction:column;align-items:center;text-align:center;gap:8px}}
+
+/* eligibility warning + company logos on job cards */
+.elig{display:flex;gap:8px;align-items:flex-start;margin:10px 0 2px;padding:9px 12px;border-radius:10px;background:#fff0ee;color:#b4321f;font-size:.86rem;font-weight:600;line-height:1.4;border:1px solid #ffd6cf}.elig svg{flex:none;margin-top:1px}
+#job-content .elig{font-size:.95rem;margin:0 0 18px}
+.icon3d.co-logo{background:#fff;padding:0;overflow:hidden;box-shadow:0 6px 16px rgba(20,26,82,.12);border:1px solid #eceefb}.icon3d.co-logo img{width:100%;height:100%;object-fit:cover;display:block}

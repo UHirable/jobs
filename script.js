@@ -152,6 +152,8 @@ const flagOf = (c) =>
   c === WORLDWIDE ? "🌍"
   : FLAG_CODES[c] ? `<img class="flag" src="https://flagcdn.com/w40/${FLAG_CODES[c]}.png" alt="${escapeHTML(c)}" width="20" height="15" loading="lazy">`
   : "📍";
+const ELIG_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>';
+const eligHTML = (j) => j.eligibility ? `<p class="elig">${ELIG_ICON}<span>${escapeHTML(j.eligibility)}</span></p>` : "";
 const MATCH_NOTE = "Apply through U Hirable and get matched with this role and 1,000+ top companies.";
 const jobChips = (j) =>
   [
@@ -263,13 +265,13 @@ if (list && typeof JOBS !== "undefined") {
       .map((j, i) => `
         <article class="job-card">
           <div class="job-head">
-            <div class="icon3d ${i % 2 ? "gold" : ""}">${jobIcon(j)}</div>
+            ${j.logo ? `<div class="icon3d co-logo"><img src="${escapeHTML(j.logo)}" width="64" height="64" alt="${escapeHTML(j.company || "")} logo" loading="lazy"></div>` : `<div class="icon3d ${i % 2 ? "gold" : ""}">${jobIcon(j)}</div>`}
             <div>
               <h3>${escapeHTML(j.title)}</h3>
               <p class="meta">${escapeHTML(j.company || "")}${j.industry ? " · " + escapeHTML(j.industry) : ""}</p>
             </div>
           </div>
-          <div class="chips">${jobChips(j)}</div>
+          <div class="chips">${jobChips(j)}</div>${eligHTML(j)}
           <p class="desc">${escapeHTML(j.brief || "")}</p>
           <div class="job-actions">
             <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
@@ -322,7 +324,7 @@ if (jobContent && typeof JOBS !== "undefined") {
     });
 
     jobContent.innerHTML =
-      `<h2>Role overview</h2><p>${escapeHTML(j.overview || j.brief || "")}</p>` +
+      eligHTML(j) + `<h2>Role overview</h2><p>${escapeHTML(j.overview || j.brief || "")}</p>` +
       (j.compensation ? `<h2>Compensation</h2><p>${escapeHTML(j.compensation)}</p>` : "") +
       list("Key responsibilities", j.responsibilities) +
       (arr(j.responsibilityGroups).length
@@ -358,7 +360,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=7";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=8";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
