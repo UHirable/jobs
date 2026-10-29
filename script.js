@@ -296,7 +296,7 @@ if (jobContent && typeof JOBS !== "undefined") {
     document.getElementById("job-body").innerHTML =
       `<div class="panel" style="text-align:center"><a class="btn btn-primary" href="jobs.html">See all open jobs</a></div>`;
   } else {
-    document.title = `${j.title} – U Hirable`;
+    if (!window.JOB_ID) document.title = `${j.title} – U Hirable`;
     document.getElementById("job-title").textContent = j.title;
     document.getElementById("job-meta").textContent = [j.company, j.industry].filter(Boolean).join(" · ");
     document.getElementById("job-chips").innerHTML = jobChips(j);
@@ -358,7 +358,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=5";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=6";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};

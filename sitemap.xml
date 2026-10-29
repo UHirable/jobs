@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://uhirable.github.io/jobs/</loc><lastmod>2026-10-25</lastmod><priority>1.0</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/jobs.html</loc><lastmod>2026-10-25</lastmod><priority>0.9</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/career-boost.html</loc><lastmod>2026-10-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/partners.html</loc><lastmod>2026-10-25</lastmod><priority>0.8</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/</loc><lastmod>2026-10-29</lastmod><priority>1.0</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/jobs.html</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/career-boost.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/partners.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
   <url><loc>https://uhirable.github.io/jobs/employer.html</loc><lastmod>2026-10-25</lastmod><priority>0.7</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-airbnb-engineering-manager.html</loc><lastmod>2026-10-25</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-apollo-senior-software-engineer.html</loc><lastmod>2026-10-25</lastmod><priority>0.6</priority></url>
@@ -20,11 +20,10 @@
   <url><loc>https://uhirable.github.io/jobs/job-rippling-product-design-lead-design-systems.html</loc><lastmod>2026-10-25</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-rippling-product-design-lead.html</loc><lastmod>2026-10-25</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-workos-solutions-engineer.html</loc><lastmod>2026-10-25</lastmod><priority>0.6</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/about.html</loc><lastmod>2026-10-25</lastmod><priority>0.5</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/about.html</loc><lastmod>2026-10-29</lastmod><priority>0.5</priority></url>
   <url><loc>https://uhirable.github.io/jobs/privacy.html</loc><lastmod>2026-10-25</lastmod><priority>0.3</priority></url>
   <url><loc>https://uhirable.github.io/jobs/disclosure.html</loc><lastmod>2026-10-25</lastmod><priority>0.3</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/events.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/event-cairo-university-employment-fair.html</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/events.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
   <url><loc>https://uhirable.github.io/jobs/event-cipd-festival-of-work.html</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://uhirable.github.io/jobs/event-education-city-job-fair.html</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://uhirable.github.io/jobs/event-ere-recruiting-innovation-summit.html</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
@@ -60,8 +59,8 @@
   <url><loc>https://uhirable.github.io/jobs/job-timescapes-account-executive.html</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-garage-account-executive.html</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-first-resonance-senior-account-executive.html</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/job-sites.html</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority></url>
-  <url><loc>https://uhirable.github.io/jobs/cv-tools.html</loc><lastmod>2026-10-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/job-sites.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
+  <url><loc>https://uhirable.github.io/jobs/cv-tools.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-palantir-forward-deployed-software-engineer-us-government.html</loc><lastmod>2026-10-28</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-palantir-senior-software-engineer-autonomous-systems.html</loc><lastmod>2026-10-28</lastmod><priority>0.6</priority></url>
   <url><loc>https://uhirable.github.io/jobs/job-palantir-forward-deployed-software-engineer-edge-autonomous-systems.html</loc><lastmod>2026-10-28</lastmod><priority>0.6</priority></url>
