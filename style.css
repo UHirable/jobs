@@ -886,7 +886,7 @@ textarea { resize: vertical; }
 /* ===== Promo cards on Open Jobs (Paraform + Remotive) ===== */
 .promo-card{position:relative;border:2px solid var(--pc,#14a597)!important;background:linear-gradient(135deg,var(--pbg,#f0fbf9) 0%,#fff 60%)!important}
 .pf-card{--pc:#f5b70a;--pbg:#fff8e1;--pt:#1d1d3a;--pch:#fff1c2;--pct:#8a6500}
-.rm-card{--pc:#f5b70a;--pbg:#fff8e1;--pt:#1d1d3a;--pch:#fff1c2;--pct:#8a6500}
+.rm-promo{--pc:#f5b70a;--pbg:#fff8e1;--pt:#1d1d3a;--pch:#fff1c2;--pct:#8a6500}
 .promo-badge{position:absolute;top:-12px;right:18px;background:var(--pc);color:var(--pt);font-size:.72rem;font-weight:800;letter-spacing:.04em;padding:5px 12px;border-radius:999px;text-transform:uppercase}
 .promo-logo{width:52px;height:52px;border-radius:14px;flex:none;object-fit:contain;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.08)}
 .pf-logo{background:transparent;box-shadow:none}
@@ -903,7 +903,7 @@ textarea { resize: vertical; }
 /* ===== Hero buttons: 4 colors, 3D + shine ===== */
 .hero-float .btn{border:0!important;font-weight:800;text-shadow:0 1px 0 rgba(0,0,0,.12);--c1:#ffd84d;--c2:#ffbf00;--sh:#c99300;--gl:rgba(255,201,60,.55);color:#16163a!important;background:linear-gradient(180deg,var(--c1) 0%,var(--c2) 100%)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.08),0 6px 0 var(--sh),0 14px 24px -10px var(--gl)!important}
 .hero-float .btn:nth-child(1){text-shadow:none}
-.hero-float .btn:nth-child(2){--c1:#22c3ac;--c2:#0f9a87;--sh:#0a6f61;--gl:rgba(18,162,143,.55);color:#fff!important}
+.hero-float .btn:nth-child(2){text-shadow:none}
 .hero-float .btn:nth-child(3){--c1:#9a82ff;--c2:#6d4dff;--sh:#4b2fd1;--gl:rgba(122,92,255,.55);color:#fff!important}
 .hero-float .btn:nth-child(4){--c1:#ff8a6b;--c2:#ff5a36;--sh:#c93d1e;--gl:rgba(255,107,74,.55);color:#fff!important}
 .hero-float .btn::before{content:"";position:absolute;left:8px;right:8px;top:3px;height:45%;border-radius:12px 12px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));pointer-events:none}
@@ -994,3 +994,17 @@ textarea { resize: vertical; }
 .elig{display:flex;gap:8px;align-items:flex-start;margin:10px 0 2px;padding:9px 12px;border-radius:10px;background:#fff0ee;color:#b4321f;font-size:.86rem;font-weight:600;line-height:1.4;border:1px solid #ffd6cf}.elig svg{flex:none;margin-top:1px}
 #job-content .elig{font-size:.95rem;margin:0 0 18px}
 .icon3d.co-logo{background:#fff;padding:0;overflow:hidden;box-shadow:0 6px 16px rgba(20,26,82,.12);border:1px solid #eceefb}.icon3d.co-logo img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Remotive strip (gold, spans both columns) */
+.rm-strip{grid-column:1/-1;position:relative;border:2px solid #f5b70a;border-radius:22px;background:linear-gradient(135deg,#fff8e1,#fff 60%);padding:20px 22px 18px;--pc:#f5b70a;--pt:#1d1d3a;box-shadow:0 10px 30px rgba(245,183,10,.15)}
+.rm-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}.rm-head h3{font-size:1.15rem;margin:0}.rm-head .meta{margin:2px 0 0}
+.rm-row{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.rm-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border:1px solid #f3e4b3;border-radius:16px;padding:14px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;box-shadow:0 4px 14px rgba(20,26,82,.06);transition:transform .15s}.rm-card:hover{transform:translateY(-2px)}
+.rm-top{display:flex;gap:10px;align-items:center}.rm-top img{width:40px;height:40px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid #eceefb;flex:none}
+.rm-top b{display:block;font-size:.95rem;line-height:1.25;color:#141a52}.rm-top span{font-size:.82rem;color:#6b70a0}
+.rm-card .chips{margin:0;gap:6px}.rm-card .chip{font-size:.72rem;padding:4px 9px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-card em{font-style:normal;font-weight:700;font-size:.82rem;color:#8a6500;margin-top:auto}
+.rm-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:4px}.rm-foot small{color:#6b70a0}.rm-foot small a{color:inherit}
+.rm-strip .promo-btn{background:#f5b70a;color:#1d1d3a;border-color:#f5b70a}
+.rm-loading{color:#6b70a0;margin:6px 0}
+.rm-home{padding:10px 0 0;margin-top:-10px}.rm-home+.hub4-wrap{margin-top:0;padding-top:90px}.rm-home .rm-strip h2{font-size:1.35rem;margin:0}.rm-home .promo-badge{top:-13px}

@@ -187,6 +187,37 @@ const jobIcon = (j) => {
   return JOB_ICONS.job;
 };
 
+const REMOTIVE_LINK = "https://remotive.com/join?via=uhirable";
+// Remotive public API (their terms: link back to the job on Remotive and credit Remotive). Fetched once per visit, cached 6h.
+const RM_CACHE_KEY = "rm-jobs-v1";
+function rmCard(j) {
+  const loc = j.candidate_required_location || "Worldwide";
+  const sal = j.salary ? `<span class="chip gold">${escapeHTML(j.salary)}</span>` : "";
+  const logo = j.company_logo ? `<img src="${escapeHTML(j.company_logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : "";
+  return `<a class="rm-card" href="${escapeHTML(j.url)}" target="_blank" rel="noopener nofollow">
+    <div class="rm-top">${logo}<div><b>${escapeHTML(j.title)}</b><span>${escapeHTML(j.company_name || "")}</span></div></div>
+    <div class="chips"><span class="chip">${escapeHTML(j.category || "Remote")}</span><span class="chip gold">🌍 ${escapeHTML(loc)}</span>${sal}</div>
+    <em>View on Remotive →</em></a>`;
+}
+function fillRemotive() {
+  const row = document.getElementById("rm-row");
+  if (!row) return;
+  const paint = (jobs) => { row.innerHTML = jobs.slice(0, 12).map(rmCard).join(""); };
+  try {
+    const c = JSON.parse(sessionStorage.getItem(RM_CACHE_KEY) || "null");
+    if (c && Date.now() - c.t < 6 * 3600e3 && c.jobs.length) { paint(c.jobs); return; }
+  } catch {}
+  fetch("https://remotive.com/api/remote-jobs?limit=12").then((r) => r.json()).then((d) => {
+    const jobs = (d && d.jobs) || [];
+    if (!jobs.length) throw new Error("empty");
+    paint(jobs);
+    try { sessionStorage.setItem(RM_CACHE_KEY, JSON.stringify({ t: Date.now(), jobs })); } catch {}
+  }).catch(() => {
+    row.innerHTML = `<p class="rm-loading">Hand-picked remote jobs at tech companies, updated every day. Work from anywhere.</p>`;
+  });
+}
+document.addEventListener("DOMContentLoaded", fillRemotive);
+
 // ---------- Jobs list + country filter (jobs.html) ----------
 const list = document.getElementById("jobs-list");
 if (list && typeof JOBS !== "undefined") {
@@ -206,7 +237,6 @@ if (list && typeof JOBS !== "undefined") {
 
   // Promo cards (Paraform + Remotive) shown first; Paraform only for its countries
   const PF_COUNTRIES = ["United States","United Kingdom","Canada","Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland"];
-  const REMOTIVE_LINK = "https://remotive.com/join?via=uhirable";
   function promoCards(country, q) {
     if (q) return "";
     const pf = (country === "all" || PF_COUNTRIES.includes(country)) ? `
@@ -224,7 +254,7 @@ if (list && typeof JOBS !== "undefined") {
           <div class="job-actions"><a class="btn btn-sm promo-btn" href="${PARAFORM_LINK}" target="_blank" rel="noopener">Get matched →</a></div>
         </article>` : "";
     const rm = `
-        <article class="job-card promo-card rm-card">
+        <article class="job-card promo-card rm-promo">
           <span class="promo-badge">More remote jobs</span>
           <div class="job-head">
             <img class="promo-logo" src="logo-remotive.svg" width="52" height="52" alt="Remotive">
@@ -360,7 +390,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=8";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=9";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
