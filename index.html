@@ -20,7 +20,7 @@
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="amel-3d-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=39">
+  <link rel="stylesheet" href="style.css?v=41">
 <style>
 .me-stage{padding-top:100px}
 .me-bubble.cloud{left:50%;right:auto;top:0;transform:translateX(-50%);width:max-content;max-width:92%;text-align:center;
@@ -68,7 +68,12 @@
             <a href="cv-tools.html" class="btn btn-gold"><svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>CV Tools</a>
           </div>
         </div>
-
+<div class="okguy" id="okguy" aria-hidden="true"><div class="ok-bubble" id="ok-bubble">Great choice!</div><img src="thumbs-guy.webp" alt=""></div>
+<script>
+(function(){const g=document.getElementById('okguy'),b=document.getElementById('ok-bubble');if(!g)return;const msgs={'jobs.html':'46 open roles!','career-boost.html':'Free AI tools!','job-sites.html':'100+ job sites!','cv-tools.html':'Build your CV!'};let t;
+document.querySelectorAll('.hero-actions a').forEach(a=>{const show=()=>{clearTimeout(t);b.textContent=msgs[a.getAttribute('href')]||'Great choice!';g.classList.add('up');};a.addEventListener('mouseenter',show);a.addEventListener('focus',show);a.addEventListener('mouseleave',()=>{t=setTimeout(()=>g.classList.remove('up'),900)});a.addEventListener('click',()=>{g.classList.add('up','yay');setTimeout(()=>g.classList.remove('yay'),700)});});
+setTimeout(()=>{b.textContent='Hi there!';g.classList.add('up');t=setTimeout(()=>g.classList.remove('up'),2200)},1800);})();
+</script>
         <div class="hero-visual" data-tilt data-tilt-max="6">
           <div class="me-stage">
             <div class="me-glow" aria-hidden="true"></div>
@@ -101,7 +106,7 @@
         </div>
       </section>
     </section>
-    <!-- FOUR SECTIONS -->
+    <!-- TWO SECTIONS -->
     <section class="hub4-wrap">
       <div class="container">
         <div class="hub4">
@@ -112,22 +117,6 @@
             <p>Browse roles from global companies, filter by country and apply in a click.</p>
             <ul><li>Remote, hybrid and on-site roles</li><li>US, Europe, the Middle East and beyond</li><li>Get matched with 1,000+ top companies</li></ul>
             <span class="h4-btn">Browse open jobs →</span>
-          </a>
-          <a href="employer.html" class="h4 h4-hire" data-tilt>
-            <div class="h4-char"><img loading="lazy" decoding="async" src="recruiter-woman-3d.webp" width="185" height="400" alt=""></div>
-            <span class="h4-tag">For Employers</span>
-            <h2>Hire Talent</h2>
-            <p>Tell us about the role you need to fill, and we'll find the right people for your team.</p>
-            <ul><li>Global talent search</li><li>Candidates screened for fit</li><li>From one key hire to a full team</li></ul>
-            <span class="h4-btn">Post a job request →</span>
-          </a>
-          <a href="partners.html" class="h4 h4-comp" data-tilt>
-            <div class="h4-char"><img loading="lazy" src="company-3d.svg" width="240" height="240" alt=""></div>
-            <span class="h4-tag">For Companies</span>
-            <h2>Hiring Partners</h2>
-            <p>Trusted partners and tools to hire, pay and manage your team, with exclusive perks.</p>
-            <ul><li>Oyster: hire in 180+ countries, 30 days free</li><li>Remote staffing: $500 off</li><li>Global payroll &amp; EOR: 1st month free</li><li>HR &amp; recruiting software: up to 10% off</li></ul>
-            <span class="h4-btn">Explore partners →</span>
           </a>
           <a href="career-boost.html" class="h4 h4-boost" data-tilt>
             <div class="h4-char"><img loading="lazy" src="career-rocket.svg?v=1" width="560" height="480" alt="Rocket launching from a laptop showing a hired check"></div>
@@ -142,6 +131,15 @@
     </section>
 
     <!-- TOP TALENT -->
+    <section class="container ask-sec">
+      <div class="ask-card">
+        <div class="ask-art"><img src="duo-robot.webp" alt="">
+          <div class="ask-bub man" id="ab-man">Any remote jobs for me?</div>
+          <div class="ask-bub bot" id="ab-bot">12 remote roles right now. Want them?</div>
+        </div>
+        <div class="ask-text"><span class="tt-pill" style="background:#e9e6ff;color:#5b3fd6">ASK OUR ASSISTANT</span><h2>Not sure where to start?</h2><p>Ask about remote jobs, visa sponsorship, CV tools or the best job sites for your country. Instant answers, no sign-up.</p><button type="button" class="btn btn-primary" id="ask-open">Ask the assistant →</button></div>
+      </div>
+    </section>
     <section class="container tt-sec" style="padding-bottom:90px"><div class="tt-card"><div><span class="tt-pill">TOP TALENT</span><h2>Experienced? <span>Get matched with top companies.</span></h2><p>Share your profile once and you will get matched with top companies hiring now.</p><ul class="tt-list"><li><i>5+</i>5+ years of experience in your field</li><li><i>★</i>Genuinely excellent at what you do</li></ul><a class="tt-btn" href="talent.html">Get Matched →</a></div><div class="tt-stat tt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/><path d="M9.6 9l1.6 1.6L14.6 7.4"/></svg><span>Get matched with<br>top companies</span></div></div></section>
   </main>
 
@@ -169,11 +167,11 @@
     </div>
   </div>
 
-  <script src="script.js?v=27"></script>
+  <script src="script.js?v=29"></script>
 <script>
 (function(){const el=document.getElementById("typed");if(!el)return;
 const lines=["Hi, I'm Amel 👋","I've always believed the right job changes more than a career…","…it can change the life of an entire family.","As a Global Talent Acquisition Partner, I see it every day.","That's why I built U Hirable…","…to help job seekers get hired, companies hire great talent, and everyone grow their careers."];
 let i=0;setInterval(()=>{el.classList.add("out");setTimeout(()=>{i=(i+1)%lines.length;el.textContent=lines[i];el.classList.remove("out")},450)},3200);})();
 </script>  <script data-goatcounter="https://uhirable.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
+<script>(function(){const P=[["Any remote jobs for me?","12 remote roles right now. Want them?"],["Who sponsors visas?","16 companies do. Here\u2019s the list."],["Is my CV ATS-friendly?","Let\u2019s check it, free."],["Best job sites in UAE?","Bayt, GulfTalent, Naukrigulf and more."]];let i=0;const m=document.getElementById("ab-man"),b=document.getElementById("ab-bot");setInterval(()=>{i=(i+1)%P.length;m.classList.add("sw");b.classList.add("sw");setTimeout(()=>{m.textContent=P[i][0];b.textContent=P[i][1];m.classList.remove("sw");b.classList.remove("sw")},350)},3200);document.getElementById("ask-open").addEventListener("click",()=>document.getElementById("ua-btn").click());})();</script></body>
 </html>

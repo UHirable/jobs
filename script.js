@@ -422,3 +422,66 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     if(e.key==="ArrowUp"){e.preventDefault();i>0?links[i-1].focus():q.focus();}});
   document.addEventListener("click",e=>{if(!e.target.closest(".hsearch"))res.hidden=true;});
 })();
+
+// ---------- U Hirable assistant (rule-based, no AI, works offline) ----------
+(function () {
+  if (document.getElementById("ua-btn")) return;
+  const WA = "https://wa.me/201515594609", BASE = "";
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>';
+  const btn = document.createElement("button"); btn.id = "ua-btn"; btn.className = "ua-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Ask U Hirable"); btn.className += " img"; btn.innerHTML = "<img src=\"robot-head.webp\" alt=\"\"><span>Ask me anything</span>";
+  const panel = document.createElement("div"); panel.className = "ua-panel"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "U Hirable assistant");
+  panel.innerHTML = `<div class="ua-head">${ICON}<div><b>U Hirable assistant</b><small>Ask about jobs, visas, CV tools or job sites</small></div><button type="button" aria-label="Close">✕</button></div>
+    <div class="ua-log" id="ua-log"></div>
+    <div class="ua-chips" id="ua-chips"></div>
+    <form class="ua-in" id="ua-form"><input id="ua-q" type="text" placeholder="e.g. remote jobs, visa sponsorship, CV…" autocomplete="off"><button type="submit">Send</button></form>`;
+  document.body.append(btn, panel);
+  const log = panel.querySelector("#ua-log"), chips = panel.querySelector("#ua-chips"), form = panel.querySelector("#ua-form"), q = panel.querySelector("#ua-q");
+  const CHIPS = ["Remote jobs", "Visa sponsorship", "Fix my CV", "Jobs in UAE", "Job sites", "Hire talent"];
+  const say = (html, me) => { const d = document.createElement("div"); d.className = "ua-m " + (me ? "me" : "bot"); d.dir = "auto"; if (me) d.textContent = html; else d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; };
+  const setChips = (list) => { chips.innerHTML = list.map((c) => `<button type="button">${escapeHTML(c)}</button>`).join(""); };
+  chips.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
+  const L = (t, u) => `<a href="${u}">${t}</a>`;
+  let idx = null, loading = null;
+  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=10"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
+  const find = (words, kinds, n) => (idx || []).filter((e) => (!kinds || kinds.includes(e.k)) && words.some((w) => (e.t + " " + e.d).toLowerCase().includes(w))).slice(0, n || 5);
+  const list = (items) => items.length ? "<ul>" + items.map((e) => `<li>${L(escapeHTML(e.t), e.u)}${e.d ? " <small>· " + escapeHTML(e.d) + "</small>" : ""}</li>`).join("") + "</ul>" : "";
+  const COUNTRIES = ["egypt", "uae", "dubai", "saudi", "riyadh", "qatar", "kuwait", "bahrain", "oman", "jordan", "morocco", "tunisia", "nigeria", "kenya", "south africa", "united states", "usa", "us", "canada", "uk", "united kingdom", "london", "ireland", "germany", "france", "netherlands", "spain", "portugal", "poland", "italy", "india", "pakistan", "singapore", "australia", "japan", "korea", "china", "philippines", "thailand", "indonesia", "brazil", "mexico", "europe", "gulf", "africa", "asia", "remote"];
+  const ALIAS = { usa: "united states", us: "united states", uk: "united kingdom", dubai: "uae", riyadh: "saudi", london: "united kingdom" };
+  function reply(text) {
+    const t = text.toLowerCase().trim(); const ar = /[؀-ۿ]/.test(t);
+    const has = (...w) => w.some((x) => t.includes(x));
+    if (has("hi", "hello", "hey", "مرحبا", "اهلا", "أهلا", "السلام") && t.length < 25) return (ar ? "أهلاً! أقدر أساعدك تلاقي وظايف ريموت، أو وظايف فيها فيزا، أو أدوات سي في. اختاري من تحت أو اكتبي سؤالك." : "Hi! I can help you find remote jobs, visa sponsorship roles, CV tools or the best job sites for your country. Pick an option below or type a question.");
+    if (has("visa", "sponsor", "h1b", "h-1b", "relocat", "فيزا", "كفالة")) return (ar ? "دي الوظايف اللي فيها كفالة فيزا أو نقل فيزا: " : "These roles sponsor a work visa or accept a visa transfer: ") + L(ar ? "Jobs with visa sponsorship" : "Jobs with visa sponsorship", "visa-sponsorship-jobs.html") + (ar ? "<br>اقري سطر \"Who can apply\" في كل وظيفة قبل ما تقدّم." : "<br>Always read the \"Who can apply\" line on each job before applying.");
+    if (has("remote", "work from home", "wfh", "anywhere", "ريموت", "من البيت", "عن بعد")) return (ar ? "الوظايف الريموت كلها هنا، وكل وظيفة مكتوب عليها الدول المسموح تقدّم منها: " : "All fully remote roles are here, each showing the countries you can apply from: ") + L("Remote jobs", "remote-jobs.html") + "<br>" + (ar ? "وكمان مواقع الوظايف الريموت: " : "More remote job sites: ") + L("Job Sites → Remote", "job-sites.html");
+    if (has("cv", "resume", "ats", "cover letter", "سي في", "سيرة", "cv ")) return (ar ? "أدوات مجانية تبني بيها السي في وتتأكد إنه يعدّي الـ ATS: " : "Free tools to build your CV and check it passes ATS filters: ") + L("CV Tools", "cv-tools.html") + " · " + L("Career Boost", "career-boost.html") + (ar ? "<br>نصيحة: خلي أول تلت في السي في مطابق لعنوان الوظيفة وكلماتها." : "<br>Tip: match the top third of your CV to the job title and keywords.");
+    if (has("linkedin", "profile", "لينكد")) return "To get found by recruiters on LinkedIn, start with the tools in " + L("Career Boost", "career-boost.html") + " (Taplio, 7 days free). Also follow " + L("U Hirable on LinkedIn", "https://www.linkedin.com/company/uhirable") + " for weekly roles.";
+    if (has("hire", "recruit", "post a job", "employer", "candidates", "توظيف", "اوظف", "أوظف")) return (ar ? "عاوزة توظف؟ قولينا عن الوظيفة وهنلاقيلك الناس المناسبة: " : "Hiring? Tell us about the role and we'll find the right people: ") + L("Hire Talent", "employer.html") + "<br>" + (ar ? "وأدوات التوظيف والرواتب بعروض خاصة: " : "Hiring, payroll and EOR tools with exclusive perks: ") + L("Hiring Partners", "partners.html");
+    if (has("partner", "payroll", "eor", "oyster", "staffing", "ats software", "crm")) return "Hiring tools with exclusive perks (EOR, payroll, staffing, recruiting software): " + L("Hiring Partners", "partners.html");
+    if (has("event", "conference", "fair", "summit", "معرض", "مؤتمر")) return "Hiring events, career fairs and HR conferences around the world: " + L("Events", "events.html");
+    if (has("newsletter", "subscribe", "shortlist")) return "Our weekly newsletter is The Shortlist, on LinkedIn: " + L("U Hirable on LinkedIn", "https://www.linkedin.com/company/uhirable") + ". Each issue: free tools, CV tips and who can actually apply.";
+    if (has("contact", "whatsapp", "email", "talk", "human", "تواصل", "واتس")) return "You can reach us on " + L("WhatsApp", WA) + " or email <a href=\"mailto:u.hirable@proton.me\">u.hirable@proton.me</a>.";
+    if (has("salary", "pay", "مرتب", "راتب")) return "Every role on " + L("Open Roles", "jobs.html") + " shows the salary range on its card, so you can filter before you apply.";
+    if (has("top talent", "experienced", "senior", "get matched", "paraform")) return "5+ years of experience? Share your profile once and get matched with top companies: " + L("Top Talent", "talent.html");
+    const c = COUNTRIES.find((x) => t.includes(x)); 
+    if (c || has("job site", "job board", "where to search", "sites", "مواقع")) {
+      const key = ALIAS[c] || c; const sites = key ? find([key], ["Job Site"], 6) : [], jobs = key ? find([key], ["Job"], 4) : [];
+      let out = key ? `Here's what I found for <b>${escapeHTML(key)}</b>:` : "Browse 100+ job sites by region: " + L("Job Sites", "job-sites.html");
+      if (jobs.length) out += "<br><b>Open roles</b>" + list(jobs);
+      if (sites.length) out += "<br><b>Job sites</b>" + list(sites);
+      if (key && !jobs.length && !sites.length) out += " nothing specific yet. Try " + L("Open Roles", "jobs.html") + " or " + L("Job Sites", "job-sites.html") + ".";
+      else if (key) out += "<br>" + L("All job sites →", "job-sites.html");
+      return out;
+    }
+    if (has("job", "role", "vacanc", "hiring", "وظيف", "شغل")) { const r = find(t.split(/\s+/).filter((w) => w.length > 3), ["Job"], 5); return r.length ? "Roles matching your search:" + list(r) + L("See all open roles →", "jobs.html") : "Browse all open roles here: " + L("Open Roles", "jobs.html") + " — filter by country or search a title."; }
+    const r = find(t.split(/\s+/).filter((w) => w.length > 3), null, 5);
+    if (r.length) return "Here's what I found:" + list(r);
+    return (ar ? "مش فاهم السؤال ده للأسف. جربي: ريموت، فيزا، سي في، مواقع وظايف، أو اسم دولة. أو كلمينا على " : "I didn't catch that. Try: remote, visa, CV, job sites, or a country name. Or message us on ") + L("WhatsApp", WA) + ".";
+  }
+  async function ask(text) { if (!text.trim()) return; say(text, true); q.value = ""; await loadIdx(); setTimeout(() => say(reply(text)), 250); }
+  form.addEventListener("submit", (e) => { e.preventDefault(); ask(q.value); });
+  let opened = false;
+  const open = () => { panel.classList.add("open"); btn.setAttribute("aria-expanded", "true"); if (!opened) { opened = true; loadIdx(); say(reply("hi")); setChips(CHIPS); } q.focus(); };
+  const close = () => { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); };
+  btn.addEventListener("click", () => (panel.classList.contains("open") ? close() : open()));
+  panel.querySelector(".ua-head button").addEventListener("click", close);
+})();
