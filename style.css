@@ -1008,3 +1008,5 @@ textarea { resize: vertical; }
 .rm-strip .promo-btn{background:#f5b70a;color:#1d1d3a;border-color:#f5b70a}
 .rm-loading{color:#6b70a0;margin:6px 0}
 .rm-home{padding:10px 0 0;margin-top:-10px}.rm-home+.hub4-wrap{margin-top:0;padding-top:90px}.rm-home .rm-strip h2{font-size:1.35rem;margin:0}.rm-home .promo-badge{top:-13px}
+
+.topic-faq{max-width:760px;margin:40px auto 0;background:#fff;border-radius:22px;padding:26px 30px;box-shadow:0 10px 30px rgba(20,26,82,.06)}.topic-faq h2{font-size:1.3rem;margin:0 0 10px}.topic-faq h3{font-size:1.05rem;margin:16px 0 6px}.topic-faq p{color:#4a4f80;line-height:1.6;margin:0 0 8px}

@@ -238,7 +238,7 @@ if (list && typeof JOBS !== "undefined") {
   // Promo cards (Paraform + Remotive) shown first; Paraform only for its countries
   const PF_COUNTRIES = ["United States","United Kingdom","Canada","Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland"];
   function promoCards(country, q) {
-    if (q) return "";
+    if (q || window.JOB_FILTER) return "";
     const pf = (country === "all" || PF_COUNTRIES.includes(country)) ? `
         <article class="job-card promo-card pf-card">
           <span class="promo-badge">Get matched</span>
@@ -274,7 +274,10 @@ if (list && typeof JOBS !== "undefined") {
     const country = countrySelect.value;
     const q = searchBox.value.trim().toLowerCase();
 
+    const topic = window.JOB_FILTER;
+    const topicOk = (j) => !topic || (topic === "visa" ? arr(j.tags).some((t) => /^(visa (sponsorship|transfer)|relocation)/i.test(t)) : arr(j.tags).some((t) => /^(fully )?remote$/i.test(t)));
     const filtered = JOBS.filter((j) => {
+      if (!topicOk(j)) return false;
       const matchCountry = country === "all" || jobCountries(j).includes(country) || jobCountries(j).includes(WORLDWIDE);
       const text = [j.title, j.company, j.industry, j.brief, ...arr(j.tags), ...jobCountries(j)].join(" ").toLowerCase();
       return matchCountry && (!q || text.includes(q));
@@ -390,7 +393,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=9";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=10";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
