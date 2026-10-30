@@ -20,7 +20,7 @@
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="amel-3d-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=41">
+  <link rel="stylesheet" href="style.css?v=44">
 <style>
 .me-stage{padding-top:100px}
 .me-bubble.cloud{left:50%;right:auto;top:0;transform:translateX(-50%);width:max-content;max-width:92%;text-align:center;
@@ -68,11 +68,18 @@
             <a href="cv-tools.html" class="btn btn-gold"><svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>CV Tools</a>
           </div>
         </div>
-<div class="okguy" id="okguy" aria-hidden="true"><div class="ok-bubble" id="ok-bubble">Great choice!</div><img src="thumbs-guy.webp" alt=""></div>
+<div class="guide" id="guide" aria-hidden="true"><div class="g-bub" id="g-bub">Hi! I'm your guide 👋</div><img src="thumbs-guy.webp" alt=""></div>
 <script>
-(function(){const g=document.getElementById('okguy'),b=document.getElementById('ok-bubble');if(!g)return;const msgs={'jobs.html':'46 open roles!','career-boost.html':'Free AI tools!','job-sites.html':'100+ job sites!','cv-tools.html':'Build your CV!'};let t;
-document.querySelectorAll('.hero-actions a').forEach(a=>{const show=()=>{clearTimeout(t);b.textContent=msgs[a.getAttribute('href')]||'Great choice!';g.classList.add('up');};a.addEventListener('mouseenter',show);a.addEventListener('focus',show);a.addEventListener('mouseleave',()=>{t=setTimeout(()=>g.classList.remove('up'),900)});a.addEventListener('click',()=>{g.classList.add('up','yay');setTimeout(()=>g.classList.remove('yay'),700)});});
-setTimeout(()=>{b.textContent='Hi there!';g.classList.add('up');t=setTimeout(()=>g.classList.remove('up'),2200)},1800);})();
+(function(){const g=document.getElementById('guide'),bub=document.getElementById('g-bub');if(!g||!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+const TIPS=[['.hero-actions a[href="jobs.html"]','46 open roles, filter by country!'],['.hero-actions a[href="career-boost.html"]','Free AI tools to get hired faster.'],['.hero-actions a[href="job-sites.html"]','100+ job sites around the world.'],['.hero-actions a[href="cv-tools.html"]','Build a CV that passes ATS.'],['.ph-eye','We\u2019re live on Product Hunt today!'],['.me-stage','That\u2019s Amel, a recruiter who built this hub.'],['.rm-strip','Fresh remote jobs, updated automatically.'],['.h4-jobs','Open roles at startups and tech companies.'],['.h4-boost','Boost your career with free AI tools.'],['.ask-card','That\u2019s Lilo. Upload your CV and get matched!'],['.tt-card','5+ years of experience? Get matched.'],['#ua-btn','Click to chat with Lilo!'],['.wa-float','Or chat with us on WhatsApp.']];
+const IDLE=['Move your mouse, I\u2019ll follow you!','Looking for remote jobs? Try the Remote Jobs page.','Need a visa? We have a page for that.','Scroll down, there\u2019s more!'];
+let mx=innerWidth/2,my=innerHeight*0.6,gx=mx,gy=my,lastMove=Date.now(),idleI=0,curTip='',t;
+const say=(s)=>{if(s===curTip)return;curTip=s;bub.textContent=s;bub.classList.add('on');clearTimeout(t);t=setTimeout(()=>{bub.classList.remove('on');curTip=''},2600)};
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;lastMove=Date.now();const el=document.elementFromPoint(mx,my);if(!el)return;for(const [sel,txt] of TIPS){if(el.closest(sel)){say(txt);break;}}});
+document.addEventListener('click',()=>{g.classList.add('yay');setTimeout(()=>g.classList.remove('yay'),700)});
+setInterval(()=>{if(Date.now()-lastMove>6000&&!bub.classList.contains('on')){say(IDLE[idleI++%IDLE.length]);}},4000);
+let last=0;(function f(ts){const W=g.offsetWidth,H=g.offsetHeight;const left=mx>innerWidth*0.6;const tx=Math.min(innerWidth-W-10,Math.max(10,left?mx-W-28:mx+28)),ty=Math.min(innerHeight-H-10,Math.max(10,my-H*0.55));g.classList.toggle('flip',left);gx+=(tx-gx)*0.08;gy+=(ty-gy)*0.08;const vx=tx-gx;g.style.transform='translate('+gx+'px,'+gy+'px)';g.querySelector('img').style.transform='rotate('+Math.max(-10,Math.min(10,vx*0.05))+'deg) scaleX('+(vx<-20?-1:1)+')';requestAnimationFrame(f)})();
+setTimeout(()=>say('Hi! I\u2019m your guide. Move your mouse!'),1200);})();
 </script>
         <div class="hero-visual" data-tilt data-tilt-max="6">
           <div class="me-stage">
@@ -137,7 +144,7 @@ setTimeout(()=>{b.textContent='Hi there!';g.classList.add('up');t=setTimeout(()=
           <div class="ask-bub man" id="ab-man">Any remote jobs for me?</div>
           <div class="ask-bub bot" id="ab-bot">12 remote roles right now. Want them?</div>
         </div>
-        <div class="ask-text"><span class="tt-pill" style="background:#e9e6ff;color:#5b3fd6">ASK OUR ASSISTANT</span><h2>Not sure where to start?</h2><p>Ask about remote jobs, visa sponsorship, CV tools or the best job sites for your country. Instant answers, no sign-up.</p><button type="button" class="btn btn-primary" id="ask-open">Ask the assistant →</button></div>
+        <div class="ask-text"><span class="tt-pill" style="background:#e9e6ff;color:#5b3fd6">MEET LILO</span><h2>Not sure where to start? Ask Lilo.</h2><p>Upload your CV and Lilo matches you to open roles in seconds. Or ask about remote jobs, visa sponsorship, CV tools and job sites. Free, no sign-up, and your CV never leaves your browser.</p><button type="button" class="btn btn-primary" id="ask-open">Ask Lilo →</button></div>
       </div>
     </section>
     <section class="container tt-sec" style="padding-bottom:90px"><div class="tt-card"><div><span class="tt-pill">TOP TALENT</span><h2>Experienced? <span>Get matched with top companies.</span></h2><p>Share your profile once and you will get matched with top companies hiring now.</p><ul class="tt-list"><li><i>5+</i>5+ years of experience in your field</li><li><i>★</i>Genuinely excellent at what you do</li></ul><a class="tt-btn" href="talent.html">Get Matched →</a></div><div class="tt-stat tt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/><path d="M9.6 9l1.6 1.6L14.6 7.4"/></svg><span>Get matched with<br>top companies</span></div></div></section>
@@ -167,7 +174,7 @@ setTimeout(()=>{b.textContent='Hi there!';g.classList.add('up');t=setTimeout(()=
     </div>
   </div>
 
-  <script src="script.js?v=29"></script>
+  <script src="script.js?v=31"></script>
 <script>
 (function(){const el=document.getElementById("typed");if(!el)return;
 const lines=["Hi, I'm Amel 👋","I've always believed the right job changes more than a career…","…it can change the life of an entire family.","As a Global Talent Acquisition Partner, I see it every day.","That's why I built U Hirable…","…to help job seekers get hired, companies hire great talent, and everyone grow their careers."];

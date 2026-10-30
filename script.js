@@ -428,11 +428,12 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   if (document.getElementById("ua-btn")) return;
   const WA = "https://wa.me/201515594609", BASE = "";
   const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>';
-  const btn = document.createElement("button"); btn.id = "ua-btn"; btn.className = "ua-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Ask U Hirable"); btn.className += " img"; btn.innerHTML = "<img src=\"robot-head.webp\" alt=\"\"><span>Ask me anything</span>";
-  const panel = document.createElement("div"); panel.className = "ua-panel"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "U Hirable assistant");
-  panel.innerHTML = `<div class="ua-head">${ICON}<div><b>U Hirable assistant</b><small>Ask about jobs, visas, CV tools or job sites</small></div><button type="button" aria-label="Close">✕</button></div>
+  const btn = document.createElement("button"); btn.id = "ua-btn"; btn.className = "ua-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Ask Lilo"); btn.className += " img"; btn.innerHTML = "<span class=\"lilo-av\"><img src=\"robot-head.webp\" alt=\"\"><svg class=\"lilo-hand\" viewBox=\"0 0 40 44\" aria-hidden=\"true\"><path d=\"M10 24 V12 a3 3 0 0 1 6 0 V8 a3 3 0 0 1 6 0 v2 a3 3 0 0 1 6 0 v4 a3 3 0 0 1 6 0 v12 a12 12 0 0 1 -24 0z\" fill=\"#fff\" stroke=\"#c9cffd\" stroke-width=\"2\"/><circle cx=\"22\" cy=\"30\" r=\"4\" fill=\"#4fb6ff\"/></svg><i class=\"lilo-hi\">Hi!</i></span><span>Ask Lilo</span>";
+  const panel = document.createElement("div"); panel.className = "ua-panel"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "Lilo, the U Hirable assistant");
+  panel.innerHTML = `<div class="ua-head">${ICON}<div><b>Lilo</b><small>Your U Hirable guide. Ask about jobs, visas, CV tools or job sites</small></div><button type="button" aria-label="Close">✕</button></div>
     <div class="ua-log" id="ua-log"></div>
     <div class="ua-chips" id="ua-chips"></div>
+    <div class="ua-cv"><label class="ua-cv-btn"><input type="file" id="ua-file" accept=".pdf,.docx,.txt" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg><span>Upload your CV, get matched</span></label><small>Read in your browser only. Never uploaded.</small></div>
     <form class="ua-in" id="ua-form"><input id="ua-q" type="text" placeholder="e.g. remote jobs, visa sponsorship, CV…" autocomplete="off"><button type="submit">Send</button></form>`;
   document.body.append(btn, panel);
   const log = panel.querySelector("#ua-log"), chips = panel.querySelector("#ua-chips"), form = panel.querySelector("#ua-form"), q = panel.querySelector("#ua-q");
@@ -450,7 +451,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   function reply(text) {
     const t = text.toLowerCase().trim(); const ar = /[؀-ۿ]/.test(t);
     const has = (...w) => w.some((x) => t.includes(x));
-    if (has("hi", "hello", "hey", "مرحبا", "اهلا", "أهلا", "السلام") && t.length < 25) return (ar ? "أهلاً! أقدر أساعدك تلاقي وظايف ريموت، أو وظايف فيها فيزا، أو أدوات سي في. اختاري من تحت أو اكتبي سؤالك." : "Hi! I can help you find remote jobs, visa sponsorship roles, CV tools or the best job sites for your country. Pick an option below or type a question.");
+    if (has("hi", "hello", "hey", "مرحبا", "اهلا", "أهلا", "السلام") && t.length < 25) return (ar ? "أهلاً! أنا Lilo، أقدر أساعدك تلاقي وظايف ريموت، أو وظايف فيها فيزا، أو أدوات سي في. اختاري من تحت أو اكتبي سؤالك." : "Hi, I'm Lilo! Upload your CV and I'll find your closest roles in seconds, or ask me about remote jobs, visas, CV tools and job sites.");
     if (has("visa", "sponsor", "h1b", "h-1b", "relocat", "فيزا", "كفالة")) return (ar ? "دي الوظايف اللي فيها كفالة فيزا أو نقل فيزا: " : "These roles sponsor a work visa or accept a visa transfer: ") + L(ar ? "Jobs with visa sponsorship" : "Jobs with visa sponsorship", "visa-sponsorship-jobs.html") + (ar ? "<br>اقري سطر \"Who can apply\" في كل وظيفة قبل ما تقدّم." : "<br>Always read the \"Who can apply\" line on each job before applying.");
     if (has("remote", "work from home", "wfh", "anywhere", "ريموت", "من البيت", "عن بعد")) return (ar ? "الوظايف الريموت كلها هنا، وكل وظيفة مكتوب عليها الدول المسموح تقدّم منها: " : "All fully remote roles are here, each showing the countries you can apply from: ") + L("Remote jobs", "remote-jobs.html") + "<br>" + (ar ? "وكمان مواقع الوظايف الريموت: " : "More remote job sites: ") + L("Job Sites → Remote", "job-sites.html");
     if (has("cv", "resume", "ats", "cover letter", "سي في", "سيرة", "cv ")) return (ar ? "أدوات مجانية تبني بيها السي في وتتأكد إنه يعدّي الـ ATS: " : "Free tools to build your CV and check it passes ATS filters: ") + L("CV Tools", "cv-tools.html") + " · " + L("Career Boost", "career-boost.html") + (ar ? "<br>نصيحة: خلي أول تلت في السي في مطابق لعنوان الوظيفة وكلماتها." : "<br>Tip: match the top third of your CV to the job title and keywords.");
@@ -477,6 +478,49 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     if (r.length) return "Here's what I found:" + list(r);
     return (ar ? "مش فاهم السؤال ده للأسف. جربي: ريموت، فيزا، سي في، مواقع وظايف، أو اسم دولة. أو كلمينا على " : "I didn't catch that. Try: remote, visa, CV, job sites, or a country name. Or message us on ") + L("WhatsApp", WA) + ".";
   }
+
+  // ---- CV match (runs fully in the browser; the file is never uploaded) ----
+  const fileIn = panel.querySelector("#ua-file");
+  const STOP = new Set("the and for with that this from your you are our will have has not but can all any more than into over per via each new who their they them its was were been being also such as of to in on at by an a or is it be we us i".split(" "));
+  const tokens = (t) => (t.toLowerCase().match(/[a-z][a-z0-9+#.\-]{1,}/g) || []).filter((w) => !STOP.has(w));
+  const SKILLS = ["python","sql","java","javascript","typescript","react","node","aws","gcp","azure","snowflake","databricks","dbt","airflow","kafka","spark","excel","powerpoint","tableau","power bi","looker","salesforce","hubspot","figma","sketch","product","design","marketing","sales","account executive","sdr","bdr","gtm","partnerships","finance","accounting","controller","cpa","fp&a","quickbooks","netsuite","machine learning","ml","ai","llm","nlp","data engineer","data scientist","analyst","devops","kubernetes","docker","terraform","security","recruiter","talent","hr","operations","project manager","product manager","engineering manager","full stack","backend","frontend","mobile","ios","android","go","rust","c++","c#",".net","php","ruby","scala","r","matlab","statistics","real estate","private equity","investment banking","consulting","law","legal","nurse","teacher","customer support","customer success","supply chain","logistics","edi","fintech","mortgage","healthcare","saas"];
+  function matchCV(text) {
+    const low = text.toLowerCase(); const cvTok = new Set(tokens(text));
+    const mySkills = SKILLS.filter((k) => low.includes(k));
+    const years = (low.match(/(\d{1,2})\+?\s*(?:years|yrs)/) || [])[1];
+    const ALL = (typeof JOBS !== "undefined" ? JOBS : (window.JOBS || []));
+    const scored = ALL.map((j) => {
+      const jt = `${j.title} ${j.industry || ""} ${j.brief || ""} ${j.overview || ""} ${(j.requirements || []).join(" ")} ${(j.responsibilities || []).join(" ")}`;
+      const jl = jt.toLowerCase(); const jTok = [...new Set(tokens(jt))];
+      const jSkills = SKILLS.filter((k) => jl.includes(k));
+      const hitSkills = jSkills.filter((k) => low.includes(k));
+      const titleHit = tokens(j.title).filter((w) => cvTok.has(w)).length;
+      const overlap = jTok.filter((w) => cvTok.has(w)).length;
+      const score = hitSkills.length * 12 + titleHit * 15 + Math.min(overlap, 40);
+      const pct = Math.min(96, Math.round(score / (jSkills.length * 12 + tokens(j.title).length * 15 + 40) * 100));
+      return { j, pct, missing: jSkills.filter((k) => !low.includes(k)).slice(0, 5), hit: hitSkills };
+    }).filter((x) => x.pct > 12).sort((a, b) => b.pct - a.pct).slice(0, 3);
+    let out = `<b>Your CV:</b> ${mySkills.length ? mySkills.slice(0, 8).map(escapeHTML).join(", ") : "I couldn't find clear skills"}${years ? ` · ${escapeHTML(years)}+ years` : ""}.<br>`;
+    if (!scored.length) return out + `No close match in our open roles right now. Try the ${L("Remote jobs", "remote-jobs.html")} page, or strengthen your CV with ${L("CV Tools", "cv-tools.html")}.`;
+    out += `<b>Your top matches:</b><ul>` + scored.map((x) => `<li>${L(escapeHTML(x.j.title + " · " + x.j.company), x.j.page || "jobs.html")} <span class="k">${x.pct}% match</span>${x.missing.length ? `<br><small>Missing keywords: ${x.missing.map(escapeHTML).join(", ")}</small>` : ""}</li>`).join("") + "</ul>";
+    out += `Add the missing keywords with ${L("SkillSyncer", "career-boost.html")} (free), then apply.`;
+    return out;
+  }
+  async function readFile(f) {
+    if (/\.txt$/i.test(f.name)) return f.text();
+    if (/\.docx$/i.test(f.name)) { await loadLib("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"); const r = await window.mammoth.extractRawText({ arrayBuffer: await f.arrayBuffer() }); return r.value; }
+    await loadLib("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs", true); const pdfjs = window.pdfjsLib; pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.mjs";
+    const doc = await pdfjs.getDocument({ data: await f.arrayBuffer() }).promise; let t = "";
+    for (let i = 1; i <= Math.min(doc.numPages, 6); i++) { const pg = await doc.getPage(i); const c = await pg.getTextContent(); t += c.items.map((x) => x.str).join(" ") + "\n"; }
+    return t;
+  }
+  const loadLib = (src, mod) => new Promise((r, j) => { if (mod && window.pdfjsLib) return r(); if (!mod && window.mammoth) return r(); const s = document.createElement("script"); if (mod) { s.type = "module"; s.textContent = `import * as p from "${src}"; window.pdfjsLib = p; window.dispatchEvent(new Event("pdfjs-ready"));`; window.addEventListener("pdfjs-ready", r, { once: true }); } else { s.src = src; s.onload = r; s.onerror = j; } document.head.appendChild(s); });
+  fileIn.addEventListener("change", async () => {
+    const f = fileIn.files[0]; if (!f) return; say("📄 " + f.name, true); say("Reading your CV…");
+    try { await loadIdx(); if (typeof JOBS === "undefined" && !window.JOBS) { await loadLib("jobs.js?v=37"); if (typeof JOBS === "undefined") { const r = await fetch("jobs.js?v=37").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); } } const text = await readFile(f); if (!text || text.trim().length < 80) throw new Error("empty"); say(matchCV(text)); }
+    catch (e) { say("I couldn't read that file. Try a PDF or Word (.docx) with selectable text, or paste your skills here and I'll match them."); }
+    fileIn.value = "";
+  });
   async function ask(text) { if (!text.trim()) return; say(text, true); q.value = ""; await loadIdx(); setTimeout(() => say(reply(text)), 250); }
   form.addEventListener("submit", (e) => { e.preventDefault(); ask(q.value); });
   let opened = false;
