@@ -1024,19 +1024,14 @@ textarea { resize: vertical; }
 @media (max-width:720px){.ua-btn{right:16px;bottom:84px;padding:12px}.ua-btn>span:not(.lilo-av){display:none}.ua-panel{right:16px;bottom:146px}}
 
 .ask-sec{padding:0 0 70px}.ask-card{display:grid;grid-template-columns:1.05fr 1fr;gap:30px;align-items:center;background:#fff;border-radius:28px;padding:26px 34px;box-shadow:0 18px 50px rgba(20,26,82,.08)}
-.ask-art{position:relative}.ask-art img{width:100%;display:block}.ask-art{background:radial-gradient(circle at 70% 20%,#2a37ff,#0a0f9e 60%,#070a4a);border-radius:22px;padding:18px 18px 0}
+.ask-art{position:relative;background:radial-gradient(circle at 70% 15%,#dfe4ff,#eef1ff 55%,#f6f7ff);border-radius:22px;padding:18px 18px 0;overflow:visible}.ask-art img{width:100%;display:block;filter:drop-shadow(0 18px 24px rgba(20,26,82,.18))}
 .ask-bub{position:absolute;background:#fff;color:#141a52;font-weight:700;padding:10px 14px;border-radius:16px;box-shadow:0 10px 24px rgba(20,26,82,.18);font-size:.95rem;transition:opacity .35s,transform .35s;max-width:220px}
 .ask-bub.man{right:4%;top:2%;border-bottom-right-radius:4px}.ask-bub.bot{left:4%;top:-6%;background:#ffd23f;color:#141a52;border-bottom-left-radius:4px}
 .ask-bub.sw{opacity:0;transform:translateY(6px)}
-.ask-text h2{font-size:1.8rem;margin:10px 0 8px}.ask-text p{color:#4a4f80;line-height:1.6;margin:0 0 18px}
+.ask-text h2{font-size:1.8rem;margin:10px 0 8px}.ask-text p{color:#4a4f80;line-height:1.6;margin:0 0 16px}.ask-feats{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:10px}.ask-feats li{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:#2a2f63;line-height:1.4}.ask-feats i{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:1rem;background:#eef1ff}.ask-feats b{display:block;color:#141a52}.ask-trust{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}.ask-trust span{font-size:.78rem;font-weight:700;color:#4a4f80;background:#f3f4fb;border-radius:999px;padding:6px 11px}
 .ua-btn.img{padding:4px;background:#fff;box-shadow:0 6px 0 #c9cffd,0 18px 30px -8px rgba(1,18,255,.45)}.ua-btn.img img{width:56px;height:56px;border-radius:50%;object-fit:cover;display:block;animation:botbob 3s ease-in-out infinite}.ua-btn.img .lilo-av{width:56px;height:56px}@keyframes botbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}.ua-btn.img:hover img{animation:botwig .6s ease}@keyframes botwig{0%,100%{transform:rotate(0)}30%{transform:rotate(-10deg)}60%{transform:rotate(10deg)}}.ua-btn.img>span:not(.lilo-av){color:#141a52;padding-right:0}.ua-btn.img:hover>span:not(.lilo-av){padding-right:8px}
-@media(max-width:860px){.ask-card{grid-template-columns:1fr}}
+@media(max-width:860px){.ask-card{grid-template-columns:1fr;padding:18px 18px 22px;gap:18px}.ask-art{padding:12px 12px 0;margin-top:26px}.ask-bub{font-size:.8rem;padding:8px 11px;max-width:170px;line-height:1.3}.ask-bub.man{right:2%;top:42%;max-width:150px}.ask-bub.bot{left:2%;top:-9%;max-width:160px}.ask-text h2{font-size:1.45rem}.ask-feats li{font-size:.88rem}}
 
-/* Tour guide that follows the mouse */
-.guide{position:fixed;left:0;top:0;width:120px;z-index:58;pointer-events:none;will-change:transform}.guide img{width:100%;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));transition:transform .25s}
-.guide.yay img{animation:gyay .7s ease}@keyframes gyay{0%,100%{scale:1}40%{scale:1.15}}
-.g-bub{position:absolute;left:100%;top:-6px;margin-left:8px;background:#fff;color:#141a52;font-weight:800;font-size:.86rem;padding:8px 12px;border-radius:14px;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.22);opacity:0;transform:translateY(6px) scale(.9);transition:all .25s;border-bottom-left-radius:4px}.g-bub.on{opacity:1;transform:none}.guide.flip .g-bub{left:auto;right:100%;margin-left:0;margin-right:8px;border-bottom-left-radius:14px;border-bottom-right-radius:4px}
-@media(max-width:900px),(pointer:coarse){.guide{display:none}}
 
 .ua-cv{padding:8px 14px 2px;background:#f5f6ff}.ua-cv-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(180deg,#ffe27a,#f5b70a);color:#141a52;font-weight:800;font-size:.86rem;padding:9px 12px;border-radius:12px;cursor:pointer;box-shadow:0 4px 0 #b57300}.ua-cv-btn svg{width:18px;height:18px}.ua-cv-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #b57300}.ua-cv small{display:block;color:#6b70a0;font-size:.72rem;margin:5px 2px 0}
 .ua-m small{color:#6b70a0}
@@ -1047,3 +1042,12 @@ textarea { resize: vertical; }
 .lilo-hi{position:absolute;left:50%;top:-18px;transform:translateX(-50%) scale(0);background:#ffd23f;color:#141a52;font-style:normal;font-weight:800;font-size:.68rem;padding:2px 7px;border-radius:999px;animation:hipop 2.4s ease-in-out infinite;white-space:nowrap}
 @keyframes hipop{0%,50%,100%{transform:translateX(-50%) scale(0)}58%,88%{transform:translateX(-50%) scale(1)}}
 .ua-btn.img:hover .lilo-hand{animation:wave .8s ease-in-out infinite}
+
+/* work-from-home beginners page */
+.wfh .topic-faq{max-width:none;margin:0}.wfh-intro{margin:0 0 34px!important}.wfh-h{font-size:1.5rem;margin:34px 0 16px;color:#141a52}
+.wfh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.wfh-card{background:#fff;border-radius:20px;padding:20px 20px 16px;box-shadow:0 10px 30px rgba(20,26,82,.06);display:flex;flex-direction:column}.wfh-card i{font-style:normal;font-size:1.5rem;width:46px;height:46px;border-radius:14px;background:#eef1ff;display:grid;place-items:center;margin-bottom:12px}.wfh-card h3{font-size:1.05rem;margin:0 0 6px;color:#141a52}.wfh-card p{color:#4a4f80;line-height:1.5;font-size:.92rem;margin:0 0 10px;flex:1}.wfh-card small{font-size:.78rem;font-weight:700;color:#5b3fd6;background:#f3f0ff;border-radius:999px;padding:5px 10px;align-self:flex-start}
+.wfh-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wfh-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px}.wfh-list li{color:#4a4f80;font-size:.95rem;padding-left:18px;position:relative;line-height:1.45}.wfh-list li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:#ffd23f}.wfh-list a{color:#141a52;font-weight:700}
+.wfh-steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wfh-step{background:#fff;border-radius:20px;padding:22px 22px 18px 24px;box-shadow:0 10px 30px rgba(20,26,82,.06);position:relative}.wfh-step b{position:absolute;left:-10px;top:-10px;width:38px;height:38px;border-radius:50%;background:#ffd23f;color:#141a52;display:grid;place-items:center;font-size:1rem;box-shadow:0 6px 14px rgba(20,26,82,.15)}.wfh-step h3{font-size:1.05rem;margin:0 0 6px;color:#141a52}.wfh-step p{color:#4a4f80;line-height:1.55;font-size:.93rem;margin:0}
+.wfh-faq{margin-top:34px!important}
+@media(max-width:1000px){.wfh-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.wfh-grid,.wfh-two,.wfh-steps{grid-template-columns:1fr}.wfh-h{font-size:1.3rem}}

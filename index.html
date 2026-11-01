@@ -20,7 +20,7 @@
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="amel-3d-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="style.css?v=46">
 <style>
 .me-stage{padding-top:100px}
 .me-bubble.cloud{left:50%;right:auto;top:0;transform:translateX(-50%);width:max-content;max-width:92%;text-align:center;
@@ -68,19 +68,7 @@
             <a href="cv-tools.html" class="btn btn-gold"><svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>CV Tools</a>
           </div>
         </div>
-<div class="guide" id="guide" aria-hidden="true"><div class="g-bub" id="g-bub">Hi! I'm your guide 👋</div><img src="thumbs-guy.webp" alt=""></div>
-<script>
-(function(){const g=document.getElementById('guide'),bub=document.getElementById('g-bub');if(!g||!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-const TIPS=[['.hero-actions a[href="jobs.html"]','46 open roles, filter by country!'],['.hero-actions a[href="career-boost.html"]','Free AI tools to get hired faster.'],['.hero-actions a[href="job-sites.html"]','100+ job sites around the world.'],['.hero-actions a[href="cv-tools.html"]','Build a CV that passes ATS.'],['.ph-eye','We\u2019re live on Product Hunt today!'],['.me-stage','That\u2019s Amel, a recruiter who built this hub.'],['.rm-strip','Fresh remote jobs, updated automatically.'],['.h4-jobs','Open roles at startups and tech companies.'],['.h4-boost','Boost your career with free AI tools.'],['.ask-card','That\u2019s Lilo. Upload your CV and get matched!'],['.tt-card','5+ years of experience? Get matched.'],['#ua-btn','Click to chat with Lilo!'],['.wa-float','Or chat with us on WhatsApp.']];
-const IDLE=['Move your mouse, I\u2019ll follow you!','Looking for remote jobs? Try the Remote Jobs page.','Need a visa? We have a page for that.','Scroll down, there\u2019s more!'];
-let mx=innerWidth/2,my=innerHeight*0.6,gx=mx,gy=my,lastMove=Date.now(),idleI=0,curTip='',t;
-const say=(s)=>{if(s===curTip)return;curTip=s;bub.textContent=s;bub.classList.add('on');clearTimeout(t);t=setTimeout(()=>{bub.classList.remove('on');curTip=''},2600)};
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;lastMove=Date.now();const el=document.elementFromPoint(mx,my);if(!el)return;for(const [sel,txt] of TIPS){if(el.closest(sel)){say(txt);break;}}});
-document.addEventListener('click',()=>{g.classList.add('yay');setTimeout(()=>g.classList.remove('yay'),700)});
-setInterval(()=>{if(Date.now()-lastMove>6000&&!bub.classList.contains('on')){say(IDLE[idleI++%IDLE.length]);}},4000);
-let last=0;(function f(ts){const W=g.offsetWidth,H=g.offsetHeight;const left=mx>innerWidth*0.6;const tx=Math.min(innerWidth-W-10,Math.max(10,left?mx-W-28:mx+28)),ty=Math.min(innerHeight-H-10,Math.max(10,my-H*0.55));g.classList.toggle('flip',left);gx+=(tx-gx)*0.08;gy+=(ty-gy)*0.08;const vx=tx-gx;g.style.transform='translate('+gx+'px,'+gy+'px)';g.querySelector('img').style.transform='rotate('+Math.max(-10,Math.min(10,vx*0.05))+'deg) scaleX('+(vx<-20?-1:1)+')';requestAnimationFrame(f)})();
-setTimeout(()=>say('Hi! I\u2019m your guide. Move your mouse!'),1200);})();
-</script>
+
         <div class="hero-visual" data-tilt data-tilt-max="6">
           <div class="me-stage">
             <div class="me-glow" aria-hidden="true"></div>
@@ -144,7 +132,7 @@ setTimeout(()=>say('Hi! I\u2019m your guide. Move your mouse!'),1200);})();
           <div class="ask-bub man" id="ab-man">Any remote jobs for me?</div>
           <div class="ask-bub bot" id="ab-bot">12 remote roles right now. Want them?</div>
         </div>
-        <div class="ask-text"><span class="tt-pill" style="background:#e9e6ff;color:#5b3fd6">MEET LILO</span><h2>Not sure where to start? Ask Lilo.</h2><p>Upload your CV and Lilo matches you to open roles in seconds. Or ask about remote jobs, visa sponsorship, CV tools and job sites. Free, no sign-up, and your CV never leaves your browser.</p><button type="button" class="btn btn-primary" id="ask-open">Ask Lilo →</button></div>
+        <div class="ask-text"><span class="tt-pill" style="background:#e9e6ff;color:#5b3fd6">MEET LILO</span><h2>Not sure where to start? Ask Lilo.</h2><p>Upload your CV and Lilo matches you to open roles in seconds. Or just ask, in English or Arabic.</p><ul class="ask-feats"><li><i>📄</i><div><b>CV match</b>Upload your CV and get your closest open roles, ranked.</div></li><li><i>🌍</i><div><b>Remote &amp; visa sponsorship</b>Ask which companies hire remotely or sponsor visas right now.</div></li><li><i>🛠️</i><div><b>Free tools &amp; job sites</b>Get the best free CV tools and the top job sites for your country.</div></li></ul><div class="ask-trust"><span>No sign-up</span><span>100% free</span><span>Your CV never leaves your browser</span></div><button type="button" class="btn btn-primary" id="ask-open">Ask Lilo →</button></div>
       </div>
     </section>
     <section class="container tt-sec" style="padding-bottom:90px"><div class="tt-card"><div><span class="tt-pill">TOP TALENT</span><h2>Experienced? <span>Get matched with top companies.</span></h2><p>Share your profile once and you will get matched with top companies hiring now.</p><ul class="tt-list"><li><i>5+</i>5+ years of experience in your field</li><li><i>★</i>Genuinely excellent at what you do</li></ul><a class="tt-btn" href="talent.html">Get Matched →</a></div><div class="tt-stat tt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/><path d="M9.6 9l1.6 1.6L14.6 7.4"/></svg><span>Get matched with<br>top companies</span></div></div></section>
@@ -157,7 +145,7 @@ setTimeout(()=>say('Hi! I\u2019m your guide. Move your mouse!'),1200);})();
         <a href="https://www.linkedin.com/company/uhirable" target="_blank" rel="noopener" aria-label="U Hirable on LinkedIn" class="social li"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
         <a href="https://wa.me/201515594609" target="_blank" rel="noopener" aria-label="Chat with U Hirable on WhatsApp" class="social wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.27.49 1.7.63.71.23 1.36.2 1.88.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.5 9.5 0 0 1-4.84-1.33l-.35-.2-3.6.94.96-3.5-.23-.36a9.46 9.46 0 0 1-1.45-5.05c0-5.24 4.27-9.5 9.52-9.5 2.54 0 4.93.99 6.72 2.79a9.43 9.43 0 0 1 2.78 6.72c0 5.24-4.27 9.5-9.5 9.5zm8.1-17.6A11.4 11.4 0 0 0 12.04.55C5.73.55.6 5.68.6 11.98c0 2.02.53 3.98 1.53 5.71L.5 23.6l6.05-1.59a11.4 11.4 0 0 0 5.48 1.4h.01c6.3 0 11.43-5.13 11.43-11.43 0-3.05-1.19-5.92-3.34-8.08z"/></svg></a>
       <a class="ph-mini" href="https://www.producthunt.com/products/u-hirable?utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-u-hirable" target="_blank" rel="noopener" aria-label="U Hirable on Product Hunt"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#ff6154"/><path d="M9.5 7h3.6a3.3 3.3 0 0 1 0 6.6H11.4V17H9.5zm1.9 1.8v3h1.7a1.5 1.5 0 0 0 0-3z" fill="#fff"/></svg><span>Product Hunt</span></a></div></div>
-        <nav aria-label="For job seekers"><h4>For Job Seekers</h4><a href="jobs.html">Open Roles</a><a href="remote-jobs.html">Remote Jobs</a><a href="visa-sponsorship-jobs.html">Visa Sponsorship Jobs</a><a href="job-sites.html">Job Sites</a><a href="cv-tools.html">CV Tools</a><a href="career-boost.html">Career Boost</a><a href="talent.html">Top Talent</a><a href="events.html">Events</a></nav>
+        <nav aria-label="For job seekers"><h4>For Job Seekers</h4><a href="jobs.html">Open Roles</a><a href="remote-jobs.html">Remote Jobs</a><a href="visa-sponsorship-jobs.html">Visa Sponsorship Jobs</a><a href="work-from-home-jobs-for-beginners.html">WFH Jobs for Beginners</a><a href="job-sites.html">Job Sites</a><a href="cv-tools.html">CV Tools</a><a href="career-boost.html">Career Boost</a><a href="talent.html">Top Talent</a><a href="events.html">Events</a></nav>
         <nav aria-label="For companies"><h4>For Companies</h4><a href="partners.html">Hiring Partners</a><a href="employer.html">Hire Talent</a></nav>
         <nav aria-label="U Hirable"><h4>U Hirable</h4><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="disclosure.html">Affiliate Disclosure</a></nav>
       </div>
@@ -174,7 +162,7 @@ setTimeout(()=>say('Hi! I\u2019m your guide. Move your mouse!'),1200);})();
     </div>
   </div>
 
-  <script src="script.js?v=31"></script>
+  <script src="script.js?v=33"></script>
 <script>
 (function(){const el=document.getElementById("typed");if(!el)return;
 const lines=["Hi, I'm Amel 👋","I've always believed the right job changes more than a career…","…it can change the life of an entire family.","As a Global Talent Acquisition Partner, I see it every day.","That's why I built U Hirable…","…to help job seekers get hired, companies hire great talent, and everyone grow their careers."];
