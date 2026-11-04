@@ -2,7 +2,85 @@
 <source>
   <publisher>U Hirable</publisher>
   <publisherurl>https://uhirable.github.io/jobs/</publisherurl>
-  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <job>
+    <title><![CDATA[Senior/Staff Software Engineer]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-senior-staff-software-engineer]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-senior-staff-software-engineer.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate builds AI-native tooling that automates mortgage workflows, replacing 20-year-old loan origination software. $44M raised, 80 people, fully remote since 2020, with customers who have originated $85B+ in home loans. As a Senior/Staff engineer you'll architect and launch multi-step AI agents, integrate lending APIs and build the next generation of job-processing infrastructure on AWS, in a TypeScript monorepo with end-to-end type safety and Terraform-managed infrastructure.</p><p><strong>Who can apply:</strong> Visa transfers accepted (OPT, H1B transfer); no new H1B. Must live in the US and work US hours. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Architect, build and launch complex multi-step AI agents that digitize customers' ops workflows.</li><li>Integrate with third-party lending APIs for documents, automated underwriting and fraud prevention.</li><li>Build the next generation of job-processing infrastructure on AWS for observability and reliability.</li><li>Mentor less senior engineers and contribute product ideas.</li></ul><p><strong>Requirements</strong></p><ul><li>7–25 years as a Senior/Staff software engineer with full-stack web development from design through deployment; minimum 5 years at senior level.</li><li>Stack: TypeScript, React, Node/Express, GraphQL/Apollo, Postgres, AWS (ECS, RDS, Kafka, ElasticSearch), Terraform.</li><li>Familiarity with AI product development (evals, experiment design) and a keen eye for security.</li><li>Visa transfers accepted (OPT, H1B transfer); no new H1B.</li><li>Remote in the US, working US hours.</li></ul><p><strong>Compensation:</strong> $150K – $350K base plus competitive equity. Full-time, remote in the US. Interview: 15-min screen, 1-hour live coding, take-home + presentation + system design, product interview, project review.</p>]]></description>
+    <salary><![CDATA[$150K – $350K + equity]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
+  <job>
+    <title><![CDATA[Senior/Staff Software Engineer – Security]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-senior-staff-software-engineer-security]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-senior-staff-software-engineer-security.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate builds AI-native tooling that automates mortgage workflows. $44M raised, 80 people, fully remote, powering $85B+ in home loans. This is a hands-on senior IC role focused on product security and security engineering: secure design, threat modeling, code review, authentication and authorization, secrets handling and internal tooling. It is not a compliance, endpoint-IT or scanner-operations role.</p><p><strong>Who can apply:</strong> US citizens or Green Card holders living in the US only; no visa sponsorship. Remote, US hours. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Design and build shared libraries, platform guardrails and internal tools that make the secure path the easy path.</li><li>Review architecture, designs and production code for security issues: auth, tenant isolation, secrets, data exposure, abuse cases.</li><li>Perform pragmatic threat modeling for new features, services and integrations.</li><li>Build low-noise security automation in CI/CD: code scanning, dependency policy, secret detection, infrastructure checks.</li><li>Work directly with engineers to remediate vulnerabilities with durable fixes; contribute to incident analysis and postmortems.</li></ul><p><strong>Requirements</strong></p><ul><li>8+ years as a senior IC software engineer specializing in security, or a software engineer who pivoted into security and still ships code to infrastructure.</li><li>Stack: AWS, Terraform, TypeScript, Node, React, Datadog.</li><li>Comfortable in a startup: small teams, broad ownership, pragmatic decisions.</li><li>US citizen or Green Card holder (no visa sponsorship).</li><li>Remote in the US, working US hours.</li></ul><p><strong>Compensation:</strong> $150K – $350K base ("we never lose on comp") plus competitive equity. Full-time, remote in the US. Interview: CEO screen, 1-hour live coding, policy-engine session, take-home + system design, product &amp; ops call, CTO final.</p>]]></description>
+    <salary><![CDATA[$150K – $350K + equity]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
+  <job>
+    <title><![CDATA[Engineering Manager]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-engineering-manager]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-engineering-manager.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate is an AI-native loan origination system transforming the mortgage industry: $44M raised, 80 people, fully remote, $85B+ in home loans processed. As the engineering team more than doubles this year, you'll own the health, output and trajectory of an engineering pod, managing people with care and directness while staying hands-on in code.</p><p><strong>Who can apply:</strong> US citizens or Green Card holders living in the US only; no visa sponsorship. Remote-first, US-based. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Manage a pod of ~6–8 engineers: 1:1s, continuous feedback, hiring, performance management and career growth.</li><li>Own the pod's execution cadence: planning, retros, delivery health and surfacing risk early.</li><li>Keep coding 10–20% of your time, shipping 1–2 PRs a week.</li><li>Partner with Product Managers and Technical Leads on prioritization and architecture.</li><li>Onboard new engineers and keep documentation and ownership boundaries sharp.</li></ul><p><strong>Requirements</strong></p><ul><li>8+ years as a software engineer or engineering manager; has actually managed 5+ engineers (hiring, firing, PIPs, reviews).</li><li>Hands-on TypeScript; must pass a live coding interview in TypeScript.</li><li>Progressive career trajectory (SWE → Senior → Staff/Management); startup or small-company experience preferred.</li><li>AI-forward mindset: uses AI tools in engineering workflows and expects the team to.</li><li>US citizen or Green Card holder (no visa sponsorship); remote in the US.</li></ul><p><strong>Compensation:</strong> $225K – $300K base, up to $325K for exceptional candidates, plus competitive equity. Full-time, remote in the US. Interview: Head of People screen, 30-min live coding, 1-hour system design, hiring manager screen.</p>]]></description>
+    <salary><![CDATA[$225K – $300K + equity]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
+  <job>
+    <title><![CDATA[Senior Product Designer]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-senior-product-designer]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-senior-product-designer.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate builds an AI-native loan origination platform helping lenders move toward fully automated mortgage origination. $44M raised, 80 people, fully remote. You'll turn some of the densest, highest-stakes workflows in financial services into experiences that are easy to use and earn users' trust, working closely with Product and Engineering from discovery to high-fidelity design.</p><p><strong>Who can apply:</strong> Visa transfers accepted (OPT, H1B transfer); no new H1B. US-based, working US time zones; no relocation support. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Own design end to end for a core product area, from discovery through high-fidelity Figma design.</li><li>Lead customer discovery and usability sessions and turn findings into design decisions.</li><li>Design clear UX patterns for multi-step automation workflows, data-dense tables and high-stakes decision screens.</li><li>Design AI-native experiences: uncertainty states, user intervention, streaming content and graceful error handling.</li><li>Build and maintain Figma component libraries and design-system assets.</li></ul><p><strong>Requirements</strong></p><ul><li>7+ years of hands-on senior product design with a strong product (not brand) focus; 5–10 years in end-to-end design for complex SaaS tools.</li><li>Portfolio showing high-craft visual and interaction design, ideally dense layouts and multi-step workflows.</li><li>Deep Figma skills: variables, auto-layout, variants, prototyping, component hygiene.</li><li>Experience inside established product design teams; formal degree.</li><li>Visa transfers accepted (OPT, H1B transfer); remote within US time zones.</li></ul><p><strong>Compensation:</strong> $170K – $250K base plus 100% paid medical premiums for you and your family, dental, vision, 401(k), HSA/FSA and flexible time off. No equity. Full-time, remote in the US. Interview: recruiter screen, portfolio deep dive, 90-min cross-functional panel, 2-hour live design challenge, CTO final.</p>]]></description>
+    <salary><![CDATA[$170K – $250K + full benefits]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
+  <job>
+    <title><![CDATA[Senior Software Engineer – Design]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-senior-software-engineer-design]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-senior-software-engineer-design.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate builds AI-native tooling that automates mortgage workflows. $44M raised, 80 people, fully remote. This role is for someone obsessed with the fine details of UI and UX, bringing craft to every component shipped and elevating the product from pixel to production.</p><p><strong>Who can apply:</strong> Visa transfers accepted (OPT, H1B transfer); no new H1B. Remote, working US hours. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Own the end-to-end design process, from wireframing in Figma to implementation in React/TypeScript.</li><li>Build and maintain a scalable design system and component library using shadcn/ui.</li><li>Write accessible, production-quality React components with correct ARIA, keyboard and focus management.</li><li>Translate complex mortgage workflows into intuitive, elegant user experiences with product and engineering.</li><li>Define and enforce visual and interaction design standards across the product.</li></ul><p><strong>Requirements</strong></p><ul><li>5+ years as a Design Engineer or frontend/full-stack engineer shipping production code with strong design sense; minimum 5 years at senior level.</li><li>Stack: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, GraphQL, Apollo Client, Turborepo, Figma.</li><li>Visa transfers accepted (OPT, H1B transfer); no new H1B.</li><li>Remote, working US hours.</li></ul><p><strong>Compensation:</strong> $150K – $350K base depending on location and level, plus competitive equity. Full-time, remote. Interview: CEO screen, live coding, take-home + presentation + system design, project review.</p>]]></description>
+    <salary><![CDATA[$150K – $350K + equity]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
+  <job>
+    <title><![CDATA[Senior Technical Product Manager]]></title>
+    <date><![CDATA[Wed, 04 Nov 2026 00:00:00 GMT]]></date>
+    <referencenumber><![CDATA[loancrate-senior-technical-product-manager]]></referencenumber>
+    <url><![CDATA[https://uhirable.github.io/jobs/job-loancrate-senior-technical-product-manager.html]]></url>
+    <company><![CDATA[Loancrate]]></company>
+    <city><![CDATA[Remote]]></city>
+    <country><![CDATA[US]]></country>
+    <description><![CDATA[<p>Loancrate is an AI-native mortgage platform processing $85B+ in home loans, with $44M raised and an engineering team more than doubling this year. You'll be embedded with engineering, in constant contact with mortgage lenders, and making real decisions about what gets built. This is a pure IC role, not backlog management and not people management.</p><p><strong>Who can apply:</strong> US citizens or Green Card holders living in the US only; no visa sponsorship. Remote in the US with roughly monthly domestic travel to customer sites. Please don't apply from outside the US.</p><p><strong>What you'll do</strong></p><ul><li>Own a product pod end to end: customer discovery, roadmap, delivery and post-launch iteration.</li><li>Bridge engineering, design and business, turning customer needs into clear specs and architecture decisions.</li><li>Prototype and validate ideas hands-on with AI coding tools.</li><li>Define success metrics for every initiative and iterate until outcomes are achieved.</li><li>Partner with Sales and Customer Success on positioning and deal cycles.</li></ul><p><strong>Requirements</strong></p><ul><li>5–10 years of PM or closely related experience (e.g. forward-deployed engineering) in B2B SaaS at a startup or growth-stage company.</li><li>Demonstrated 0-to-1 product ownership; ex-founders strongly preferred.</li><li>Technical fluency to prototype with AI tools, read a codebase and contribute to architecture discussions.</li><li>US-based and authorized to work without visa sponsorship.</li><li>Willing to travel domestically roughly once a month.</li></ul><p><strong>Compensation:</strong> $170K – $250K base plus competitive equity. Full-time, remote in the US. Interview: 30-min phone screen, 90-min product behavioral and design partnership, product sense rounds, take-home presentation.</p>]]></description>
+    <salary><![CDATA[$170K – $250K + equity]]></salary>
+    <jobtype><![CDATA[fulltime]]></jobtype>
+    <remotetype><![CDATA[Fully remote]]></remotetype>
+  </job>
   <job>
     <title><![CDATA[Strategic Projects Lead – AI Safety]]></title>
     <date><![CDATA[Sun, 01 Nov 2026 00:00:00 GMT]]></date>
