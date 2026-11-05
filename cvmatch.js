@@ -66,6 +66,35 @@
     const soft = r.softHit.filter((k) => !["languages", "stakeholder"].includes(k)); if (soft.length) out += ` Strong ${soft.slice(0, 2).join(" and ")}.`; if (langsHave.length > 1) out += ` ${langsHave.join(" and ")} speaker.`;
     return out;
   }
+
+  // years in roles similar to the job title (e.g. recruiting roles only), from dated CV entries
+  const FAM = [[/recruit|talent|sourc|headhunt/, /recruit|talent acquisition|talent partner|sourc|headhunt|hiring/], [/engineer|developer|software|programmer|\bsde\b|\bswe\b/, /engineer|developer|software|programm/], [/sales|account executive|business development|\bbdr\b|\bsdr\b/, /sales|account executive|business development|\bbdr\b|\bsdr\b/], [/market|growth|\bseo\b/, /market|growth|\bseo\b/], [/attorney|lawyer|counsel|legal/, /attorney|lawyer|counsel|legal/], [/nurse|\brn\b/, /nurse|\brn\b/], [/design|\bux\b|\bui\b/, /design|\bux\b|\bui\b/], [/product (manager|owner|lead)/, /product/], [/project manager|program manager|\bpmo\b/, /project|program/], [/analyst|analytics|data/, /analy|data/], [/accountant|accounting|finance|financial|controller|bookkeep/, /account|financ|controller|bookkeep/], [/teacher|tutor|instructor/, /teach|tutor|instruct/], [/customer (support|service|success)/, /customer|support|success/], [/\bhr\b|human resources|people/, /\bhr\b|human resources|people/]];
+  const MON = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+  function roleRegex(title) {
+    const t = (title || "").toLowerCase().replace(/\b(senior|junior|lead|principal|staff|global|technical|head of|associate|assistant|chief|sr|jr|remote|contract|intern|i|ii|iii)\b/g, " ");
+    for (const [k, re] of FAM) if (k.test(t)) return re;
+    const stems = t.split(/[^a-z]+/).filter((w) => w.length > 3 && !GENERIC.has(w)).map((w) => w.replace(/(ers?|ing|ments?|ors?|ists?|ians?)$/, "")).filter((w) => w.length > 3);
+    return stems.length ? new RegExp(stems.join("|")) : null;
+  }
+  function relYears(cvRaw, title) {
+    const fam = roleRegex(title); if (!fam) return { found: false, years: 0 };
+    const t = cvRaw.toLowerCase().replace(/[–—]/g, "-").replace(/\s+/g, " ");
+    const D = "(?:(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\\.?,?\\s+)?(?:(\\d{1,2})[\\/.])?((?:19|20)\\d\\d)";
+    const re = new RegExp(D + "\\s*(?:-|to|until)?\\s*(?:" + D + "|(present|current|now|today))?", "g");
+    const now = new Date(), nowF = now.getFullYear() + now.getMonth() / 12, iv = [];
+    for (const m of t.matchAll(re)) {
+      const head = t.slice(m.index + m[0].length, m.index + m[0].length + 110);
+      if (!fam.test(head) || /certif|course|award|diploma|degree|bachelor|master|bsc|msc|mba/.test(head.slice(0, 60))) continue;
+      const sm = m[1] ? MON[m[1]] : (+m[2] || 1), sy = +m[3]; const start = sy + (sm - 1) / 12; if (start > nowF) continue;
+      let end;
+      if (m[6]) end = +m[6] + ((m[4] ? MON[m[4]] : (+m[5] || 12)) - 1) / 12 + 1 / 12; else end = nowF; // "present" or an open date = ongoing
+      if (end > start) iv.push([start, Math.min(end, nowF)]);
+    }
+    if (!iv.length) return { found: false, years: 0 };
+    iv.sort((a, b) => a[0] - b[0]); let sum = 0, cs = iv[0][0], ce = iv[0][1];
+    for (const [s, e] of iv.slice(1)) { if (s <= ce) ce = Math.max(ce, e); else { sum += ce - cs; cs = s; ce = e; } } sum += ce - cs;
+    return { found: true, years: Math.max(1, Math.round(sum)) };
+  }
   function phraseHits(text) { const out = new Set(); for (const [re, k] of PHRASES) if (re.test(text)) out.add(k); return out; }
   function analyse(cv, job) {
     const c = norm(cv), j = norm(job);
@@ -76,9 +105,9 @@
     const firstLine = norm(job.split("\n").find((l) => l.trim()) || ""); const dist = distinctive(j, jSkills).filter((w) => !has(firstLine, w)); const dHit = dist.filter((w) => has(c, w)); const dMiss = dist.filter((w) => !has(c, w)).slice(0, 8);
     const sk = jSkills.length ? hit.length / jSkills.length : (dist.length ? dHit.length / dist.length : 0.5);
     const kw = dist.length ? dHit.length / dist.length : sk;
-    const need = jobYears(j), have = years(c);
+    const need = jobYears(j); let have = years(c); const total = have;
     let ex = need ? Math.min(1, have / need) : 0.85; if (!need && !have) ex = 0.7;
-    const titleLine = jobTitle(job).toLowerCase(); const tTok = tokens(norm(titleLine)).slice(0, 6); const tHit = tTok.filter((w) => has(c, w)).length; const tb = tTok.length ? tHit / tTok.length : 0.5;
+    const titleLine = jobTitle(job).toLowerCase(); const rel = relYears(cv, titleLine); if (rel.found) { have = rel.years; ex = need ? Math.min(1, have / need) : ex; } const tTok = tokens(norm(titleLine)).slice(0, 6); const tHit = tTok.filter((w) => has(c, w)).length; const tb = tTok.length ? tHit / tTok.length : 0.5;
     const overall = Math.round(100 * (0.45 * sk + 0.25 * kw + 0.2 * ex + 0.1 * tb));
     // summary / headline check: do the first ~300 chars of the CV contain the job title words?
     const top = norm(cv.slice(0, 400)); const titleInTop = tTok.length ? tTok.filter((w) => has(top, w)).length / tTok.length : 0;
@@ -93,8 +122,8 @@
     const langs = LANGS.filter((l) => has(j, l)).map((l) => ({ k: l, ok: has(c, l) }));
     const pii = PII.filter(([re]) => re.test(cv)).map(([, n]) => n);
     const bullets = bulletAudit(cv);
-    const words = cv.trim().split(/\s+/).length; const ideal = have >= 8 ? [550, 850] : have >= 3 ? [400, 700] : [300, 550];
-    return { overall: Math.max(5, Math.min(98, overall)), sk: Math.round(sk * 100), kw: Math.round(kw * 100), ex: Math.round(ex * 100), hit, miss, hardHit, softHit, hardMiss, softMiss, dHit: dHit.slice(0, 10), dMiss, need, have, titleInTop, titleWords: tTok, title: titleLine, bad, mustMiss, niceMiss, density, edu, langs, pii, bullets, words, ideal };
+    const words = cv.trim().split(/\s+/).length; const ideal = total >= 8 ? [550, 850] : total >= 3 ? [400, 700] : [300, 550];
+    return { overall: Math.max(5, Math.min(98, overall)), sk: Math.round(sk * 100), kw: Math.round(kw * 100), ex: Math.round(ex * 100), hit, miss, hardHit, softHit, hardMiss, softMiss, dHit: dHit.slice(0, 10), dMiss, need, have, total, relFound: rel.found, titleInTop, titleWords: tTok, title: titleLine, bad, mustMiss, niceMiss, density, edu, langs, pii, bullets, words, ideal };
   }
   function formatCheck(meta, text) {
     const issues = [], warns = [], good = [];
@@ -155,7 +184,7 @@
     const pill = (k, soft) => `<span class="${soft ? "soft" : ""}">${esc(k)}</span>`;
     $("#cm-found").innerHTML = found.length ? found.map((k) => pill(k, SOFT.has(k))).join("") : "<span>No clear keyword matches</span>";
     $("#cm-miss").innerHTML = missing.length ? missing.map((k) => pill(k, SOFT.has(k))).join("") : "<span>Nothing important missing 🎉</span>";
-    $("#cm-exp").textContent = r.need ? (r.have >= r.need ? `The ad asks for ${r.need}+ years; your CV shows about ${r.have}. ✓` : `The ad asks for ${r.need}+ years; your CV shows about ${r.have || "0"}. Make your years of experience explicit.`) : (r.have ? `Your CV shows about ${r.have} years of experience.` : "Add your years of experience clearly (e.g. \"4+ years in sales\").");
+    const hv = r.relFound ? `about ${r.have} in similar roles (${r.total} in total)` : `about ${r.have || "0"}`; $("#cm-exp").textContent = r.need ? (r.have >= r.need ? `The ad asks for ${r.need}+ years; your CV shows ${hv}. ✓` : `The ad asks for ${r.need}+ years; your CV shows ${hv}. Make your years of experience in this field explicit.`) : (r.have ? `Your CV shows ${hv} years of experience.` : "Add your years of experience clearly (e.g. \"4+ years in sales\").");
     // suggestions: one ready line per missing keyword
     const sug = [...r.hardMiss, ...r.softMiss].slice(0, 6);
     $("#cm-sug").innerHTML = sug.length ? sug.map((k) => `<li><b>${esc(k)}</b><span>${esc(suggestion(k, SOFT.has(k)))}</span></li>`).join("") : "<li><b>Nothing to add</b><span>Your CV already covers the must-haves. Tailor the summary and apply.</span></li>";
@@ -171,8 +200,6 @@
     if (fc.issues.length || fc.warns.length || fc.good.length) { fmt.hidden = false; $("#cm-fmt-list").innerHTML = fc.issues.map((x) => `<li class="bad"><b>✗ ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("") + fc.warns.map((x) => `<li class="warn"><b>⚠ ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("") + fc.good.map((g) => `<li class="ok"><b>✓ ${esc(g)}</b></li>`).join(""); $("#cm-fmt-h").textContent = fc.issues.length ? `ATS format check: ${fc.issues.length} issue${fc.issues.length > 1 ? "s" : ""}` : fc.warns.length ? `ATS format check: OK, ${fc.warns.length} tip${fc.warns.length > 1 ? "s" : ""}` : "ATS format check: all clear"; } else fmt.hidden = true;
     // must-have vs nice-to-have
     const mh = $("#cm-must"); if (r.mustMiss.length || r.niceMiss.length) { mh.hidden = false; $("#cm-must-list").innerHTML = (r.mustMiss.length ? `<li class="bad"><b>✗ Must-have, missing (${r.mustMiss.length})</b><div>${r.mustMiss.map((k) => `<span>${esc(k)}</span>`).join("")}</div><small>These are in the requirements section. Missing them usually means an automatic reject.</small></li>` : `<li class="ok"><b>✓ All must-haves covered</b></li>`) + (r.niceMiss.length ? `<li class="warn"><b>⚠ Nice-to-have, missing (${r.niceMiss.length})</b><div>${r.niceMiss.map((k) => `<span>${esc(k)}</span>`).join("")}</div><small>Optional. Add only if true.</small></li>` : ""); } else mh.hidden = true;
-    // keyword density
-    const dn = $("#cm-density"); const dRows = r.density.filter((x) => x.job > x.cv); if (dRows.length) { dn.hidden = false; $("#cm-density-body").innerHTML = dRows.map((x) => `<tr><td>${esc(x.k)}</td><td>${x.job}×</td><td class="${x.cv ? "" : "z"}">${x.cv}×</td><td>${x.cv ? "Mention it once or twice more" : "Add it"}</td></tr>`).join(""); } else dn.hidden = true;
     // education, languages, pii, bullets, length
     const ex = []; r.edu.forEach((e) => ex.push({ ok: e.ok, t: (e.ok ? "✓ " : "✗ ") + e.k.toUpperCase() + (e.ok ? " found" : " required by the ad, not on your CV") })); r.langs.forEach((l) => ex.push({ ok: l.ok, t: (l.ok ? "✓ " : "✗ ") + l.k.charAt(0).toUpperCase() + l.k.slice(1) + (l.ok ? " listed" : " requested, add your level") }));
     const eb = $("#cm-extra"); if (ex.length) { eb.hidden = false; $("#cm-extra-list").innerHTML = ex.map((x) => `<li class="${x.ok ? "ok" : "bad"}"><b>${esc(x.t)}</b></li>`).join(""); } else eb.hidden = true;
@@ -180,7 +207,6 @@
     const bu = $("#cm-bullets"); const B = r.bullets; if (B.total >= 3) { bu.hidden = false; const pctNum = Math.round(100 * (B.total - B.noNum) / B.total), pctVerb = Math.round(100 * (B.total - B.weak) / B.total); $("#cm-bullets-body").innerHTML = `<div class="cm-bars"><div><span>Start with a strong verb</span><i style="--w:${pctVerb}%"></i><em>${pctVerb}%</em></div><div><span>Include a number</span><i style="--w:${pctNum}%"></i><em>${pctNum}%</em></div></div><p class="cm-tiny">${B.total} experience lines checked.${B.long ? ` ${B.long} are over 30 words, split them.` : ""}</p>` + (B.noNumEx.length ? `<p class="cm-tiny"><b>Add a number to lines like:</b> "${esc(B.noNumEx[0].slice(0, 110))}…"</p>` : "") + (B.weakEx.length ? `<p class="cm-tiny"><b>Start with a verb:</b> "${esc(B.weakEx[0].slice(0, 110))}…"</p>` : ""); } else bu.hidden = true;
     const ln = $("#cm-length"); ln.hidden = false; ln.className = "cm-note " + (r.words < r.ideal[0] ? "warn" : r.words > r.ideal[1] ? "warn" : "ok"); ln.innerHTML = r.words < r.ideal[0] ? `<b>Short CV: ${r.words} words.</b> For your level aim for ${r.ideal[0]}–${r.ideal[1]}. Add results and tools to each role.` : r.words > r.ideal[1] ? `<b>Long CV: ${r.words} words.</b> For your level aim for ${r.ideal[0]}–${r.ideal[1]}. Cut old roles to one line each.` : `<b>✓ Good length: ${r.words} words</b> (ideal for your level: ${r.ideal[0]}–${r.ideal[1]}).`;
     // summary draft
-    const sd = summaryDraft(cvIn, r, r.title); $("#cm-sum-text").textContent = sd; $("#cm-sum").hidden = false;
     // before / after
     const key = "uh-cm-last"; try { const prev = JSON.parse(sessionStorage.getItem(key) || "null"); const ba = $("#cm-before"); if (prev && prev.job === job.slice(0, 200) && prev.pct !== r.overall) { ba.hidden = false; ba.className = "cm-note " + (r.overall > prev.pct ? "ok" : "warn"); ba.innerHTML = `<b>${r.overall > prev.pct ? "📈" : "📉"} Was ${prev.pct}%, now ${r.overall}%.</b> ${r.overall > prev.pct ? "Your edits worked." : "Your last version scored higher."}`; } else ba.hidden = true; sessionStorage.setItem(key, JSON.stringify({ job: job.slice(0, 200), pct: r.overall })); } catch (e) {}
     res.hidden = false; res.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -210,6 +236,5 @@
     if (window.goatcounter && goatcounter.count) try { goatcounter.count({ path: "cv-match/share", title: "CV match share", event: true }); } catch (e) {}
   }
   const sb = $("#cm-share"); if (sb) sb.addEventListener("click", shareImage);
-  const cp = $("#cm-sum-copy"); if (cp) cp.addEventListener("click", async () => { try { await navigator.clipboard.writeText($("#cm-sum-text").textContent); cp.textContent = "Copied ✓"; setTimeout(() => cp.textContent = "Copy", 2000); } catch (e) {} });
   const lilo = $("#cm-lilo"); if (lilo) lilo.addEventListener("click", (e) => { const b = document.getElementById("ua-btn"); if (b) { e.preventDefault(); b.click(); } });
 })();
