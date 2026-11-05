@@ -523,20 +523,32 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     let xml;
     if (found.comp === 0) xml = new TextDecoder().decode(found.data);
     else { const r = new Blob([found.data]).stream().pipeThrough(ds); xml = await new Response(r).text(); }
-    return xml.replace(/<\/w:p>/g, "\n").replace(/<[^>]+>/g, " ");
+    const txt = xml.replace(/<\/w:p>/g, "\n").replace(/<[^>]+>/g, " ");
+    try {
+      const n = (re) => (xml.match(re) || []).length;
+      const fonts = [...new Set([...xml.matchAll(/w:ascii="([^"]+)"/g)].map((m) => m[1]))];
+      const words = txt.trim().split(/\s+/).length, breaks = n(/<w:br [^>]*w:type="page"/g);
+      window.UA_lastMeta = { docx: true, pages: Math.max(breaks + 1, Math.ceil(words / 550)), images: n(/<w:drawing>|<w:pict>|<w:pict /g), tables: n(/<w:tbl>/g), textBoxes: n(/<w:txbxContent>/g), fonts, chars: txt.length, cols: false, sideDates: false };
+    } catch (e) {}
+    return txt;
   }
   async function readPdf(f) {
     if (!window.pdfjsLib) { await new Promise((r, j) => { const s = document.createElement("script"); s.type = "module"; s.textContent = 'import * as p from "./lib-pdf.mjs"; window.pdfjsLib = p; window.dispatchEvent(new Event("pdfjs-ready"));'; window.addEventListener("pdfjs-ready", r, { once: true }); s.onerror = j; document.head.appendChild(s); setTimeout(() => j(new Error("timeout")), 15000); }); }
     const pdfjs = window.pdfjsLib; pdfjs.GlobalWorkerOptions.workerSrc = "lib-pdf.worker.mjs";
-    const doc = await pdfjs.getDocument({ data: await f.arrayBuffer() }).promise; let t = "";
+    const rawBuf = await f.arrayBuffer(); const doc = await pdfjs.getDocument({ data: rawBuf.slice(0) }).promise; let t = "";
     const meta = { pages: doc.numPages, images: 0, fonts: new Set(), cols: false, textItems: 0 };
     for (let i = 1; i <= Math.min(doc.numPages, 6); i++) {
       const pg = await doc.getPage(i); const c = await pg.getTextContent(); t += c.items.map((x) => x.str).join(" ") + "\n";
       meta.textItems += c.items.filter((x) => x.str.trim()).length; meta.chars = (meta.chars || 0) + c.items.reduce((a, x) => a + x.str.length, 0);
-      try { const vp = pg.getViewport({ scale: 1 }); const items = c.items.filter((x) => x.str.trim().length > 15).map((x) => ({ x0: x.transform[4], x1: x.transform[4] + (x.width || 0), y: Math.round(x.transform[5]), len: x.str.length })); if (items.length > 20) { const left = items.filter((i) => i.x0 < vp.width * 0.4), right = items.filter((i) => i.x0 >= vp.width * 0.4); if (left.length > 8 && right.length > 8) { const leftMaxEnd = Math.max(...left.map((i) => i.x1)); const rightMinStart = Math.min(...right.map((i) => i.x0)); const sameRows = left.filter((l) => right.some((r) => Math.abs(r.y - l.y) < 3)).length; const leftAvg = left.reduce((a, i) => a + i.len, 0) / left.length; if (leftMaxEnd < rightMinStart + 5 && sameRows > 8 && leftAvg > 40) meta.cols = true; else if (leftMaxEnd < rightMinStart + 5 && sameRows > 8) meta.sideDates = true; } } } catch (e) {}
-      try { const ops = await pg.getOperatorList(); const OPS = pdfjs.OPS; meta.images += ops.fnArray.filter((o) => o === OPS.paintImageXObject || o === OPS.paintJpegXObject || o === OPS.paintImageXObjectRepeat || o === OPS.paintInlineImageXObject || o === OPS.paintImageMaskXObject).length; } catch (e) {}
+      try { const vp = pg.getViewport({ scale: 1 }); const items = c.items.filter((x) => x.str.trim().length > 2).map((x) => ({ x0: x.transform[4], x1: x.transform[4] + (x.width || 0), y: Math.round(x.transform[5]), len: x.str.trim().length, s: x.str }));
+        if (items.length > 12) { const xs = items.map((i) => i.x0).sort((a, b) => a - b); const margin = xs[Math.floor(xs.length * 0.05)];
+          // a gutter: a vertical band with no text crossing it, with many rows having text on both sides
+          let best = null; for (let gx = margin + vp.width * 0.12; gx < vp.width * 0.75; gx += vp.width * 0.02) { const L = items.filter((i) => i.x1 <= gx + 2), R = items.filter((i) => i.x0 >= gx - 2); if (L.length + R.length < items.length - 1) continue; if (L.length < 5 || R.length < 5) continue; const rows = L.filter((l) => R.some((r) => Math.abs(r.y - l.y) < 4)).length; if (rows >= 5 && (!best || rows > best.rows)) best = { gx, L, R, rows }; }
+          if (best) { const narrow = best.L.reduce((a, i) => a + i.len, 0) / best.L.length <= best.R.reduce((a, i) => a + i.len, 0) / best.R.length ? best.L : best.R; const datey = narrow.filter((i) => /\b(19|20)\d\d\b|present|current/i.test(i.s)).length; if (datey >= narrow.length * 0.5) meta.sideDates = true; else meta.cols = true; } } } catch (e) {}
+      try { const ops = await pg.getOperatorList(); const OPS = pdfjs.OPS; meta.images += ops.fnArray.filter((o) => o === OPS.paintImageXObject || o === OPS.paintJpegXObject || o === OPS.paintImageXObjectRepeat || o === OPS.paintInlineImageXObject || o === OPS.paintImageMaskXObject).length; meta.opsOk = true; } catch (e) {}
       try { c.styles && Object.values(c.styles).forEach((st) => st.fontFamily && meta.fonts.add(st.fontFamily)); } catch (e) {}
     }
+    if (!meta.opsOk) { try { const raw = new TextDecoder("latin1").decode(rawBuf); meta.images = (raw.match(/\/Subtype\s*\/Image\b/g) || []).length; } catch (e) {} }
     meta.fonts = [...meta.fonts]; window.UA_lastMeta = meta;
     return t;
   }
