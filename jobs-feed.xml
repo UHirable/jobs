@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jobs>
+  <job id="compiled-health-member-of-technical-staff-compiler">
+    <link><![CDATA[https://uhirable.github.io/jobs/job-compiled-health-member-of-technical-staff-compiler.html]]></link>
+    <name><![CDATA[Member of Technical Staff, Compiler]]></name>
+    <region><![CDATA[Remote · US or Canada only]]></region>
+    <description><![CDATA[<p>Compiled Health compiles the standard of care into executable, evidence-traceable decision artifacts, with the compiler live in Canadian public health care today. Founded by a physician who worked with OpenAI's health and safety research team; $3M seed plus a family office committed through Series A. Six people, fully remote across North America with offsites every couple of months. You'll study how far frontier models can go in extracting, structuring and proving clinical logic, design the experiments that settle what works, and ship the winning approach.</p><p><strong>Who can apply:</strong> REMOTE, BUT US OR CANADA ONLY. You must live in the US (citizen or Green Card) or in Canada with the right to work there. No visa sponsorship (rare exceptions for frontier-lab researchers). Applications from other countries will be rejected.</p><p><strong>What you'll do</strong></p><ul><li>Build the pipeline that converts clinical standards into executable modules: parsing with document and layout models, transformation, validation.</li><li>Design and iterate on the target syntax for guideline logic.</li><li>Run experiments: open vs closed models, fine-tuning, constrained decoding.</li><li>Co-design benchmarks and adversarial cases for source fidelity, logical completeness and recommendation correctness.</li><li>Develop deterministic validators using static analysis, constraint solving or formal methods.</li></ul><p><strong>Requirements</strong></p><ul><li>3+ years of research or industry experience, or a final-year PhD/postdoc; publications in clinical AI a strong signal.</li><li>Python, PyTorch, Transformers, LLMs; static analysis or SMT/SAT solvers; FHIR and HL7 v2 a plus.</li><li>High-output, high-ownership; not a 35-hours-a-week environment.</li><li>US citizen/Green Card or Canada-based with right to work; no visa sponsorship.</li><li>Remote in North America with in-person offsites several times a year.</li></ul><p><strong>Compensation:</strong> $250K – $400K base plus competitive equity (up to 5% for frontier-lab candidates, cash/equity ratio flexible), health, dental, vision, flexible PTO and paid parental leave. Interview: founder intro, 60-min research deep dive, logistics and offer.</p><p>Apply via U Hirable: <a href="https://uhirable.github.io/jobs/job-compiled-health-member-of-technical-staff-compiler.html">https://uhirable.github.io/jobs/job-compiled-health-member-of-technical-staff-compiler.html</a></p>]]></description>
+    <pubdate>05.11.2026</pubdate>
+    <updated>05.11.2026</updated>
+    <salary><![CDATA[$250K – $400K + up to 5% equity]]></salary>
+    <company><![CDATA[Compiled Health]]></company>
+    <expire>04.01.2027</expire>
+    <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-compiled-health.png]]></company_logo>
+  </job>
+  <job id="timely-schools-senior-software-engineer-optimizer">
+    <link><![CDATA[https://uhirable.github.io/jobs/job-timely-schools-senior-software-engineer-optimizer.html]]></link>
+    <name><![CDATA[Senior Software Engineer, Optimizer]]></name>
+    <region><![CDATA[Remote · US only (NY or Boston preferred)]]></region>
+    <description><![CDATA[<p>Timely Schools transforms how schools build master schedules: AI-powered optimization plus expert schedulers, now serving 500,000 students across 20+ states with industry-leading renewal rates. Series A (Aug 2025), 60 people, 80% former educators, CTO started as a math teacher. The Optimizer squad is led by a former senior Google engineer with a PhD in math.</p><p><strong>Who can apply:</strong> REMOTE, BUT US ONLY. You must live in the US and work East Coast hours. Visa transfers accepted (OPT, H1B transfer); no new H1B. Applications from outside the US will be rejected.</p><p><strong>What you'll do</strong></p><ul><li>Build and extend the core optimization engine (mixed-integer / linear programming) and the backend systems around it.</li><li>Explore ML and AI approaches to improve scheduling accuracy, speed and accessibility.</li><li>Work across the stack (~80% backend, ~20% frontend).</li><li>Own mission-critical systems end to end, including on-call and customer troubleshooting with the school success team.</li><li>Lead complex technical projects with a path to tech lead.</li></ul><p><strong>Requirements</strong></p><ul><li>4–10 years of software engineering with a track record of shipping production software and leading complex efforts.</li><li>Depth in at least one of: linear optimization / mathematical programming (Gurobi, CP-SAT), production ML, or backend API/infrastructure, with ability to learn the others.</li><li>Has owned a mission-critical algorithm, model or optimization module.</li><li>Python, AWS, Terraform, CI/CD; strong communication with non-technical stakeholders.</li><li>Visa transfers accepted (OPT, H1B transfer).</li><li>US-based, East Coast hours preferred.</li></ul><p><strong>Compensation:</strong> $160K – $200K base plus equity, health, dental, vision, life insurance, unlimited PTO and professional development. Interview: recruiter screen, CTO interview, 2–3 hour take-home, technical deep dive, culture interview.</p><p>Apply via U Hirable: <a href="https://uhirable.github.io/jobs/job-timely-schools-senior-software-engineer-optimizer.html">https://uhirable.github.io/jobs/job-timely-schools-senior-software-engineer-optimizer.html</a></p>]]></description>
+    <pubdate>05.11.2026</pubdate>
+    <updated>05.11.2026</updated>
+    <salary><![CDATA[$160K – $200K + equity]]></salary>
+    <company><![CDATA[Timely Schools]]></company>
+    <expire>04.01.2027</expire>
+    <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-timely-schools.png]]></company_logo>
+  </job>
+  <job id="timely-schools-director-of-engineering">
+    <link><![CDATA[https://uhirable.github.io/jobs/job-timely-schools-director-of-engineering.html]]></link>
+    <name><![CDATA[Director of Engineering (Product)]]></name>
+    <region><![CDATA[Remote · US only]]></region>
+    <description><![CDATA[<p>Timely Schools transforms how schools build master schedules: AI-powered optimization plus expert schedulers, now serving 500,000 students across 20+ states. Series A (Aug 2025), ~63 people, 80% former educators. You'll own the product engineering organization (scheduler experience, visibility/reporting, elementary squads) as Timely moves from product-market fit to scale.</p><p><strong>Who can apply:</strong> REMOTE, BUT US ONLY. You must live in the US and work East Coast hours; retreats twice a year plus 2–4 trips to Boston/New York. Visa transfers accepted but strong preference for candidates who don't need sponsorship. Applications from outside the US will be rejected.</p><p><strong>What you'll do</strong></p><ul><li>Take direct ownership of multiple product squads, managing engineers and driving delivery.</li><li>Be hands-on early: contribute code, review, pair (~50/50 at first, 80/20 leadership over time).</li><li>Make and land key architecture decisions for the next two years of growth.</li><li>Partner with Product and School Success to define squad goals aligned to business outcomes.</li><li>Ship high-value features ahead of the March–August scheduling season, including AI capabilities.</li></ul><p><strong>Requirements</strong></p><ul><li>5+ years of engineering and 2–3+ years managing multiple teams (6+ engineers), ideally scaling teams and managing managers.</li><li>Hands-on: can read, review and write code; strong backend architecture (stack: React, TypeScript, Python, AWS, MongoDB).</li><li>Startup or high-growth experience; comfortable with ambiguity.</li><li>Visa transfers accepted; preference for no sponsorship needed.</li><li>US-based, East Coast hours preferred.</li></ul><p><strong>Compensation:</strong> $210K – $240K base plus competitive equity, health insurance, parental leave, 401(k), unlimited PTO and coworking access. Interview: Chief of Staff screen, CTO interview, async take-home, 2-hour final.</p><p>Apply via U Hirable: <a href="https://uhirable.github.io/jobs/job-timely-schools-director-of-engineering.html">https://uhirable.github.io/jobs/job-timely-schools-director-of-engineering.html</a></p>]]></description>
+    <pubdate>05.11.2026</pubdate>
+    <updated>05.11.2026</updated>
+    <salary><![CDATA[$210K – $240K + equity]]></salary>
+    <company><![CDATA[Timely Schools]]></company>
+    <expire>04.01.2027</expire>
+    <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-timely-schools.png]]></company_logo>
+  </job>
+  <job id="goldsand-friedberg-senior-healthcare-attorney">
+    <link><![CDATA[https://uhirable.github.io/jobs/job-goldsand-friedberg-senior-healthcare-attorney.html]]></link>
+    <name><![CDATA[Senior Healthcare Attorney (Non-Equity Partner)]]></name>
+    <region><![CDATA[Remote · US only (DC or Miami preferred)]]></region>
+    <description><![CDATA[<p>Goldsand Friedberg is a 20-attorney national healthcare law firm founded in 2019 by two former BigLaw partners and the premier boutique in digital health and telemedicine; its only competition is BigLaw. Clients are venture-backed telehealth, digital health, longevity and managed-care companies. 1,500-hour billable target (most attorneys work 9–5, no weekends), rates $495–$750/hr, tight-knit and transparent culture with heavy investment in mentorship. This is a backfill with real work waiting.</p><p><strong>Who can apply:</strong> REMOTE, BUT US ONLY. US citizens or Green Card holders living in the US; DC or Miami strongly preferred, East Coast generally. No visa sponsorship. Applications from outside the US will be rejected.</p><p><strong>What you'll do</strong></p><ul><li>Take full ownership of client relationships and matters as a "send and delete" attorney.</li><li>Advise digital health and telemedicine companies on corporate practice of medicine, telehealth compliance, licensure, fraud &amp; abuse and health AI.</li><li>Act as outside general counsel to Series A/B healthcare technology companies across regulatory, corporate, employment and compliance.</li><li>Draft memos, regulatory analyses and client advisories on rapidly evolving health AI issues.</li><li>Build your own practice over time; origination is rewarded with uncapped upside (no book of business required to join).</li></ul><p><strong>Requirements</strong></p><ul><li>10+ years in healthcare regulatory law, able to manage clients and matters independently from day one.</li><li>Experience as outside GC to venture-backed digital health or telemedicine companies; health AI or managed care a plus.</li><li>Westlaw/LexisNexis, Word redlining, AI legal tools.</li><li>US citizen or Green Card holder; no visa sponsorship.</li><li>Remote in the US; DC or Miami preferred.</li></ul><p><strong>Compensation:</strong> $250K – $290K base plus 25% bonus at 1,500 hours (described as nearly automatic), total $312K – $362K+, with origination upside well into the $400Ks. No equity. Interview: two founding partners, committee of 3 partners, final meeting (ideally in person); 1-month trial contract if currently unemployed.</p><p>Apply via U Hirable: <a href="https://uhirable.github.io/jobs/job-goldsand-friedberg-senior-healthcare-attorney.html">https://uhirable.github.io/jobs/job-goldsand-friedberg-senior-healthcare-attorney.html</a></p>]]></description>
+    <pubdate>05.11.2026</pubdate>
+    <updated>05.11.2026</updated>
+    <salary><![CDATA[$250K – $290K base · OTE $312K – $400K+]]></salary>
+    <company><![CDATA[Goldsand Friedberg]]></company>
+    <expire>04.01.2027</expire>
+    <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-goldsand-friedberg.png]]></company_logo>
+  </job>
+  <job id="modern-health-staff-software-engineer-growth">
+    <link><![CDATA[https://uhirable.github.io/jobs/job-modern-health-staff-software-engineer-growth.html]]></link>
+    <name><![CDATA[Staff Software Engineer, Growth Engineering]]></name>
+    <region><![CDATA[Remote · US only (excluding Hawaii)]]></region>
+    <description><![CDATA[<p>Modern Health is a mental health benefits platform for employers, backed by Kleiner Perkins, Founders Fund, Y Combinator and Battery Ventures with $172M raised, the fastest entirely female-founded US company to reach unicorn status. 240 people, fully remote. You'll own and scale the backend systems that power client launches and member access, partnering with a senior staff engineer on an 18-month to 2-year roadmap, with meaningful contributions expected in your first 30 days.</p><p><strong>Who can apply:</strong> REMOTE, BUT US ONLY (not Hawaii). US citizens or Green Card holders living in the US. No visa sponsorship, no transfers, no STEM OPT. Must overlap at least 6 hours with 8am–5pm Pacific. Applications from outside the US will be rejected.</p><p><strong>What you'll do</strong></p><ul><li>Independently own large-scale projects across eligibility processing, identity and client configuration systems.</li><li>Design and build backend architectures that support 50x data growth.</li><li>Partner with product managers and internal operations to define requirements, use cases and edge cases.</li><li>Sequence and deliver against a multi-year growth engineering roadmap with a senior staff engineer.</li><li>Mentor junior engineers through technical leadership and code collaboration.</li></ul><p><strong>Requirements</strong></p><ul><li>8–15 years of backend engineering, staff level, focused on Python (Django/Flask, FastAPI).</li><li>Deep architectural knowledge and strong product sense; can flush out requirements cross-functionally.</li><li>Stack: Python, GraphQL, REST, React/TypeScript, PostgreSQL, Redis, Docker, AWS (ECS, RDS, CloudFront).</li><li>US citizen or Green Card holder; no sponsorship or transfers.</li><li>Remote in the US excluding Hawaii, with 6-hour Pacific overlap.</li></ul><p><strong>Compensation:</strong> Base by zone: $161K – $203K (SF Bay Area, NYC metro, other California, Seattle), $145K – $183K (other NY/WA, DC, Austin, CT, IL, MA, NH, NJ, OR, RI, VT), $137K – $172K (all other states), plus equity. Interview: intro call, hiring manager round, tech screen, virtual on-site, 2-hour final.</p><p>Apply via U Hirable: <a href="https://uhirable.github.io/jobs/job-modern-health-staff-software-engineer-growth.html">https://uhirable.github.io/jobs/job-modern-health-staff-software-engineer-growth.html</a></p>]]></description>
+    <pubdate>05.11.2026</pubdate>
+    <updated>05.11.2026</updated>
+    <salary><![CDATA[$137K – $203K + equity (by zone)]]></salary>
+    <company><![CDATA[Modern Health]]></company>
+    <expire>04.01.2027</expire>
+    <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-modern-health.png]]></company_logo>
+  </job>
   <job id="elise-ai-solutions-engineer-implementation-delivery">
     <link><![CDATA[https://uhirable.github.io/jobs/job-elise-ai-solutions-engineer-implementation-delivery.html]]></link>
     <name><![CDATA[Solutions Engineer, Implementation & Delivery]]></name>
@@ -783,6 +848,7 @@
     <company><![CDATA[Rippling]]></company>
     <expire>24.12.2026</expire>
     <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-rippling.png]]></company_logo>
   </job>
   <job id="rippling-product-design-lead">
     <link><![CDATA[https://uhirable.github.io/jobs/job-rippling-product-design-lead.html]]></link>
@@ -795,6 +861,7 @@
     <company><![CDATA[Rippling]]></company>
     <expire>24.12.2026</expire>
     <jobtype>full-time</jobtype>
+    <company_logo><![CDATA[https://uhirable.github.io/jobs/logo-co-rippling.png]]></company_logo>
   </job>
   <job id="airbnb-engineering-manager">
     <link><![CDATA[https://uhirable.github.io/jobs/job-airbnb-engineering-manager.html]]></link>

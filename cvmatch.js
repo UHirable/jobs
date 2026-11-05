@@ -23,13 +23,48 @@
   const norm = (t) => { let x = " " + t.toLowerCase().replace(/[‘’]/g, "'").replace(/[–—]/g, "-").replace(/\s+/g, " ") + " "; for (const g of SYN) { const canon = g[0]; for (const a of g) { if (a === canon) continue; x = x.split(" " + a + " ").join(" " + canon + " ").split(" " + a + ",").join(" " + canon + ",").split(" " + a + ".").join(" " + canon + "."); } } return x; };
   const tokens = (t) => (t.match(/[a-z][a-z0-9+#.\-\/&]{1,}/g) || []).map((w) => w.replace(/[.\-\/]+$/, "")).filter((w) => w.length > 2 && !STOP.has(w) && !/^\d+$/.test(w));
   const has = (text, k) => new RegExp("(^|[^a-z0-9])" + k.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&") + "($|[^a-z0-9])").test(text);
-  function years(t) { let m = 0; for (const x of t.matchAll(/(\d{1,2})\s*\+?\s*(?:years|yrs|year)/g)) m = Math.max(m, +x[1]); const yrs = [...t.matchAll(/\b(20\d\d|19\d\d)\b/g)].map((x) => +x[1]); if (yrs.length >= 2) m = Math.max(m, Math.min(40, Math.max(...yrs) - Math.min(...yrs))); if (/present|current/.test(t) && yrs.length) m = Math.max(m, Math.min(40, new Date().getFullYear() - Math.min(...yrs))); return m; }
+  function years(t) { let explicit = 0; for (const x of t.matchAll(/(\d{1,2})\s*\+?\s*(?:years|yrs|year)/g)) explicit = Math.max(explicit, +x[1]); if (explicit) return explicit; const yrs = [...t.matchAll(/\b(20\d\d|19\d\d)\b/g)].map((x) => +x[1]).filter((y) => y <= new Date().getFullYear()); if (!yrs.length) return 0; const sorted = [...new Set(yrs)].sort((a, b) => a - b); const start = sorted.length > 3 ? sorted[1] : sorted[0]; const end = /present|current/.test(t) ? new Date().getFullYear() : Math.max(...yrs); return Math.min(25, Math.max(0, end - start)); }
   function jobYears(t) { const m = t.match(/(\d{1,2})\s*\+?\s*(?:-|to)?\s*(\d{1,2})?\s*\+?\s*(?:years|yrs)/); return m ? +m[1] : 0; }
   const GENERIC = new Set("small large big testing test tests present current previous data team teams tools tool insights insight business customer customers client clients product products service services platform platforms solution solutions process processes projects project systems system technical technology environment environments people person results result performance quality time global world international local based location office english emea apac latam north america europe".split(" "));
   function distinctive(jobN, jSkills) {
     const freq = {}; for (const w of tokens(jobN)) freq[w] = (freq[w] || 0) + 1;
     const part = (w) => jSkills.some((k) => k !== w && k.split(/[\s\/&.-]+/).includes(w));
     return Object.keys(freq).filter((w) => w.length > 3 && !SKILLS.includes(w) && !GENERIC.has(w) && !part(w)).sort((a, b) => freq[b] - freq[a]).slice(0, 40);
+  }
+  const TITLE_WORDS = /\b(engineer|developer|manager|analyst|designer|scientist|lead|director|specialist|coordinator|consultant|associate|executive|representative|recruiter|accountant|attorney|lawyer|nurse|teacher|architect|administrator|assistant|officer|head of|vp|president|intern|researcher|partner|controller|marketer|writer|editor|technician|operator|agent|advisor|strategist|planner|supervisor|owner|founder|chief)\b/i;
+  function jobTitle(job) {
+    const lines = job.split(/\n/).map((l) => l.trim()).filter(Boolean);
+    let m = job.match(/(?:job title|position|role)\s*[:\-]\s*([^\n]{3,80})/i); if (m) return m[1].trim();
+    m = job.match(/(?:hiring (?:a|an)|looking for (?:a|an)|seeking (?:a|an)|searching for (?:a|an))\s+([^\n.,]{3,80}?)(?:\s+(?:to|who|with|that)\b|[.,\n])/i); if (m) return m[1].trim();
+    const cand = lines.slice(0, 8).find((l) => l.length < 90 && TITLE_WORDS.test(l) && !/\b(is|are|we|our|the company)\b/i.test(l)); if (cand) return cand.replace(/\s*[\(\|–-].*$/, "");
+    const any = lines.find((l) => l.length < 90 && TITLE_WORDS.test(l)); if (any) return any.replace(/\s*[\(\|–-].*$/, "");
+    return "";
+  }
+  // must-have vs nice-to-have split of the job text
+  function splitJob(job) {
+    const low = job.toLowerCase(); const i = low.search(/(nice[- ]to[- ]have|preferred|bonus points|a plus|plus:|it would be great|good to have)/);
+    return i > 200 ? { must: job.slice(0, i), nice: job.slice(i) } : { must: job, nice: "" };
+  }
+  const EDU = [["phd","doctorate"],["mba"],["master's","masters","msc","m.sc","ms degree"],["bachelor's","bachelors","bsc","b.sc","ba degree","bs degree","undergraduate degree","university degree","college degree"],["cpa"],["cfa"],["pmp"],["cissp"],["aws certified"],["scrum master","csm"],["shrm","phr"],["six sigma"],["juris doctor","jd","law degree"],["md ","medical degree"],["rn ","registered nurse"]];
+  const LANGS = ["english","arabic","french","german","spanish","portuguese","italian","dutch","mandarin","chinese","japanese","korean","hindi","urdu","turkish","russian","polish","swedish"];
+  const PII = [[/\b(date of birth|dob|born on|age:\s*\d{2})\b/i,"Date of birth / age"],[/\b(married|single|divorced|marital status)\b/i,"Marital status"],[/\b(nationality|religion)\b/i,"Nationality / religion"],[/\b(photo|photograph)\b/i,"Photo"],[/\b(national id|passport (no|number)|ssn|social security)\b/i,"ID or passport number"]];
+  const STRONG_VERBS = /^(led|built|designed|launched|grew|increased|reduced|cut|saved|delivered|managed|owned|created|developed|implemented|drove|improved|automated|scaled|negotiated|closed|hired|trained|shipped|optimi[sz]ed|migrated|architected|established|generated|won|secured|streamlined|transformed|coached|mentored|achieved|exceeded|boosted|accelerated)\b/i;
+  function bulletAudit(cv) {
+    const ls = cv.split(/\n/).map((l) => l.replace(/^[\s•\-*·▪●]+/, "").trim()).filter((l) => l.length > 25 && l.length < 300 && /[a-z]/i.test(l) && !/^[A-Z\s&]{6,}$/.test(l));
+    const bullets = ls.filter((l) => /^(\w+ed|\w+ing|[A-Z]\w+ )/i.test(l) && l.split(" ").length >= 5).slice(0, 40);
+    const noNum = bullets.filter((l) => !/\d/.test(l)); const weak = bullets.filter((l) => !STRONG_VERBS.test(l)); const long = bullets.filter((l) => l.split(" ").length > 30);
+    return { total: bullets.length, noNum: noNum.length, weak: weak.length, long: long.length, weakEx: weak.slice(0, 2), noNumEx: noNum.slice(0, 2) };
+  }
+  function summaryDraft(cv, r, title) {
+    const have = r.have || years(norm(cv)); const seen = []; const ROLEW = /^(recruiter|engineer|manager|analyst|designer|developer|consultant|accountant|attorney|lawyer|nurse|teacher|director|associate|executive|representative|specialist)s?$/;
+    const skills = [...r.hardHit].filter((k) => k.length > 2 && !GENERIC.has(k) && !LANGS.includes(k) && !ROLEW.test(k) && !["full", "cycle", "degree", "fluent", "partners", "hiring", "management", "english"].includes(k)).filter((k) => { const st = k.slice(0, 5); if (seen.includes(st)) return false; seen.push(st); return true; }).slice(0, 3);
+    const langsHave = r.langs.filter((l) => l.ok).map((l) => l.k.charAt(0).toUpperCase() + l.k.slice(1));
+    const nums = (cv.match(/[^.\n]*\b\d{2,}[%+kKmM]?\b[^.\n]*/g) || []).map((x) => x.trim()).filter((x) => x.length > 30 && x.length < 160 && !/\b(19|20)\d\d\b/.test(x) && !/@|\+\d|phone|linkedin/i.test(x));
+    const t = title ? title.replace(/^(senior|junior|lead)\s+/i, (m) => m) : "professional";
+    let out = `${t.charAt(0).toUpperCase() + t.slice(1)}${have ? ` with ${have}+ years of experience` : ""}${skills.length ? ` in ${skills.slice(0, -1).join(", ")}${skills.length > 1 ? " and " : ""}${skills[skills.length - 1]}` : ""}.`;
+    if (nums[0]) out += " " + nums[0].replace(/^[a-z]/, (m) => m.toUpperCase()).replace(/[.;,]$/, "") + ".";
+    const soft = r.softHit.filter((k) => !["languages", "stakeholder"].includes(k)); if (soft.length) out += ` Strong ${soft.slice(0, 2).join(" and ")}.`; if (langsHave.length > 1) out += ` ${langsHave.join(" and ")} speaker.`;
+    return out;
   }
   function phraseHits(text) { const out = new Set(); for (const [re, k] of PHRASES) if (re.test(text)) out.add(k); return out; }
   function analyse(cv, job) {
@@ -38,12 +73,12 @@
     const hasC = (k) => has(c, k) || cPh.has(k);
     const jSkills = [...new Set([...SKILLS.filter((k) => has(j, k)), ...jPh])];
     const hit = jSkills.filter(hasC), miss = jSkills.filter((k) => !hasC(k));
-    const dist = distinctive(j, jSkills); const dHit = dist.filter((w) => has(c, w)); const dMiss = dist.filter((w) => !has(c, w)).slice(0, 8);
+    const firstLine = norm(job.split("\n").find((l) => l.trim()) || ""); const dist = distinctive(j, jSkills).filter((w) => !has(firstLine, w)); const dHit = dist.filter((w) => has(c, w)); const dMiss = dist.filter((w) => !has(c, w)).slice(0, 8);
     const sk = jSkills.length ? hit.length / jSkills.length : (dist.length ? dHit.length / dist.length : 0.5);
     const kw = dist.length ? dHit.length / dist.length : sk;
     const need = jobYears(j), have = years(c);
     let ex = need ? Math.min(1, have / need) : 0.85; if (!need && !have) ex = 0.7;
-    const titleLine = (job.split("\n").find((l) => l.trim().length > 3) || "").toLowerCase(); const tTok = tokens(norm(titleLine)).slice(0, 6); const tHit = tTok.filter((w) => has(c, w)).length; const tb = tTok.length ? tHit / tTok.length : 0.5;
+    const titleLine = jobTitle(job).toLowerCase(); const tTok = tokens(norm(titleLine)).slice(0, 6); const tHit = tTok.filter((w) => has(c, w)).length; const tb = tTok.length ? tHit / tTok.length : 0.5;
     const overall = Math.round(100 * (0.45 * sk + 0.25 * kw + 0.2 * ex + 0.1 * tb));
     // summary / headline check: do the first ~300 chars of the CV contain the job title words?
     const top = norm(cv.slice(0, 400)); const titleInTop = tTok.length ? tTok.filter((w) => has(top, w)).length / tTok.length : 0;
@@ -51,18 +86,26 @@
     const bad = BAD.filter(([p]) => c.includes(" " + p) || c.includes(p + " ")).map(([p, tip]) => ({ p, tip }));
     const hardMiss = miss.filter((k) => !SOFT.has(k)), softMiss = miss.filter((k) => SOFT.has(k));
     const hardHit = hit.filter((k) => !SOFT.has(k)), softHit = hit.filter((k) => SOFT.has(k));
-    return { overall: Math.max(5, Math.min(98, overall)), sk: Math.round(sk * 100), kw: Math.round(kw * 100), ex: Math.round(ex * 100), hit, miss, hardHit, softHit, hardMiss, softMiss, dHit: dHit.slice(0, 10), dMiss, need, have, titleInTop, titleWords: tTok, bad };
+    const sj = splitJob(job); const mustN = norm(sj.must), niceN = norm(sj.nice);
+    const mustMiss = miss.filter((k) => has(mustN, k) || phraseHits(mustN).has(k)), niceMiss = miss.filter((k) => !mustMiss.includes(k) && sj.nice && (has(niceN, k) || phraseHits(niceN).has(k)));
+    const density = jSkills.map((k) => { const re = new RegExp("(^|[^a-z0-9])" + k.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&") + "($|[^a-z0-9])", "g"); return { k, job: (j.match(re) || []).length, cv: (c.match(re) || []).length }; }).filter((x) => x.job >= 2).sort((a, b) => (b.job - b.cv) - (a.job - a.cv)).slice(0, 8);
+    const edu = EDU.filter((g) => g.some((t) => j.includes(" " + t))).map((g) => ({ k: g[0].replace(/\s+$/, ""), ok: g.some((t) => c.includes(" " + t)) }));
+    const langs = LANGS.filter((l) => has(j, l)).map((l) => ({ k: l, ok: has(c, l) }));
+    const pii = PII.filter(([re]) => re.test(cv)).map(([, n]) => n);
+    const bullets = bulletAudit(cv);
+    const words = cv.trim().split(/\s+/).length; const ideal = have >= 8 ? [550, 850] : have >= 3 ? [400, 700] : [300, 550];
+    return { overall: Math.max(5, Math.min(98, overall)), sk: Math.round(sk * 100), kw: Math.round(kw * 100), ex: Math.round(ex * 100), hit, miss, hardHit, softHit, hardMiss, softMiss, dHit: dHit.slice(0, 10), dMiss, need, have, titleInTop, titleWords: tTok, title: titleLine, bad, mustMiss, niceMiss, density, edu, langs, pii, bullets, words, ideal };
   }
   function formatCheck(meta, text) {
-    const issues = [], good = [];
-    if (!meta) { if (text) good.push("Text file: readable by any ATS."); return { issues, good }; }
-    if (meta.pages > 2) issues.push({ t: `${meta.pages} pages`, d: "Recruiters spend 7 seconds on a CV. Aim for 1 page (under 10 years) or 2 pages max." }); else good.push(`${meta.pages} page${meta.pages > 1 ? "s" : ""}: good length.`);
+    const issues = [], warns = [], good = [];
+    if (!meta) { if (text) good.push("Text file: readable by any ATS."); return { issues, warns, good }; }
+    if (meta.pages > 2) warns.push({ t: `${meta.pages} pages`, d: "ATS reads it fine, but recruiters skim: aim for 1 page (under 10 years of experience) or 2 pages max." }); else good.push(`${meta.pages} page${meta.pages > 1 ? "s" : ""}: good length.`);
     if (meta.images > 0) issues.push({ t: `${meta.images} image${meta.images > 1 ? "s" : ""} or graphic${meta.images > 1 ? "s" : ""}`, d: "ATS can't read text inside images, photos, icons or skill bars. Use plain text." }); else good.push("No images or graphics: ATS-safe.");
-    if (meta.cols) issues.push({ t: "Multi-column layout", d: "Many ATS read columns left-to-right across the page and scramble your text. Use a single column." }); else good.push("Single column: reads in order.");
+    if (meta.cols) issues.push({ t: "Two-column layout", d: "Long text in two side-by-side columns: many ATS read across the page and scramble it. Use a single column." }); else if (meta.sideDates) warns.push({ t: "Dates in a side column", d: "Most ATS read this fine. For 100% safety put dates on the same line as the company name." }); else good.push("Single column: reads in order.");
     const odd = (meta.fonts || []).filter((f) => !/arial|helvetica|calibri|times|georgia|verdana|cambria|garamond|roboto|open ?sans|lato|inter|segoe|tahoma|trebuchet|sans-serif|serif|liberation|dejavu|noto|carlito|symbol/i.test(f));
-    if (odd.length) issues.push({ t: "Unusual fonts", d: "Stick to Arial, Calibri, Helvetica or Georgia so every ATS and reader renders it." }); else good.push("Standard fonts.");
+    if (odd.length) warns.push({ t: "Unusual fonts", d: "Stick to Arial, Calibri, Helvetica or Georgia so every ATS and reader renders it." }); else good.push("Standard fonts.");
     if ((meta.chars || 0) < 300) issues.push({ t: "Very little selectable text", d: "If your CV is a scanned image or exported as a picture, ATS reads nothing. Export from Word/Google Docs as a text PDF." });
-    return { issues, good };
+    return { issues, warns, good };
   }
   function verdict(p) {
     if (p >= 75) return ["🎯 STRONG MATCH", "Apply now.", "Your CV already speaks the job's language. Tailor the summary line to this role and send it today.", "g"];
@@ -86,7 +129,7 @@
   drop.addEventListener("drop", (e) => loadFile(e.dataTransfer.files[0]));
   async function jobFromLink(u) {
     const m = u.match(/job-([a-z0-9-]+)\.html/); if (!m) return null;
-    if (!window.JOBS) { const r = await fetch("jobs.js?v=40").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
+    if (!window.JOBS) { const r = await fetch("jobs.js?v=41").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
     const j = window.JOBS.find((x) => x.id === m[1]); if (!j) return null;
     return [j.title, j.company, j.brief, j.overview, ...(j.requirements || []), ...(j.responsibilities || []), j.compensation].filter(Boolean).join("\n");
   }
@@ -125,7 +168,21 @@
     // format check
     const fc = formatCheck(window.UA_lastMeta, !window.UA_lastMeta && cv === "" ? cvIn : null);
     const fmt = $("#cm-format");
-    if (fc.issues.length || fc.good.length) { fmt.hidden = false; $("#cm-fmt-list").innerHTML = fc.issues.map((x) => `<li class="bad"><b>✗ ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("") + fc.good.map((g) => `<li class="ok"><b>✓ ${esc(g)}</b></li>`).join(""); $("#cm-fmt-h").textContent = fc.issues.length ? `ATS format check: ${fc.issues.length} issue${fc.issues.length > 1 ? "s" : ""}` : "ATS format check: all clear"; } else fmt.hidden = true;
+    if (fc.issues.length || fc.warns.length || fc.good.length) { fmt.hidden = false; $("#cm-fmt-list").innerHTML = fc.issues.map((x) => `<li class="bad"><b>✗ ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("") + fc.warns.map((x) => `<li class="warn"><b>⚠ ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("") + fc.good.map((g) => `<li class="ok"><b>✓ ${esc(g)}</b></li>`).join(""); $("#cm-fmt-h").textContent = fc.issues.length ? `ATS format check: ${fc.issues.length} issue${fc.issues.length > 1 ? "s" : ""}` : fc.warns.length ? `ATS format check: OK, ${fc.warns.length} tip${fc.warns.length > 1 ? "s" : ""}` : "ATS format check: all clear"; } else fmt.hidden = true;
+    // must-have vs nice-to-have
+    const mh = $("#cm-must"); if (r.mustMiss.length || r.niceMiss.length) { mh.hidden = false; $("#cm-must-list").innerHTML = (r.mustMiss.length ? `<li class="bad"><b>✗ Must-have, missing (${r.mustMiss.length})</b><div>${r.mustMiss.map((k) => `<span>${esc(k)}</span>`).join("")}</div><small>These are in the requirements section. Missing them usually means an automatic reject.</small></li>` : `<li class="ok"><b>✓ All must-haves covered</b></li>`) + (r.niceMiss.length ? `<li class="warn"><b>⚠ Nice-to-have, missing (${r.niceMiss.length})</b><div>${r.niceMiss.map((k) => `<span>${esc(k)}</span>`).join("")}</div><small>Optional. Add only if true.</small></li>` : ""); } else mh.hidden = true;
+    // keyword density
+    const dn = $("#cm-density"); const dRows = r.density.filter((x) => x.job > x.cv); if (dRows.length) { dn.hidden = false; $("#cm-density-body").innerHTML = dRows.map((x) => `<tr><td>${esc(x.k)}</td><td>${x.job}×</td><td class="${x.cv ? "" : "z"}">${x.cv}×</td><td>${x.cv ? "Mention it once or twice more" : "Add it"}</td></tr>`).join(""); } else dn.hidden = true;
+    // education, languages, pii, bullets, length
+    const ex = []; r.edu.forEach((e) => ex.push({ ok: e.ok, t: (e.ok ? "✓ " : "✗ ") + e.k.toUpperCase() + (e.ok ? " found" : " required by the ad, not on your CV") })); r.langs.forEach((l) => ex.push({ ok: l.ok, t: (l.ok ? "✓ " : "✗ ") + l.k.charAt(0).toUpperCase() + l.k.slice(1) + (l.ok ? " listed" : " requested, add your level") }));
+    const eb = $("#cm-extra"); if (ex.length) { eb.hidden = false; $("#cm-extra-list").innerHTML = ex.map((x) => `<li class="${x.ok ? "ok" : "bad"}"><b>${esc(x.t)}</b></li>`).join(""); } else eb.hidden = true;
+    const pb = $("#cm-pii"); if (r.pii.length) { pb.hidden = false; $("#cm-pii-list").innerHTML = r.pii.map((p) => `<li class="warn"><b>⚠ ${esc(p)}</b><span>Not needed for US, UK or EU applications and can trigger bias filters. Remove it unless the ad asks.</span></li>`).join(""); } else pb.hidden = true;
+    const bu = $("#cm-bullets"); const B = r.bullets; if (B.total >= 3) { bu.hidden = false; const pctNum = Math.round(100 * (B.total - B.noNum) / B.total), pctVerb = Math.round(100 * (B.total - B.weak) / B.total); $("#cm-bullets-body").innerHTML = `<div class="cm-bars"><div><span>Start with a strong verb</span><i style="--w:${pctVerb}%"></i><em>${pctVerb}%</em></div><div><span>Include a number</span><i style="--w:${pctNum}%"></i><em>${pctNum}%</em></div></div><p class="cm-tiny">${B.total} experience lines checked.${B.long ? ` ${B.long} are over 30 words, split them.` : ""}</p>` + (B.noNumEx.length ? `<p class="cm-tiny"><b>Add a number to lines like:</b> "${esc(B.noNumEx[0].slice(0, 110))}…"</p>` : "") + (B.weakEx.length ? `<p class="cm-tiny"><b>Start with a verb:</b> "${esc(B.weakEx[0].slice(0, 110))}…"</p>` : ""); } else bu.hidden = true;
+    const ln = $("#cm-length"); ln.hidden = false; ln.className = "cm-note " + (r.words < r.ideal[0] ? "warn" : r.words > r.ideal[1] ? "warn" : "ok"); ln.innerHTML = r.words < r.ideal[0] ? `<b>Short CV: ${r.words} words.</b> For your level aim for ${r.ideal[0]}–${r.ideal[1]}. Add results and tools to each role.` : r.words > r.ideal[1] ? `<b>Long CV: ${r.words} words.</b> For your level aim for ${r.ideal[0]}–${r.ideal[1]}. Cut old roles to one line each.` : `<b>✓ Good length: ${r.words} words</b> (ideal for your level: ${r.ideal[0]}–${r.ideal[1]}).`;
+    // summary draft
+    const sd = summaryDraft(cvIn, r, r.title); $("#cm-sum-text").textContent = sd; $("#cm-sum").hidden = false;
+    // before / after
+    const key = "uh-cm-last"; try { const prev = JSON.parse(sessionStorage.getItem(key) || "null"); const ba = $("#cm-before"); if (prev && prev.job === job.slice(0, 200) && prev.pct !== r.overall) { ba.hidden = false; ba.className = "cm-note " + (r.overall > prev.pct ? "ok" : "warn"); ba.innerHTML = `<b>${r.overall > prev.pct ? "📈" : "📉"} Was ${prev.pct}%, now ${r.overall}%.</b> ${r.overall > prev.pct ? "Your edits worked." : "Your last version scored higher."}`; } else ba.hidden = true; sessionStorage.setItem(key, JSON.stringify({ job: job.slice(0, 200), pct: r.overall })); } catch (e) {}
     res.hidden = false; res.scrollIntoView({ behavior: "smooth", block: "start" });
     if (window.goatcounter && goatcounter.count) try { goatcounter.count({ path: "cv-match/check", title: "CV match check", event: true }); } catch (e) {}
   });
@@ -153,17 +210,6 @@
     if (window.goatcounter && goatcounter.count) try { goatcounter.count({ path: "cv-match/share", title: "CV match share", event: true }); } catch (e) {}
   }
   const sb = $("#cm-share"); if (sb) sb.addEventListener("click", shareImage);
-  // ---- Compare against up to 3 jobs ----
-  const cmpBtn = $("#cm-cmp"), cmpBox = $("#cm-cmp-box");
-  if (cmpBtn) cmpBtn.addEventListener("click", () => { cmpBox.hidden = !cmpBox.hidden; cmpBtn.textContent = cmpBox.hidden ? "Compare 2–3 jobs at once" : "Hide compare"; });
-  const cmpGo = $("#cm-cmp-go"); if (cmpGo) cmpGo.addEventListener("click", () => {
-    const cvIn = cv || cvText.value.trim(); if (cvIn.length < 80) { err.hidden = false; err.textContent = "Add your CV first."; return; }
-    const jobs = [$("#cm-job"), $("#cm-job2"), $("#cm-job3")].map((t) => t.value.trim()).filter((v) => v.length > 60);
-    if (jobs.length < 2) { err.hidden = false; err.textContent = "Paste at least 2 job descriptions to compare."; return; }
-    err.hidden = true;
-    const rows = jobs.map((jb, i) => { const r = analyse(cvIn, jb); const title = (jb.split("\n").find((l) => l.trim().length > 3) || "Job " + (i + 1)).trim().slice(0, 60); return { title, r }; }).sort((a, b) => b.r.overall - a.r.overall);
-    $("#cm-cmp-out").innerHTML = rows.map((x, i) => `<div class="cm-cmp-row ${i === 0 ? "best" : ""}"><b>${x.r.overall}%</b><div><strong>${esc(x.title)}</strong><span>${i === 0 ? "Best match. Apply here first." : "Missing: " + esc([...x.r.hardMiss, ...x.r.dMiss].slice(0, 4).join(", ") || "nothing major")}</span></div></div>`).join("");
-    $("#cm-cmp-out").hidden = false; $("#cm-cmp-out").scrollIntoView({ behavior: "smooth", block: "nearest" });
-  });
+  const cp = $("#cm-sum-copy"); if (cp) cp.addEventListener("click", async () => { try { await navigator.clipboard.writeText($("#cm-sum-text").textContent); cp.textContent = "Copied ✓"; setTimeout(() => cp.textContent = "Copy", 2000); } catch (e) {} });
   const lilo = $("#cm-lilo"); if (lilo) lilo.addEventListener("click", (e) => { const b = document.getElementById("ua-btn"); if (b) { e.preventDefault(); b.click(); } });
 })();

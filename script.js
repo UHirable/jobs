@@ -533,7 +533,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     for (let i = 1; i <= Math.min(doc.numPages, 6); i++) {
       const pg = await doc.getPage(i); const c = await pg.getTextContent(); t += c.items.map((x) => x.str).join(" ") + "\n";
       meta.textItems += c.items.filter((x) => x.str.trim()).length; meta.chars = (meta.chars || 0) + c.items.reduce((a, x) => a + x.str.length, 0);
-      try { const xs = c.items.filter((x) => x.str.trim().length > 15).map((x) => Math.round(x.transform[4] / 40)); const uniq = new Set(xs); if (xs.length > 20 && uniq.size >= 2) { const cnt = {}; xs.forEach((v) => cnt[v] = (cnt[v] || 0) + 1); const top = Object.values(cnt).sort((a, b) => b - a); if (top[1] && top[1] > xs.length * 0.25) meta.cols = true; } } catch (e) {}
+      try { const vp = pg.getViewport({ scale: 1 }); const items = c.items.filter((x) => x.str.trim().length > 15).map((x) => ({ x0: x.transform[4], x1: x.transform[4] + (x.width || 0), y: Math.round(x.transform[5]), len: x.str.length })); if (items.length > 20) { const left = items.filter((i) => i.x0 < vp.width * 0.4), right = items.filter((i) => i.x0 >= vp.width * 0.4); if (left.length > 8 && right.length > 8) { const leftMaxEnd = Math.max(...left.map((i) => i.x1)); const rightMinStart = Math.min(...right.map((i) => i.x0)); const sameRows = left.filter((l) => right.some((r) => Math.abs(r.y - l.y) < 3)).length; const leftAvg = left.reduce((a, i) => a + i.len, 0) / left.length; if (leftMaxEnd < rightMinStart + 5 && sameRows > 8 && leftAvg > 40) meta.cols = true; else if (leftMaxEnd < rightMinStart + 5 && sameRows > 8) meta.sideDates = true; } } } catch (e) {}
       try { const ops = await pg.getOperatorList(); const OPS = pdfjs.OPS; meta.images += ops.fnArray.filter((o) => o === OPS.paintImageXObject || o === OPS.paintJpegXObject || o === OPS.paintImageXObjectRepeat || o === OPS.paintInlineImageXObject || o === OPS.paintImageMaskXObject).length; } catch (e) {}
       try { c.styles && Object.values(c.styles).forEach((st) => st.fontFamily && meta.fonts.add(st.fontFamily)); } catch (e) {}
     }
@@ -551,7 +551,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     const f = fileIn.files[0]; if (!f) return; say("📄 " + f.name, true); say("Reading your CV…");
     try {
       await loadIdx();
-      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch("jobs.js?v=40").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
+      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch("jobs.js?v=41").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
       const text = await Promise.race([readFile(f), new Promise((_, j) => setTimeout(() => j(new Error("timeout")), 20000))]);
       if (!text || text.trim().length < 80) throw new Error("empty");
       say(matchCV(text));
