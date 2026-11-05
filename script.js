@@ -393,7 +393,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=13";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=14";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
@@ -442,7 +442,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   chips.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
   const L = (t, u) => `<a href="${u}">${t}</a>`;
   let idx = null, loading = null;
-  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=13"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
+  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=14"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
   const find = (words, kinds, n) => (idx || []).filter((e) => (!kinds || kinds.includes(e.k)) && words.some((w) => (e.t + " " + e.d).toLowerCase().includes(w))).slice(0, n || 5);
   const list = (items) => items.length ? "<ul>" + items.map((e) => `<li>${L(escapeHTML(e.t), e.u)}${e.d ? " <small>· " + escapeHTML(e.d) + "</small>" : ""}</li>`).join("") + "</ul>" : "";
   const COUNTRIES = ["egypt", "uae", "dubai", "saudi", "riyadh", "qatar", "kuwait", "bahrain", "oman", "jordan", "morocco", "tunisia", "nigeria", "kenya", "south africa", "united states", "usa", "us", "canada", "uk", "united kingdom", "london", "ireland", "germany", "france", "netherlands", "spain", "portugal", "poland", "italy", "india", "pakistan", "singapore", "australia", "japan", "korea", "china", "philippines", "thailand", "indonesia", "brazil", "mexico", "europe", "gulf", "africa", "asia", "remote"];
@@ -529,10 +529,19 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     if (!window.pdfjsLib) { await new Promise((r, j) => { const s = document.createElement("script"); s.type = "module"; s.textContent = 'import * as p from "./lib-pdf.mjs"; window.pdfjsLib = p; window.dispatchEvent(new Event("pdfjs-ready"));'; window.addEventListener("pdfjs-ready", r, { once: true }); s.onerror = j; document.head.appendChild(s); setTimeout(() => j(new Error("timeout")), 15000); }); }
     const pdfjs = window.pdfjsLib; pdfjs.GlobalWorkerOptions.workerSrc = "lib-pdf.worker.mjs";
     const doc = await pdfjs.getDocument({ data: await f.arrayBuffer() }).promise; let t = "";
-    for (let i = 1; i <= Math.min(doc.numPages, 6); i++) { const pg = await doc.getPage(i); const c = await pg.getTextContent(); t += c.items.map((x) => x.str).join(" ") + "\n"; }
+    const meta = { pages: doc.numPages, images: 0, fonts: new Set(), cols: false, textItems: 0 };
+    for (let i = 1; i <= Math.min(doc.numPages, 6); i++) {
+      const pg = await doc.getPage(i); const c = await pg.getTextContent(); t += c.items.map((x) => x.str).join(" ") + "\n";
+      meta.textItems += c.items.filter((x) => x.str.trim()).length; meta.chars = (meta.chars || 0) + c.items.reduce((a, x) => a + x.str.length, 0);
+      try { const xs = c.items.filter((x) => x.str.trim().length > 15).map((x) => Math.round(x.transform[4] / 40)); const uniq = new Set(xs); if (xs.length > 20 && uniq.size >= 2) { const cnt = {}; xs.forEach((v) => cnt[v] = (cnt[v] || 0) + 1); const top = Object.values(cnt).sort((a, b) => b - a); if (top[1] && top[1] > xs.length * 0.25) meta.cols = true; } } catch (e) {}
+      try { const ops = await pg.getOperatorList(); const OPS = pdfjs.OPS; meta.images += ops.fnArray.filter((o) => o === OPS.paintImageXObject || o === OPS.paintJpegXObject || o === OPS.paintImageXObjectRepeat || o === OPS.paintInlineImageXObject || o === OPS.paintImageMaskXObject).length; } catch (e) {}
+      try { c.styles && Object.values(c.styles).forEach((st) => st.fontFamily && meta.fonts.add(st.fontFamily)); } catch (e) {}
+    }
+    meta.fonts = [...meta.fonts]; window.UA_lastMeta = meta;
     return t;
   }
   async function readFile(f) {
+    window.UA_lastMeta = null;
     if (/\.txt$/i.test(f.name)) return f.text();
     if (/\.docx$/i.test(f.name)) return readDocx(f);
     return readPdf(f);
@@ -542,7 +551,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     const f = fileIn.files[0]; if (!f) return; say("📄 " + f.name, true); say("Reading your CV…");
     try {
       await loadIdx();
-      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch("jobs.js?v=39").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
+      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch("jobs.js?v=40").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
       const text = await Promise.race([readFile(f), new Promise((_, j) => setTimeout(() => j(new Error("timeout")), 20000))]);
       if (!text || text.trim().length < 80) throw new Error("empty");
       say(matchCV(text));
