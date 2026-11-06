@@ -1,3 +1,4 @@
+const UA_BASE = (() => { try { const p = location.pathname.replace(/^\/jobs\//, "/"); const n = p.split("/").filter(Boolean).length; return n > 1 ? "../".repeat(n - 1) : ""; } catch (e) { return ""; } })();
 // ---------- Footer year (all pages) ----------
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -132,7 +133,7 @@ const escapeHTML = (s = "") =>
 const WORLDWIDE = "Worldwide";
 const jobCountries = (j) => arr(j.countries || j.locations || j.country);
 const jobId = (j) => j.id || String(j.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const jobPage = (j) => j.page || `job.html?id=${encodeURIComponent(jobId(j))}`;
+const jobPage = (j) => UA_BASE + (j.page || `job.html?id=${encodeURIComponent(jobId(j))}`);
 const jobApply = (j) => {
   const link = j.applyLink || (typeof APPLY_FORM !== "undefined" ? APPLY_FORM : "");
   // Tally forms: pass the job name into the hidden "job" field
@@ -329,7 +330,7 @@ if (jobContent && typeof JOBS !== "undefined") {
     document.getElementById("job-title").textContent = "This position has been filled";
     document.getElementById("job-meta").textContent = "Thanks for your interest! Browse our other open roles.";
     document.getElementById("job-body").innerHTML =
-      `<div class="panel" style="text-align:center"><a class="btn btn-primary" href="jobs.html">See all open jobs</a></div>`;
+      `<div class="panel" style="text-align:center"><a class="btn btn-primary" href="${UA_BASE}jobs.html">See all open jobs</a></div>`;
   } else {
     if (!window.JOB_ID) document.title = `${j.title} – U Hirable`;
     document.getElementById("job-title").textContent = j.title;
@@ -393,7 +394,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=15";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src=UA_BASE+"search-index.js?v=16";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
@@ -428,7 +429,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   if (document.getElementById("ua-btn")) return;
   const WA = "https://wa.me/201515594609", BASE = "";
   const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>';
-  const btn = document.createElement("button"); btn.id = "ua-btn"; btn.className = "ua-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Ask Lilo"); btn.className += " img"; btn.innerHTML = "<span class=\"lilo-av\"><img src=\"robot-head.webp\" alt=\"\"><svg class=\"lilo-hand\" viewBox=\"0 0 40 44\" aria-hidden=\"true\"><path d=\"M10 24 V12 a3 3 0 0 1 6 0 V8 a3 3 0 0 1 6 0 v2 a3 3 0 0 1 6 0 v4 a3 3 0 0 1 6 0 v12 a12 12 0 0 1 -24 0z\" fill=\"#fff\" stroke=\"#c9cffd\" stroke-width=\"2\"/><circle cx=\"22\" cy=\"30\" r=\"4\" fill=\"#4fb6ff\"/></svg><i class=\"lilo-hi\">Hi!</i></span><span>Ask Lilo</span>";
+  const btn = document.createElement("button"); btn.id = "ua-btn"; btn.className = "ua-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Ask Lilo"); btn.className += " img"; btn.innerHTML = "<span class=\"lilo-av\"><img src=\"" + UA_BASE + "robot-head.webp\" alt=\"\"><svg class=\"lilo-hand\" viewBox=\"0 0 40 44\" aria-hidden=\"true\"><path d=\"M10 24 V12 a3 3 0 0 1 6 0 V8 a3 3 0 0 1 6 0 v2 a3 3 0 0 1 6 0 v4 a3 3 0 0 1 6 0 v12 a12 12 0 0 1 -24 0z\" fill=\"#fff\" stroke=\"#c9cffd\" stroke-width=\"2\"/><circle cx=\"22\" cy=\"30\" r=\"4\" fill=\"#4fb6ff\"/></svg><i class=\"lilo-hi\">Hi!</i></span><span>Ask Lilo</span>";
   const panel = document.createElement("div"); panel.className = "ua-panel"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "Lilo, the U Hirable assistant");
   panel.innerHTML = `<div class="ua-head">${ICON}<div><b>Lilo</b><small>Your U Hirable guide. Ask about jobs, visas, CV tools or job sites</small></div><button type="button" aria-label="Close">✕</button></div>
     <div class="ua-log" id="ua-log"></div>
@@ -440,9 +441,9 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const say = (html, me) => { const d = document.createElement("div"); d.className = "ua-m " + (me ? "me" : "bot"); d.dir = "auto"; if (me) d.textContent = html; else d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; };
   const setChips = (list) => { chips.innerHTML = list.map((c) => `<button type="button">${escapeHTML(c)}</button>`).join(""); };
   chips.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
-  const L = (t, u) => `<a href="${u}">${t}</a>`;
+  const L = (t, u) => `<a href="${/^https?:/.test(u) ? u : UA_BASE + u}">${t}</a>`;
   let idx = null, loading = null;
-  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=15"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
+  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = UA_BASE + "search-index.js?v=16"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
   const find = (words, kinds, n) => (idx || []).filter((e) => (!kinds || kinds.includes(e.k)) && words.some((w) => (e.t + " " + e.d).toLowerCase().includes(w))).slice(0, n || 5);
   const list = (items) => items.length ? "<ul>" + items.map((e) => `<li>${L(escapeHTML(e.t), e.u)}${e.d ? " <small>· " + escapeHTML(e.d) + "</small>" : ""}</li>`).join("") + "</ul>" : "";
   const COUNTRIES = ["egypt", "uae", "dubai", "saudi", "riyadh", "qatar", "kuwait", "bahrain", "oman", "jordan", "morocco", "tunisia", "nigeria", "kenya", "south africa", "united states", "usa", "us", "canada", "uk", "united kingdom", "london", "ireland", "germany", "france", "netherlands", "spain", "portugal", "poland", "italy", "india", "pakistan", "singapore", "australia", "japan", "korea", "china", "philippines", "thailand", "indonesia", "brazil", "mexico", "europe", "gulf", "africa", "asia", "remote"];
@@ -563,7 +564,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     const f = fileIn.files[0]; if (!f) return; say("📄 " + f.name, true); say("Reading your CV…");
     try {
       await loadIdx();
-      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch("jobs.js?v=41").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
+      if (typeof JOBS === "undefined" && !window.JOBS) { const r = await fetch(UA_BASE + "jobs.js?v=41").then((x) => x.text()); window.JOBS = new Function(r + ";return JOBS;")(); }
       const text = await Promise.race([readFile(f), new Promise((_, j) => setTimeout(() => j(new Error("timeout")), 20000))]);
       if (!text || text.trim().length < 80) throw new Error("empty");
       say(matchCV(text));
