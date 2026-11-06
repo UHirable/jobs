@@ -1238,3 +1238,15 @@ textarea { resize: vertical; }
 .kw-list{padding-left:20px;line-height:1.6}.kw-list li{margin:6px 0}
 .kw-tbl{margin:10px 0 6px}.kw-tbl th:first-child{width:30%}.kw-tbl td{font-weight:600}.kw-tbl td:nth-child(2){font-weight:800;color:#0112ff}
 .kw-note{font-size:.8rem;color:#6b7280;margin:0 0 6px}
+/* home: 2x2 hero buttons, trust pills on scan strip, Lilo bottom-left */
+@media (min-width:721px){.hero-actions.hero-float{display:grid;grid-template-columns:repeat(2,max-content);justify-content:start}}
+.hm-trust{display:flex;flex-direction:column;gap:5px;margin-left:auto;font-size:.72rem;font-weight:800;color:#141a52}
+.hm-trust i{font-style:normal;display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.55);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.hm-trust svg{width:13px;height:13px}
+.hm-trust b{background:#141a52;color:#ffd23f;border-radius:999px;padding:0 5px;font-size:.66rem}
+.hm-go{margin-left:0}
+@media (max-width:720px){.hm-trust{flex-direction:row;justify-content:center;margin:0 auto;width:100%}}
+.ua-btn{right:auto;left:16px;bottom:16px}
+.ua-panel{right:auto;left:16px;bottom:92px}
+.lilo-hi{right:auto;left:calc(100% + 6px);transform-origin:left center}
+@media (max-width:720px){.ua-btn{right:auto;left:16px;bottom:16px}.ua-panel{right:auto;left:16px;bottom:92px}}
