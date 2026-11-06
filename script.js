@@ -393,7 +393,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   const q=document.getElementById("hs-q"),res=document.getElementById("hs-res");
   if(!q)return;
   let loading=null;
-  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=14";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
+  const load=()=>loading||(loading=new Promise(r=>{if(window.SEARCH_INDEX)return r();const s=document.createElement("script");s.src="search-index.js?v=15";s.onload=r;s.onerror=r;document.head.appendChild(s);}));
   const esc=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const norm=s=>String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"");
   const ORDER={"Page":0,"Job":1,"CV Tool":2,"Career Tool":3,"Hiring Partner":4,"Job Site":5,"Event":6};
@@ -442,7 +442,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   chips.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
   const L = (t, u) => `<a href="${u}">${t}</a>`;
   let idx = null, loading = null;
-  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=14"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
+  const loadIdx = () => loading || (loading = new Promise((r) => { if (window.SEARCH_INDEX) { idx = window.SEARCH_INDEX; return r(); } const s = document.createElement("script"); s.src = "search-index.js?v=15"; s.onload = () => { idx = window.SEARCH_INDEX || []; r(); }; s.onerror = r; document.head.appendChild(s); }));
   const find = (words, kinds, n) => (idx || []).filter((e) => (!kinds || kinds.includes(e.k)) && words.some((w) => (e.t + " " + e.d).toLowerCase().includes(w))).slice(0, n || 5);
   const list = (items) => items.length ? "<ul>" + items.map((e) => `<li>${L(escapeHTML(e.t), e.u)}${e.d ? " <small>· " + escapeHTML(e.d) + "</small>" : ""}</li>`).join("") + "</ul>" : "";
   const COUNTRIES = ["egypt", "uae", "dubai", "saudi", "riyadh", "qatar", "kuwait", "bahrain", "oman", "jordan", "morocco", "tunisia", "nigeria", "kenya", "south africa", "united states", "usa", "us", "canada", "uk", "united kingdom", "london", "ireland", "germany", "france", "netherlands", "spain", "portugal", "poland", "italy", "india", "pakistan", "singapore", "australia", "japan", "korea", "china", "philippines", "thailand", "indonesia", "brazil", "mexico", "europe", "gulf", "africa", "asia", "remote"];
@@ -463,7 +463,7 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
     if (has("event", "conference", "fair", "summit", "معرض", "مؤتمر", "فعاليات", "ايفنت")) return (ar ? "فعاليات التوظيف ومعارض الوظايف ومؤتمرات الـ HR حوالين العالم: " : "Hiring events, career fairs and HR conferences around the world: ") + L(ar ? "الفعاليات" : "Events", "events.html");
     if (has("newsletter", "subscribe", "shortlist", "نشره", "نيوزليتر")) return (ar ? "نشرتنا الأسبوعية اسمها The Shortlist على لينكدإن: " : "Our weekly newsletter is The Shortlist, on LinkedIn: ") + L(ar ? "U Hirable على لينكدإن" : "U Hirable on LinkedIn", "https://www.linkedin.com/company/uhirable") + (ar ? ". كل عدد فيه أدوات مجانية ونصايح سي في ومين يقدر يقدّم فعلًا." : ". Each issue: free tools, CV tips and who can actually apply.");
     if (has("contact", "whatsapp", "email", "talk", "human", "تواصل", "واتس", "ايميل", "اكلم حد", "كلمني", "بني ادم")) return (ar ? "تقدر تكلمنا على " : "You can reach us on ") + WAL + (ar ? " أو إيميل " : " or email ") + "<a href=\"mailto:u.hirable@proton.me\">u.hirable@proton.me</a>.";
-    if (has("salary", "pay", "مرتب", "راتب", "فلوس", "بيدفع", "الاجر")) return (ar ? "كل وظيفة في " : "Every role on ") + L(ar ? "الوظايف المفتوحة" : "Open Roles", "jobs.html") + (ar ? " مكتوب على الكارت بتاعها نطاق المرتب، فتقدر تفلتر قبل ما تقدّم." : " shows the salary range on its card, so you can filter before you apply.");
+    if (has("salary", "pay", "مرتب", "راتب", "فلوس", "بيدفع", "الاجر")) return (ar ? "كل وظيفة في " : "Every role on ") + L(ar ? "الوظايف المفتوحة" : "Search Jobs", "jobs.html") + (ar ? " مكتوب على الكارت بتاعها نطاق المرتب، فتقدر تفلتر قبل ما تقدّم." : " shows the salary range on its card, so you can filter before you apply.");
     if (has("top talent", "experienced", "senior", "get matched", "paraform", "خبره كبيره", "سينيور")) return (ar ? "عندك 5 سنين خبرة أو أكتر؟ شارك بروفايلك مرة واحدة واتطابق مع شركات كبيرة: " : "5+ years of experience? Share your profile once and get matched with top companies: ") + L(ar ? "Top Talent" : "Top Talent", "talent.html");
     if (has("free", "مجاني", "ببلاش", "مجانا", "بلاش")) return (ar ? "كل حاجة على U Hirable مجانية: الوظايف، وأنا، ومطابقة السي في. وفي أدوات مجانية بالكامل أو ليها خطة مجانية هنا: " : "Everything on U Hirable is free: the jobs, me, and the CV match. Tools that are 100% free or have a free plan are here: ") + L(ar ? "أدوات السي في" : "CV Tools", "cv-tools.html") + " · " + L("Career Boost", "career-boost.html");
     let c = COUNTRIES.filter((x) => new RegExp("(^|[^a-z])" + x + "($|[^a-z])").test(t)).sort((a, b) => b.length - a.length)[0];
@@ -474,13 +474,13 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
       let out = key ? (ar ? `ده اللي لقيته لـ <b>${escapeHTML(key)}</b>:` : `Here's what I found for <b>${escapeHTML(key)}</b>:`) : (ar ? "مواقع التوظيف حسب المنطقة (100+ موقع): " : "Browse 100+ job sites by region: ") + L(ar ? "مواقع التوظيف" : "Job Sites", "job-sites.html");
       if (jobs.length) out += "<br><b>" + (ar ? "وظايف مفتوحة" : "Open roles") + "</b>" + list(jobs);
       if (sites.length) out += "<br><b>" + (ar ? "مواقع توظيف" : "Job sites") + "</b>" + list(sites);
-      if (key && !jobs.length && !sites.length) out += (ar ? " مفيش حاجة محددة لسه. جرب " : " nothing specific yet. Try ") + L(ar ? "الوظايف المفتوحة" : "Open Roles", "jobs.html") + (ar ? " أو " : " or ") + L(ar ? "مواقع التوظيف" : "Job Sites", "job-sites.html") + ".";
+      if (key && !jobs.length && !sites.length) out += (ar ? " مفيش حاجة محددة لسه. جرب " : " nothing specific yet. Try ") + L(ar ? "الوظايف المفتوحة" : "Search Jobs", "jobs.html") + (ar ? " أو " : " or ") + L(ar ? "مواقع التوظيف" : "Job Sites", "job-sites.html") + ".";
       else if (key) out += "<br>" + L(ar ? "كل مواقع التوظيف ←" : "All job sites →", "job-sites.html");
       return out;
     }
     if (has("job", "role", "vacanc", "hiring", "وظيف", "وظايف", "شغل", "شغلانه", "فرص", "عمل", "فرصه", "تقديم", "اقدم", "تدريب", "انترن")) {
       const r = find(t.split(/\s+/).filter((w) => w.length > 3 && !/^(وظيف|وظايف|شغل|عمل|فرص)/.test(w)), ["Job"], 5);
-      return r.length ? (ar ? "وظايف قريبة من اللي بتدور عليه:" : "Roles matching your search:") + list(r) + L(ar ? "كل الوظايف المفتوحة ←" : "See all open roles →", "jobs.html") : (ar ? "كل الوظايف المفتوحة هنا: " : "Browse all open roles here: ") + L(ar ? "الوظايف المفتوحة" : "Open Roles", "jobs.html") + (ar ? " — فلتر بالدولة أو ابحث بعنوان الوظيفة. أو ارفع السي في وهطابقه ليك." : " — filter by country or search a title. Or upload your CV and I'll match it for you.");
+      return r.length ? (ar ? "وظايف قريبة من اللي بتدور عليه:" : "Roles matching your search:") + list(r) + L(ar ? "كل الوظايف المفتوحة ←" : "See all open roles →", "jobs.html") : (ar ? "كل الوظايف المفتوحة هنا: " : "Browse all open roles here: ") + L(ar ? "الوظايف المفتوحة" : "Search Jobs", "jobs.html") + (ar ? " — فلتر بالدولة أو ابحث بعنوان الوظيفة. أو ارفع السي في وهطابقه ليك." : " — filter by country or search a title. Or upload your CV and I'll match it for you.");
     }
     const r = find(t.split(/\s+/).filter((w) => w.length > 3), null, 5);
     if (r.length) return (ar ? "ده اللي لقيته:" : "Here's what I found:") + list(r);
