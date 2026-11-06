@@ -1266,3 +1266,4 @@ textarea { resize: vertical; }
 .browse-c{margin-top:34px}.browse-c h2{font-size:1.4rem;margin:0 0 6px}.browse-c>p{color:#5b6391;margin:0 0 14px}
 .browse-c .pj-rel a{background:#fff;border:1.5px solid #e6e9ff}
 @media (max-width:900px){.pj-hero{grid-template-columns:1fr}.pj-facts{flex-direction:row;flex-wrap:wrap}.pj-facts div{flex:1 1 160px}}
+.hero-float .btn::after{display:none;animation:none}
