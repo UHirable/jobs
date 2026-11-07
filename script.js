@@ -308,7 +308,7 @@ if (list && typeof JOBS !== "undefined") {
           <div class="chips">${jobChips(j)}</div>${eligHTML(j)}
           <p class="desc">${escapeHTML(j.brief || "")}</p>
           <div class="job-actions">
-            <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply now →</a>
+            <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply →</a>
             <a class="btn btn-sm btn-soft" href="${jobPage(j)}">More details</a>
           </div>
         </article>`)
@@ -369,7 +369,7 @@ if (jobContent && typeof JOBS !== "undefined") {
       list("Nice to have", j.preferred) +
       list("What to submit", j.submissions) +
       (j.matchNote ? `<p class="match-note big">✨ ${MATCH_NOTE}</p>` : "") +
-      `<div class="detail-apply"><a class="btn btn-primary apply-btn" href="${escapeHTML(jobApply(j) || "#")}" target="_blank" rel="noopener">Apply now →</a></div>`;
+      `<div class="detail-apply"><a class="btn btn-primary apply-btn" href="${escapeHTML(jobApply(j) || "#")}" target="_blank" rel="noopener">Apply →</a></div>`;
     if (j.matchNote) {
       const p = document.querySelector(".apply-card > p");
       if (p) p.textContent = MATCH_NOTE;

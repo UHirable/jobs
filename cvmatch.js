@@ -172,6 +172,7 @@
     } catch (e) { cv = ""; fileOut.className = "cm-file bad"; const scanned = window.UA_lastMeta && window.UA_lastMeta.pages && !(window.UA_lastMeta.chars > 0); fileOut.textContent = scanned ? "⚠ " + f.name + " has no selectable text: it looks like a scanned image or a picture. ATS can't read it either. Export a text PDF from Word/Google Docs, or paste your CV text below." : "Couldn't read " + f.name + ". Try a PDF or Word file with selectable text, or paste your CV text below."; }
   }
   fileIn.addEventListener("change", () => loadFile(fileIn.files[0]));
+  try { const jj = sessionStorage.getItem("uh-cm-job"); if (jj && location.hash === "#from-card") { jobTa.value = jj; sessionStorage.removeItem("uh-cm-job"); } } catch (e) {}
   try { const t = sessionStorage.getItem("uh-cv-text"); if (t && location.hash === "#from-builder") { cv = t; fileOut.hidden = false; fileOut.className = "cm-file"; fileOut.textContent = "📄 CV from the builder · loaded ✓"; sessionStorage.removeItem("uh-cv-text"); $("#cm-job").focus(); } } catch (e) {}
   ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
   ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
