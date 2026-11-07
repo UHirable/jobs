@@ -6,6 +6,8 @@
   .cv-fit-btn:hover{transform:translateY(-1px)}
   .cv-fit-btn svg{width:24px;height:24px}
   .cv-fit-btn span{font-size:.6rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+  .cv-fit-btn.cv-fit-wide{flex-direction:row;width:100%;min-height:0;padding:12px 14px;gap:10px;margin-top:12px}
+  .cv-fit-btn.cv-fit-wide span{font-size:.82rem;letter-spacing:0;text-transform:none}
   .uhcv-ov{position:fixed;inset:0;z-index:9999;background:rgba(5,11,63,.6);display:flex;align-items:center;justify-content:center;padding:14px}
   .uhcv-ov[hidden]{display:none}
   .uhcv-box{background:#fff;border-radius:20px;width:100%;max-width:560px;height:min(88vh,760px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 60px -20px rgba(5,11,63,.6)}
@@ -28,7 +30,15 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !ov.hidden) close(); });
   document.addEventListener("click", (e) => {
     const b = e.target.closest && e.target.closest(".cv-fit-btn"); if (!b) return;
-    e.preventDefault(); open(b.dataset.cvtitle || "", b.dataset.cvtext || "");
+    e.preventDefault();
+    const id = b.dataset.jobid;
+    const list = typeof JOBS !== "undefined" ? JOBS : (window.JOBS || null);
+    const j = id && list ? list.find((x) => x.id === id) : null;
+    if (j) {
+      const A = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+      const text = [j.title, j.company, j.industry, j.location, j.brief, j.overview, ...A(j.responsibilities), ...A(j.requirements), ...A(j.preferred), j.eligibility, j.compensation].filter(Boolean).join("\n");
+      open(j.title + (j.company ? " · " + j.company : ""), text);
+    } else open(b.dataset.cvtitle || "", b.dataset.cvtext || "");
   });
   window.UHCvPop = { open, close };
 

@@ -310,6 +310,7 @@ if (list && typeof JOBS !== "undefined") {
           <div class="job-actions">
             <a class="btn btn-primary btn-sm apply-btn" href="${escapeHTML(jobApply(j))}" target="_blank" rel="noopener">Apply →</a>
             <a class="btn btn-sm btn-soft" href="${jobPage(j)}">More details</a>
+            <button type="button" class="cv-fit-btn" data-jobid="${escapeHTML(jobId(j))}" aria-label="Check my CV match for this job"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 3h12l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="currentColor" opacity=".18"/><path d="M8 3h12l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 3v6h6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M11 20.5l3 3 6.5-6.5" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>CV Match</span></button>
           </div>
         </article>`)
       .join("");
@@ -337,6 +338,7 @@ if (jobContent && typeof JOBS !== "undefined") {
     document.getElementById("job-meta").textContent = [j.company, j.industry].filter(Boolean).join(" · ");
     document.getElementById("job-chips").innerHTML = jobChips(j);
     document.getElementById("job-apply").href = jobApply(j) || "#";
+    { const ja = document.getElementById("job-apply"); if (ja && !document.getElementById("job-cvfit")) ja.insertAdjacentHTML("afterend", `<button type="button" id="job-cvfit" class="cv-fit-btn cv-fit-wide" data-jobid="${escapeHTML(jobId(j))}"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 3h12l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="currentColor" opacity=".18"/><path d="M8 3h12l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 3v6h6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M11 20.5l3 3 6.5-6.5" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Check my CV match for this job</span></button>`); }
 
     const list = (title, items) =>
       arr(items).length ? `<h2>${title}</h2><ul>${arr(items).map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>` : "";
@@ -579,3 +581,6 @@ document.addEventListener("click", () => document.querySelectorAll(".dd.open").f
   btn.addEventListener("click", () => (panel.classList.contains("open") ? close() : open()));
   panel.querySelector(".ua-head button").addEventListener("click", close);
 })();
+
+// CV Match popup (loaded once on every page)
+if (!window.UHCvPop && !document.querySelector('script[src$="cv-popup.js"]')) { const _cvs = document.createElement("script"); _cvs.src = UA_BASE + "cv-popup.js"; document.head.appendChild(_cvs); }

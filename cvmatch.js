@@ -162,17 +162,18 @@
     if (p >= 35) return ["🤔 PARTIAL MATCH", "Fix the gaps before you apply.", "You match some requirements but important ones are missing. Add real experience with the missing keywords, or target a closer role.", "y"];
     return ["⚠️ WEAK MATCH", "This one is a stretch.", "Most of the must-haves aren't on your CV. Apply only if you can honestly add the missing skills, or use Lilo to find roles closer to your profile.", "r"];
   }
-  let cv = "", lastResult = null;
+  let cv = "", lastResult = null; const FROM_CARD = location.hash === "#from-card";
   async function loadFile(f) {
     if (!f) return; fileOut.hidden = false; fileOut.className = "cm-file"; fileOut.textContent = "📄 " + f.name + " · reading…";
     try {
       const t = await Promise.race([window.UA_readFile(f), new Promise((_, j) => setTimeout(() => j(new Error("timeout")), 20000))]);
       if (!t || t.trim().length < 80) throw new Error("empty");
-      cv = t; cvText.value = ""; fileOut.textContent = "📄 " + f.name + " · read ✓ (" + Math.round(t.split(/\s+/).length) + " words)";
+      cv = t; cvText.value = ""; fileOut.textContent = "📄 " + f.name + " · read ✓ (" + Math.round(t.split(/\s+/).length) + " words)"; if (FROM_CARD && jobTa.value.trim().length >= 60) go.click();
     } catch (e) { cv = ""; fileOut.className = "cm-file bad"; const scanned = window.UA_lastMeta && window.UA_lastMeta.pages && !(window.UA_lastMeta.chars > 0); fileOut.textContent = scanned ? "⚠ " + f.name + " has no selectable text: it looks like a scanned image or a picture. ATS can't read it either. Export a text PDF from Word/Google Docs, or paste your CV text below." : "Couldn't read " + f.name + ". Try a PDF or Word file with selectable text, or paste your CV text below."; }
   }
   fileIn.addEventListener("change", () => loadFile(fileIn.files[0]));
-  try { const jj = sessionStorage.getItem("uh-cm-job"); if (jj && location.hash === "#from-card") { jobTa.value = jj; sessionStorage.removeItem("uh-cm-job"); } } catch (e) {}
+  try { const jj = sessionStorage.getItem("uh-cm-job"); if (jj && FROM_CARD) { jobTa.value = jj; sessionStorage.removeItem("uh-cm-job"); } } catch (e) {}
+  if (FROM_CARD) { const hs = document.querySelector(".cm-hl span"); if (hs) hs.textContent = "Upload your CV and we'll compare it with this job's full description. Nothing leaves your browser."; }
   try { const t = sessionStorage.getItem("uh-cv-text"); if (t && location.hash === "#from-builder") { cv = t; fileOut.hidden = false; fileOut.className = "cm-file"; fileOut.textContent = "📄 CV from the builder · loaded ✓"; sessionStorage.removeItem("uh-cv-text"); $("#cm-job").focus(); } } catch (e) {}
   ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
   ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
@@ -203,12 +204,13 @@
     const found = [...r.hardHit, ...r.softHit].slice(0, 20), missing = [...r.hardMiss, ...r.softMiss].slice(0, 16);
     $("#cm-found-n").textContent = found.length; $("#cm-miss-n").textContent = missing.length;
     const pill = (k, soft) => `<span class="${soft ? "soft" : ""}">${esc(k)}</span>`;
-    $("#cm-found").innerHTML = found.length ? found.map((k) => pill(k, SOFT.has(k))).join("") : "<span>No clear keyword matches</span>";
-    $("#cm-miss").innerHTML = missing.length ? missing.map((k) => pill(k, SOFT.has(k))).join("") : "<span>Nothing important missing 🎉</span>";
+    const noSkills = !r.hit.length && !r.miss.length;
+    $("#cm-found").innerHTML = found.length ? found.map((k) => pill(k, SOFT.has(k))).join("") : noSkills ? "<span>Not enough job details to compare skills</span>" : "<span>No clear keyword matches</span>";
+    $("#cm-miss").innerHTML = missing.length ? missing.map((k) => pill(k, SOFT.has(k))).join("") : noSkills ? "<span>Not enough job details to compare skills</span>" : "<span>Nothing important missing 🎉</span>";
     const hv = r.relFound ? `about ${r.have} in similar roles (${r.total} in total)` : `about ${r.have || "0"}`; $("#cm-exp").textContent = (r.yearsNote || "") + " "; $("#cm-exp").textContent = (r.need ? (r.have >= r.need ? `The ad asks for ${r.need}+ years; your CV shows ${hv}. ✓` : `The ad asks for ${r.need}+ years; your CV shows ${hv}. Make your years of experience in this field explicit.`) : (r.have ? `Your CV shows ${hv} years of experience.` : "Add your years of experience clearly (e.g. \"4+ years in sales\").")) + (r.yearsNote || "");
     // suggestions: one ready line per missing keyword
     const sug = [...r.hardMiss, ...r.softMiss].slice(0, 6);
-    $("#cm-sug").innerHTML = sug.length ? sug.map((k) => `<li><b>${esc(k)}</b><span>${esc(suggestion(k, SOFT.has(k)))}</span></li>`).join("") : "<li><b>Nothing to add</b><span>Your CV already covers the must-haves. Tailor the summary and apply.</span></li>";
+    $("#cm-sug").innerHTML = sug.length ? sug.map((k) => `<li><b>${esc(k)}</b><span>${esc(suggestion(k, SOFT.has(k)))}</span></li>`).join("") : (noSkills ? "<li><b>Not enough job details</b><span>The job description doesn't list clear skills, so this score is only a rough estimate. Read the full description before applying.</span></li>" : "<li><b>Nothing to add</b><span>Your CV already covers the must-haves. Tailor the summary and apply.</span></li>");
     // headline check
     const hl = $("#cm-headline");
     if (r.titleWords.length) { hl.className = "cm-note " + (r.titleInTop >= 0.5 ? "ok" : "warn"); hl.innerHTML = r.titleInTop >= 0.5 ? `<b>✓ Headline matches.</b> The top of your CV already mentions "${esc(r.titleWords.slice(0, 3).join(" "))}".` : `<b>✗ Headline doesn't match.</b> Put the job title (${esc(r.titleWords.slice(0, 3).join(" "))}) in your first 2 lines: that's the first thing ATS and recruiters look at.`; hl.hidden = false; } else hl.hidden = true;
