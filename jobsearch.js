@@ -1,8 +1,21 @@
-// Live jobs on the Search Jobs page. Our own jobs render first (script.js); this adds live results below via our Cloudflare worker.
+// Live jobs on the Search Jobs page. Our own jobs render first (script.js); this adds live results below via our Cloudflare worker (Jooble) + WhatJobs directly from browser.
 (() => {
   const API = "https://uhirable-jobs.amel-moussa10.workers.dev/";
-  const CC = { "United States": "us", "Egypt": "eg", "Bahrain": "bh", "Kuwait": "kw", "Qatar": "qa", "Saudi Arabia": "sa", "United Arab Emirates": "ae" };
-  const ORDER = ["United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Egypt"];
+
+  // WhatJobs: browser-side calls (publisher IDs are not secret)
+  const WJ = {
+    eg: { publisher: "7501", location: "Egypt" },
+    uk: { publisher: "7502", location: "United Kingdom" },
+    ca: { publisher: "7503", location: "Canada" },
+    de: { publisher: "7505", location: "Germany" },
+    sa: { publisher: "7506", location: "Saudi Arabia" },
+    qa: { publisher: "7507", location: "Qatar" },
+    kw: { publisher: "7508", location: "Kuwait" },
+    bh: { publisher: "7509", location: "Bahrain" },
+  };
+
+  const CC = { "United States": "us", "Egypt": "eg", "Bahrain": "bh", "Kuwait": "kw", "Qatar": "qa", "Saudi Arabia": "sa", "United Arab Emirates": "ae", "United Kingdom": "uk", "Canada": "ca", "Germany": "de" };
+  const ORDER = ["United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Egypt", "United Kingdom", "Canada", "Germany"];
   const $ = (s) => document.querySelector(s);
   const esc = (t) => String(t || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const sel = $("#country-filter"), box = $("#search-box"), wrap = $("#live-wrap"), list = $("#live-list"), status = $("#live-status"), more = $("#live-more"), ownList = $("#jobs-list"), countEl = $("#jobs-count");
@@ -20,6 +33,37 @@
   const card = (j, i) => { const desc = clean(j.snippet).slice(0, 170); const chips = [j.location && `<span class="chip">📍 ${esc(j.location)}</span>`, j.type && `<span class="chip pc">${esc(j.type)}</span>`, j.salary && `<span class="chip gold">${esc(j.salary)}</span>`, ago(j.updated) && `<span class="chip">${ago(j.updated)}</span>`].filter(Boolean).join("");
     return `<article class="job-card live-card"><span class="promo-badge live">Live</span><div class="job-head"><div class="icon3d ${i % 2 ? "gold" : ""} js-ini">${esc((j.company || "?").trim().charAt(0).toUpperCase())}</div><div><h3>${esc(j.title)}</h3><p class="meta">${esc(j.company || "Company not listed")}${j.source && j.source !== "jooble" ? " · via " + esc(j.source) : ""}</p></div></div><div class="chips">${chips}</div><p class="desc">${esc(desc)}${desc.length >= 170 ? "…" : ""}</p><div class="job-actions"><a class="btn btn-primary btn-sm apply-btn" href="${esc(j.link)}" target="_blank" rel="noopener nofollow">View &amp; apply →</a><a class="btn btn-sm btn-soft" href="cv-match.html">Check my CV fit</a></div></article>`; };
 
+  async function fetchWhatJobs(cc, kw, pg) {
+    const cfg = WJ[cc];
+    if (!cfg) return { jobs: [], totalCount: 0 };
+    try {
+      const params = new URLSearchParams({
+        publisher: cfg.publisher,
+        keyword:   kw || "jobs",
+        location:  cfg.location,
+        limit:     "20",
+        page:      String(pg),
+      });
+      const r = await fetch("https://api.whatjobs.com/api/v1/jobs.json?" + params);
+      if (!r.ok) return { jobs: [], totalCount: 0 };
+      const d = await r.json();
+      const jobs = (d.data || []).map((j) => ({
+        title:    j.title    || "",
+        company:  j.company  || "",
+        location: j.location || "",
+        salary:   j.salary   || "",
+        snippet:  j.snippet  || "",
+        link:     j.url      || "",
+        type:     j.job_type || "",
+        updated:  j.age      || "",
+        source:   "whatjobs",
+      }));
+      return { jobs, totalCount: d.total || jobs.length };
+    } catch (e) {
+      return { jobs: [], totalCount: 0 };
+    }
+  }
+
   async function live(reset) {
     const country = sel.value, kw = box.value.trim();
     const liveCountry = CC[country] && country !== "United States";
@@ -30,9 +74,18 @@
     const my = ++seq; wrap.hidden = false; status.className = "js-bar"; status.textContent = "Loading live jobs in " + (country === "all" ? "the United States" : country) + "…"; more.hidden = true;
     if (liveCountry && ownList.querySelector(".empty")) { ownList.innerHTML = ""; if (countEl) countEl.textContent = ""; }
     try {
-      const r = await fetch(API + "?src=jooble&cc=" + cc + "&q=" + encodeURIComponent(kw) + "&page=" + page);
-      if (my !== seq) return; if (!r.ok) throw new Error("HTTP " + r.status);
-      const d = await r.json(); const jobs = d.jobs || []; total = d.totalCount || jobs.length;
+      const hasWJ = !!WJ[cc];
+      const jooblePromise = fetch(API + "?src=jooble&cc=" + cc + "&q=" + encodeURIComponent(kw) + "&page=" + page).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+      const wjPromise = hasWJ ? fetchWhatJobs(cc, kw, page) : Promise.resolve({ jobs: [], totalCount: 0 });
+
+      const [joobleData, wjData] = await Promise.all([jooblePromise, wjPromise]);
+      if (my !== seq) return;
+
+      const jJobs = joobleData.jobs || [];
+      const wJobs = wjData.jobs || [];
+      const jobs  = [...jJobs, ...wJobs];
+      total = Math.max(joobleData.totalCount || 0, wjData.totalCount || 0, jobs.length);
+
       list.insertAdjacentHTML("beforeend", jobs.map((j, i) => card(j, shown + i)).join("")); shown += jobs.length;
       const where = country === "all" ? "the United States" : country;
       status.innerHTML = shown ? `<b>${total.toLocaleString()}</b> live jobs${kw ? ` for <b>${esc(kw)}</b>` : ""} in ${esc(where)} · from hundreds of job sites` : `No live jobs${kw ? ` for <b>${esc(kw)}</b>` : ""} in ${esc(where)} right now. Try a shorter keyword.`;
