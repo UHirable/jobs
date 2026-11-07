@@ -55,7 +55,7 @@
 
   // ---------- exports ----------
   function plainText() { const S = sections(); let t = `${state.name}\n${[state.title, state.city, state.email, state.phone, state.linkedin].filter(Boolean).join(" · ")}\n`; for (const s of S) { t += `\n${s.h.toUpperCase()}\n`; if (s.text) t += s.text + "\n"; if (s.items) for (const it of s.items) { if (it.t) t += it.t + (it.d ? " | " + it.d : "") + "\n"; it.b.forEach((b) => t += "- " + b + "\n"); } } return t; }
-  const dl = (blob, name) => { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); };
+  const dl = (blob, name) => { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); if (window.UHNextStep) window.UHNextStep("builder"); };
   const fname = () => ((state.name || "my-cv").trim().replace(/[^a-z0-9]+/gi, "-").toLowerCase() || "my-cv") + "-cv";
   async function ensureDocx() { if (window.docx) return; await new Promise((r, j) => { const s = document.createElement("script"); s.src = "lib-docx.js?v=1"; s.onload = r; s.onerror = j; document.head.appendChild(s); }); }
   async function exportDocx() {
