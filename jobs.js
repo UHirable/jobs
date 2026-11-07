@@ -1887,5 +1887,194 @@ const JOBS = [
       "Availability to join and notice period",
       "Salary expectations"
     ]
+  },
+  {
+    id: "blacksmith-staff-product-engineer",
+    page: "job-blacksmith-staff-product-engineer.html",
+    title: "Staff Product Engineer",
+    company: "Blacksmith",
+    logo: "logo-co-blacksmith.png",
+    industry: "AI-Native Developer Infrastructure",
+    countries: ["United States"],
+    location: "New York, NY (Flatiron) · On-site 5d/wk",
+    tags: ["On-site", "Full-time", "$280K – $380K + equity", "Visa transfers accepted"],
+    brief: "Set the technical direction for Blacksmith's new 0-to-1 AI-native developer products at a $58.5M-funded startup that hit ~$10M ARR in under 2 years and tripled revenue in 2026.",
+    eligibility: "Visa transfers accepted (OPT, H1B transfer); no net new H1Bs. On-site 5 days a week in New York City (Flatiron).",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Blacksmith is the fastest way to run GitHub Actions — it orchestrates tens of millions of Firecracker VMs each month and runs CI for 3,000+ companies. Backed by Google Ventures and Peak XV, the company hit ~$10M ARR in under 2 years and tripled revenue since early 2026. With 37 people and a world-class engineering team (ex-Google Colossus lead, Cockroach Labs founding engineers), Blacksmith is now extending from CI into agent sandboxes and building its own AI coding agent. This Staff role owns the architecture and 0-to-1 build of products that don't exist in the industry today.",
+    responsibilities: [
+      "Own and drive the architectural direction for new AI-native developer products from 0 to 1.",
+      "Translate business and product strategy into long-term technical roadmaps and execution plans.",
+      "Be accountable for production outcomes including reliability, performance and operational excellence.",
+      "Mentor senior engineers and act as a force multiplier across the team.",
+      "Operate in ambiguous problem spaces where both the problem and solution need to be defined."
+    ],
+    requirements: [
+      "7–20 years as a full-stack engineer owning 0-to-1 product builds end-to-end.",
+      "Track record of leading technical direction of a product from early stage to industry-recognized customer experience.",
+      "Power user of coding agents; comfortable operating at the forefront of agentic development.",
+      "Track record of leading through influence while operating as an individual contributor.",
+      "Strong communication skills with engineers, leadership and non-technical stakeholders.",
+      "Visa transfers accepted (OPT, H1B transfer).",
+      "On-site 5 days a week in NYC (Flatiron)."
+    ],
+    compensation: "$280K – $380K base plus significant early-stage equity. TypeScript, React stack. Interview: Initial Screen (30 min) → Technical Interview I (45–60 min) → Technical Interview II (2 hrs) → Final Onsite (30–45 min)."
+  },
+  {
+    id: "castelion-tooling-engineer",
+    page: "job-castelion-tooling-engineer.html",
+    title: "Tooling Engineer",
+    company: "Castelion",
+    logo: "logo-co-castelion.png",
+    industry: "Defense · Hypersonics",
+    countries: ["United States"],
+    location: "Torrance, CA · On-site 5d/wk",
+    tags: ["On-site", "Full-time", "$140K – $200K + equity", "US citizens / Green Card"],
+    brief: "Design large-scale, safety-critical tooling for solid rocket motor production at a hypersonics defense company with $469M+ in funding and a $23M Navy contract — handling thousands of pounds of energetic materials.",
+    eligibility: "US citizens or Green Card holders only. No visa sponsorship. On-site 5 days a week in Torrance, CA.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Castelion is building long-range hypersonic strike systems to address a critical US national security gap — the first hypersonics company to move beyond concepts to actual production deliverables. Backed by $469M+ from Andreessen Horowitz, Lightspeed and General Catalyst, with a $23M+ Navy order for 50 units in 2027. 300 people, fully on-site. This Tooling Engineer role directly enables delivery of the first production units, designing the fixtures and systems that safely process thousands of pounds of energetic materials.",
+    responsibilities: [
+      "Design and develop large-scale tooling (jigs, fixtures, molds, handling assemblies) for safely moving and processing 600+ gallon, 2,000+ lb batches of oxidizer precursor chemicals.",
+      "Engineer temperature control, material movement and safe breakdown systems for solid rocket motor casting.",
+      "Lead tooling projects end-to-end from concept to production floor, including FEA validation, tolerance stack-ups and DFM.",
+      "Collaborate with manufacturing, design and production teams to meet cost, quality and delivery targets.",
+      "Mentor junior tooling engineers and technicians."
+    ],
+    requirements: [
+      "3–10 years of tooling design for large-scale, heavy or hazardous hardware.",
+      "CAD proficiency: SolidWorks, NX or CATIA; FEA, GD&T, tolerance stack-up analysis.",
+      "Experience in aerospace, defense or industrial manufacturing environments.",
+      "US citizen or Green Card holder; no visa sponsorship.",
+      "On-site 5 days a week in Torrance, CA."
+    ],
+    compensation: "$140K – $200K base (may flex higher for exceptional candidates) plus competitive equity. Interview: Recruiter Screen (30 min) → Hiring Manager Screen (30 min) → On-Site Interview (3–4 hrs)."
+  },
+  {
+    id: "retell-ai-full-stack-software-engineer",
+    page: "job-retell-ai-full-stack-software-engineer.html",
+    title: "Full-Stack Software Engineer",
+    company: "Retell AI",
+    logo: "logo-co-retell-ai.png",
+    industry: "Voice AI · Contact Center",
+    countries: ["United States"],
+    location: "Redwood City, CA · On-site 5d/wk",
+    tags: ["On-site", "Full-time", "$215K – $290K + equity", "Visa transfers & new H1B accepted"],
+    brief: "Shape the core of Retell AI's voice automation platform (React, TypeScript, Node.js) at a startup that grew from $5M to $80M ARR in 2025 with 52 people — bridging backend architecture and frontend experiences.",
+    eligibility: "Open to visa transfers (OPT, H1B transfer) and new H1B, TN. Can support visa and relocation for the US, Canada, Australia or Singapore. On-site 5 days a week in Redwood City, CA.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Retell AI is reimagining the call center with cutting-edge voice AI — thousands of companies use Retell's agents for sales, support and logistics calls. Backed by Y Combinator and Alt Capital, they scaled from $5M to $80M ARR in 2025 with a 52-person team (top 50 AI app on a16z). Vision: an AI-native CX platform where entire contact centers are powered by AI workers that execute, monitor and improve customer interactions autonomously. This full-stack role works across the entire platform alongside the founding team.",
+    responsibilities: [
+      "Develop core features: prompt orchestration, dashboards, analytics and telephony integrations.",
+      "Build scalable full-stack systems — polished UIs, robust APIs and DevOps workflows.",
+      "Lead projects from architecture to production, owning coding, deployment and iteration.",
+      "Create intuitive interfaces and APIs enabling customers to activate in hours.",
+      "Support customer onboarding, debug issues and turn feedback into product enhancements."
+    ],
+    requirements: [
+      "5+ years as a 50:50 full-stack engineer at multiple startups or in big tech.",
+      "React, TypeScript, Node.js, Python, AWS.",
+      "Visa transfers accepted; new H1B and TN supported; relocation support available.",
+      "On-site 5 days a week in Redwood City, CA."
+    ],
+    compensation: "$215K – $290K base plus extremely competitive equity. Interview: Application Review → Online Assessment (CodeSignal) → Intro Call (15–20 min) → Two Technical Phone Interviews (45 min each) → Onsite/Virtual (2–3 hrs)."
+  },
+  {
+    id: "apollo-senior-software-engineer",
+    page: "job-apollo-senior-software-engineer.html",
+    title: "Senior Software Engineer",
+    company: "Apollo",
+    logo: "logo-co-apollo.png",
+    industry: "AI-Powered Go-To-Market · $250M+ Funded",
+    countries: ["United States"],
+    location: "San Francisco, CA · Hybrid 3d/wk",
+    tags: ["Hybrid", "Full-time", "$170K – $311K + 15% bonus + equity", "Visa transfers accepted"],
+    brief: "Build and operate large-scale distributed systems at Apollo's AI-powered GTM platform — profitable, 500K+ company customers, rebuilding the entire product around AI agents. Up to $311K base + 15% bonus.",
+    eligibility: "Visa transfers accepted (OPT, H1B transfer). Hybrid 3 days in-office in San Francisco.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Apollo.io is the AI-powered end-to-end go-to-market platform trusted by 500K+ companies with 210M+ B2B contacts — profitable and rebuilding the entire product around AI and agents. $250M+ raised. The engineering org of 250+ operates with extreme ownership; engineers own systems end-to-end, use real AI tooling (Copilot, Cursor) as a core part of how they work, and partner directly with VPs and C-suite leaders.",
+    responsibilities: [
+      "Own significant systems and features end-to-end from design through production, serving hundreds of thousands of companies.",
+      "Build and operate large-scale distributed systems, selecting and combining the right technologies (Kafka, MongoDB, Elasticsearch, etc.).",
+      "Break down hard, ambiguous problems and drive them to shipped outcomes with accountability for reliability, performance and cost.",
+      "Build AI-native agent systems used by hundreds of thousands of people worldwide.",
+      "Partner with product, design and leadership on cross-cutting problems."
+    ],
+    requirements: [
+      "5–8 years of backend or full-stack engineering building large-scale distributed systems.",
+      "React, Ruby on Rails, Python, MongoDB, Elasticsearch, Kubernetes, Docker, Terraform, GCP.",
+      "Experience owning systems end-to-end in production at scale.",
+      "Visa transfers accepted (OPT, H1B transfer).",
+      "Hybrid 3 days in-office in San Francisco."
+    ],
+    compensation: "$170K – $311K base plus 15% target bonus plus competitive equity. Placement in the band is determined by leveling during the interview. Interview: Recruiter Screen (30 min) → Hiring Manager Screen (30 min) → Virtual Onsite (3 stages, 1–2 days) → CPO Wrap-Up in-person preferred (30 min)."
+  },
+  {
+    id: "genesis-computing-head-of-marketing",
+    page: "job-genesis-computing-head-of-marketing.html",
+    title: "Head of Marketing",
+    company: "Genesis Computing",
+    logo: "logo-co-genesis-computing.png",
+    industry: "AI Data Engineering · Enterprise",
+    countries: ["United States"],
+    location: "New York, NY · Hybrid 2–3d/wk",
+    tags: ["Hybrid", "Full-time", "$190K – $220K", "US citizens / Green Card"],
+    brief: "Own all marketing — positioning, product launches, content, sales enablement and demand gen — at an enterprise AI data engineering startup founded by early Snowflake employees. First marketing leader.",
+    eligibility: "US citizens or Green Card holders only; no visa sponsorship. Must live in NY or the vicinity and be able to come into the office 2–3x a week.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "Genesis Computing delivers autonomous AI Data Agents for enterprise data engineering teams — built by early Snowflake employees Matt Glickman and Justin Langseth. The agents handle the full pipeline from schema research through dbt model writing, testing, documentation, Git commits and error monitoring. Clients in financial services, healthcare, media and manufacturing cut pipeline development cycles by up to 95%. 25 people, $5M+ raised with Series A amount TBA.",
+    responsibilities: [
+      "Build and lead the marketing function: define the operating model, priorities and capabilities; hire and develop the team as the company grows.",
+      "Own positioning and messaging for Genesis and its priority use cases, including enterprise data migrations.",
+      "Lead product marketing: product launches, competitive analysis, customer research and use-case development.",
+      "Enable enterprise sales: presentations, solution briefs, competitive battlecards, demo narratives.",
+      "Lead demand generation: content, email, webinars, partners, events and selected paid channels.",
+      "Build AI-powered marketing workflows using Claude and other tools for research, content and campaigns."
+    ],
+    requirements: [
+      "6+ years of product marketing for a technical B2B company.",
+      "Experience marketing to enterprise data, engineering or technical buyers.",
+      "Hands-on AI tooling skills (Claude, etc.); Salesforce, Snowflake, Databricks, dbt a plus.",
+      "US citizen or Green Card holder; no visa sponsorship.",
+      "Must live in or near New York City; hybrid 2–3 days in-office."
+    ],
+    compensation: "$190K – $220K base. No equity. Interview: Initial screen with Margarita Barrera (30 min) → Interview with Sales team (45 min) → Executive interview with CEO (1 hr) → Executive interview with CTO (1 hr)."
+  },
+  {
+    id: "workos-solutions-engineer",
+    page: "job-workos-solutions-engineer.html",
+    title: "Solutions Engineer",
+    company: "WorkOS",
+    logo: "logo-co-workos.png",
+    industry: "Enterprise Authentication · Developer Tools",
+    countries: ["United States"],
+    location: "San Francisco, CA · Hybrid 2–3d/wk",
+    tags: ["Hybrid", "Full-time", "$160K – $200K base · OTE $200K – $250K", "Visa transfers accepted"],
+    brief: "Own technical outcomes end-to-end for customers at a $2B-valued developer tools company powering auth for OpenAI, Cursor and Perplexity. 80/20 base/variable split, OTE up to $250K.",
+    eligibility: "Visa transfers accepted (OPT, H1B transfer); no new H1B — case by case. Hybrid 2–3 days in-office in San Francisco.",
+    applyLink: PARAFORM_LINK,
+    matchNote: true,
+    overview: "WorkOS builds modern developer tools and APIs that make it easy for companies to become Enterprise Ready — powering authentication, identity, authorization and access control for the fastest-growing AI companies including OpenAI, Cursor, Perplexity, Vercel and Plaid. $198M raised, Series C at $2B valuation. As AI reshapes software, WorkOS is at the frontier of Human and Agent Authentication, answering a new critical question: who are your agents, and what are they allowed to do?",
+    responsibilities: [
+      "Work directly with customers to design and implement solutions using WorkOS products.",
+      "Own technical outcomes end-to-end: discovery, architecture, implementation, iteration and handoff.",
+      "Lead demos and proof-of-concepts for enterprise evaluations.",
+      "Partner with Account Executives to support evaluations and expansion.",
+      "Share structured feedback with Engineering and Product to improve the platform based on real-world usage."
+    ],
+    requirements: [
+      "3–6 years in pre-sales or solutions engineering at B2B SaaS startups under 500 employees.",
+      "Strong fundamentals in APIs, web stacks, SAML, SCIM, OAuth and SSO.",
+      "High agency, excellent communication, comfortable owning technical outcomes independently.",
+      "AI tooling skills: Claude, Cursor, AI coding agents.",
+      "Visa transfers accepted (case by case); no new H1B.",
+      "Hybrid 2–3 days in-office in San Francisco."
+    ],
+    compensation: "$160K – $200K base, OTE $200K – $250K (80/20 base/variable split), plus competitive equity. Interview: Recruiter Screen (30 min) → Hiring Manager Screen with Adam Wolfman (30 min) → Technical Take-Home (30 min) → Final Interview (45 min) → Meeting with Founder (30 min)."
   }
 ];
