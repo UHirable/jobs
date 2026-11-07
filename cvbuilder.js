@@ -79,7 +79,7 @@
     } catch (e) { alert("Couldn't build the Word file. Try the PDF button instead."); }
     btns.forEach((b, i) => { b.disabled = false; b.textContent = i ? "⬇ Download Word" : "Download Word"; });
   }
-  function exportPdf() { track("pdf"); window.print(); }
+  function exportPdf() { track("pdf"); const after = () => { window.removeEventListener("afterprint", after); if (window.UHNextStep) window.UHNextStep("builder-pdf"); }; window.addEventListener("afterprint", after); window.print(); }
   function track(k) { if (window.goatcounter && goatcounter.count) try { goatcounter.count({ path: "cv-builder/" + k, title: "CV builder " + k, event: true }); } catch (e) {} }
   $("#cb-docx").addEventListener("click", exportDocx); $("#cb-docx2").addEventListener("click", exportDocx);
   $("#cb-pdf").addEventListener("click", exportPdf); $("#cb-pdf2").addEventListener("click", exportPdf);

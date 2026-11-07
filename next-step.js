@@ -5,17 +5,17 @@
   const count = (path, title) => { try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path, title, event: true }); } catch (e) {} };
   let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
   const MENA = {
-    "Africa/Cairo": ["Egypt", "egypt.html", "🇪🇬"],
-    "Asia/Riyadh": ["Saudi Arabia", "saudi-arabia.html", "🇸🇦"],
-    "Asia/Dubai": ["the UAE", "uae.html", "🇦🇪"],
-    "Asia/Qatar": ["Qatar", "qatar.html", "🇶🇦"],
-    "Asia/Kuwait": ["Kuwait", "kuwait.html", "🇰🇼"],
-    "Asia/Bahrain": ["Bahrain", "bahrain.html", "🇧🇭"],
+    "Africa/Cairo": ["Egypt", "egypt.html"],
+    "Asia/Riyadh": ["Saudi Arabia", "saudi-arabia.html"],
+    "Asia/Dubai": ["the UAE", "uae.html"],
+    "Asia/Qatar": ["Qatar", "qatar.html"],
+    "Asia/Kuwait": ["Kuwait", "kuwait.html"],
+    "Asia/Bahrain": ["Bahrain", "bahrain.html"],
   };
   const US = /^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Juneau|Sitka|Nome|Adak|Metlakatla|Yakutat|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)$|^Pacific\/Honolulu$/;
   let region, sub, btn, href;
-  if (MENA[tz]) { const [name, page, flag] = MENA[tz]; region = page.replace(".html", ""); sub = `Next step: put it to work. We have live openings in ${name} right now.`; btn = `${flag} See jobs in ${name} →`; href = page; }
-  else if (US.test(tz)) { region = "us"; sub = "Next step: put it to work. See open roles at fast-growing US companies."; btn = "🇺🇸 See jobs in the US →"; href = "jobs.html"; }
+  if (MENA[tz]) { const [name, page] = MENA[tz]; region = page.replace(".html", ""); sub = `Next step: put it to work. We have live openings in ${name} right now.`; btn = `See jobs in ${name} →`; href = page; }
+  else if (US.test(tz)) { region = "us"; sub = "Next step: put it to work. See open roles at fast-growing US companies."; btn = "See jobs in the US →"; href = "jobs.html"; }
   else { region = "other"; sub = "Next step: put it to work. Browse open jobs from hundreds of job sites."; btn = "Browse open jobs →"; href = "jobs.html"; }
 
   let shown = false;
