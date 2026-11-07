@@ -27,17 +27,19 @@
       ".uhns-ic{width:76px;height:76px;margin:0 auto 14px;border-radius:22px;background:linear-gradient(145deg,#2a3cff,#0112ff 60%,#0a0fa0);display:grid;place-items:center;font-size:38px;box-shadow:0 8px 0 #070b7a,0 16px 30px -10px rgba(1,18,255,.6)}" +
       ".uhns h3{margin:0 0 8px;font-size:1.5rem;line-height:1.2}.uhns p{margin:0 0 20px;color:#5b6391;font-size:1rem;line-height:1.5}" +
       ".uhns a.uhns-go{display:block;background:#0112ff;color:#fff;font-weight:800;font-size:1.02rem;text-decoration:none;padding:14px 18px;border-radius:14px;box-shadow:0 5px 0 #0a0fa0}" +
+      ".uhns a.uhns-aff{display:block;margin-top:12px;padding:11px 14px;border-radius:12px;background:#fff8e1;border:1.5px solid #ffe08a;color:#8a6100;font-weight:800;font-size:.92rem;text-decoration:none}.uhns a.uhns-aff:hover{background:#fff1c2}" +
       ".uhns a.uhns-go:hover{background:#0a1cff}.uhns button.uhns-later{margin-top:12px;border:0;background:none;color:#5b6391;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}" +
       ".uhns button.uhns-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:#eef1ff;color:#141a52;font-size:1.1rem;font-weight:800;cursor:pointer}" +
       "@keyframes uhnsFade{from{opacity:0}to{opacity:1}}@keyframes uhnsPop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}" +
       "@media (prefers-reduced-motion:reduce){.uhns-ov,.uhns{animation:none}}";
     document.head.appendChild(st);
     const ov = document.createElement("div"); ov.className = "uhns-ov";
-    ov.innerHTML = `<div class="uhns" role="dialog" aria-modal="true" aria-labelledby="uhns-t"><button type="button" class="uhns-x" aria-label="Close">×</button><div class="uhns-ic" aria-hidden="true">🎉</div><h3 id="uhns-t">Your CV is ready!</h3><p>${sub}</p><a class="uhns-go" href="${href}">${btn}</a><button type="button" class="uhns-later">Maybe later</button></div>`;
+    ov.innerHTML = `<div class="uhns" role="dialog" aria-modal="true" aria-labelledby="uhns-t"><button type="button" class="uhns-x" aria-label="Close">×</button><div class="uhns-ic" aria-hidden="true">🎉</div><h3 id="uhns-t">Your CV is ready!</h3><p>${sub}</p><a class="uhns-go" href="${href}">${btn}</a><a class="uhns-aff" href="https://skillsyncer.com/?via=uhirable" target="_blank" rel="noopener sponsored">Check it passes ATS with SkillSyncer →</a><button type="button" class="uhns-later">Maybe later</button></div>`;
     const close = () => { ov.remove(); document.removeEventListener("keydown", onKey); };
     const onKey = (e) => { if (e.key === "Escape") close(); };
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".uhns-x") || e.target.closest(".uhns-later")) close(); });
     ov.querySelector(".uhns-go").addEventListener("click", () => count("next-step/" + (source || "cv") + "-" + region, "CV ready → jobs (" + region + ")"));
+    ov.querySelector(".uhns-aff").addEventListener("click", () => count("aff/skillsyncer-popup-" + (source || "cv"), "Affiliate click: SkillSyncer (CV ready window)"));
     document.addEventListener("keydown", onKey);
     document.body.appendChild(ov);
     const go = ov.querySelector(".uhns-go"); try { go.focus({ preventScroll: true }); } catch (e) {}
