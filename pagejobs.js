@@ -22,7 +22,7 @@
   const ago = (d) => { const t = Date.parse(d); if (!t) return ""; const days = Math.floor((Date.now() - t) / 864e5); return days <= 0 ? "Today" : days === 1 ? "Yesterday" : days < 30 ? days + " days ago" : ""; };
   if (!window.UHCvPop && !document.querySelector('script[src="cv-popup.js"]')) { const _s = document.createElement("script"); _s.src = "cv-popup.js"; document.head.appendChild(_s); }
   const card = (j, i) => { const desc = clean(j.snippet).slice(0, 170); const chips = [j.location && `<span class="chip">📍 ${esc(j.location)}</span>`, j.type && `<span class="chip pc">${esc(j.type)}</span>`, j.salary && `<span class="chip gold">${esc(j.salary)}</span>`, ago(j.updated) && `<span class="chip">${ago(j.updated)}</span>`].filter(Boolean).join("");
-    return `<article class="job-card live-card"><span class="promo-badge live">Live</span><div class="job-head"><div class="icon3d ${i % 2 ? "gold" : ""} js-ini">${esc((j.company || "?").trim().charAt(0).toUpperCase())}</div><div><h3>${esc(j.title)}</h3><p class="meta">${esc(j.company || "Company not listed")}${j.source && j.source !== "jooble" ? " · via " + esc(j.source) : ""}</p></div></div><div class="chips">${chips}</div><p class="desc">${esc(desc)}${desc.length >= 170 ? "…" : ""}</p><div class="job-actions"><a class="btn btn-primary btn-sm apply-btn" href="${esc(j.link)}" target="_blank" rel="noopener nofollow">Apply</a></div></article>`; };
+    return `<article class="job-card live-card"><span class="promo-badge live">Live</span><div class="job-head"><div class="icon3d ${i % 2 ? "gold" : ""} js-ini">${esc((j.company || "?").trim().charAt(0).toUpperCase())}</div><div><h3>${esc(j.title)}</h3><p class="meta">${esc(j.company || "Company not listed")}${j.source && j.source !== "jooble" ? " · via " + esc(j.source) : ""}</p></div></div><div class="chips">${chips}</div><p class="desc">${esc(desc)}${desc.length >= 170 ? "…" : ""}</p><div class="job-actions"><a class="btn btn-primary btn-sm apply-btn" href="${esc(j.link)}" target="_blank" rel="noopener nofollow${j.source === "lensa" ? " sponsored" : ""}" data-src="${esc(j.source || "")}">Apply</a></div></article>`; };
 
   async function fetchWhatJobs(pg) {
     const cfg = WJ[cc];
@@ -61,15 +61,19 @@
   async function load() {
     status.className = "js-bar"; status.textContent = "Loading live " + q + " jobs in " + country + "…"; more.hidden = true;
     try {
-      const jooblePromise = fetch(API + "?src=jooble&cc=" + cc + "&q=" + encodeURIComponent(q) + "&page=" + page).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+      const jooblePromise = fetch(API + "?src=jooble&cc=" + cc + "&q=" + encodeURIComponent(q) + "&page=" + page).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).catch(() => ({ jobs: [], totalCount: 0, failed: true }));
+      const lensaPromise = cc === "us" ? fetch(API + "?src=lensa&q=" + encodeURIComponent(q) + "&page=" + page).then((r) => (r.ok ? r.json() : { jobs: [] })).catch(() => ({ jobs: [] })) : Promise.resolve({ jobs: [], totalCount: 0 });
       const wjPromise = hasWJ ? fetchWhatJobs(page) : Promise.resolve({ jobs: [], totalCount: 0 });
 
-      const [joobleData, wjData] = await Promise.all([jooblePromise, wjPromise]);
+      const [joobleData, wjData, lensaData] = await Promise.all([jooblePromise, wjPromise, lensaPromise]);
 
       const jJobs = joobleData.jobs || [];
       const wJobs = wjData.jobs || [];
-      const jobs  = [...jJobs, ...wJobs];
-      total = Math.max(joobleData.totalCount || 0, wjData.totalCount || 0, jobs.length);
+      const lJobs = lensaData.jobs || [];
+      if (joobleData.failed && !lJobs.length && !wJobs.length) throw new Error("no live jobs");
+      const mix = (a, b) => { const o = []; for (let k = 0; k < Math.max(a.length, b.length); k++) { if (a[k]) o.push(a[k]); if (b[k]) o.push(b[k]); } return o; };
+      const jobs  = [...mix(lJobs, jJobs), ...wJobs];
+      total = Math.max((joobleData.totalCount || 0) + (lensaData.totalCount || 0), wjData.totalCount || 0, jobs.length);
 
       list.insertAdjacentHTML("beforeend", jobs.map((j, i) => card(j, shown + i)).join("")); shown += jobs.length;
       countEls.forEach((e) => { e.textContent = total.toLocaleString(); });
@@ -81,4 +85,5 @@
   }
   next.addEventListener("click", () => { page++; load(); });
   load();
+  document.addEventListener("click", (e) => { const a = e.target.closest && e.target.closest("a[data-src]"); if (!a || !a.dataset.src) return; try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "out/" + a.dataset.src, title: "Job click: " + a.dataset.src, event: true }); } catch (x) {} });
 })();
