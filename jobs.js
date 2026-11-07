@@ -1701,11 +1701,13 @@ const JOBS = [
     page: "job-compound-law-senior-partner.html",
     title: "Senior Partner",
     company: "Compound Law",
+    logo: "logo-co-compound-law.png",
     industry: "AI-Native Legal Services",
     countries: ["Germany"],
     location: "Berlin, Germany",
-    tags: ["Hybrid", "Full-time", "€200K – €300K (OTE €700K)", "Germany-based"],
+    tags: ["Hybrid", "Full-time", "€200K – €300K (OTE €700K)", "1–5% equity", "No visa sponsorship"],
     brief: "Join Germany's first AI-native law firm as a founding Senior Partner with founding equity in the technology company.",
+    eligibility: "No visa sponsorship: you must already have the right to work in Germany. In person in Berlin preferred; remote only for an exceptional, mutually aligned profile.",
     applyLink: PARAFORM_LINK,
     matchNote: true,
     overview: "Compound Law is an AI-native law firm focused on commercial and compliance work, with lawyers from Gleiss Lutz, Latham & Watkins and Freshfields. As a founding Senior Partner you'll bring your portable book of business onto a proprietary agentic platform, act as the face of the firm and help shape its growth toward Series A.",
@@ -1719,9 +1721,10 @@ const JOBS = [
       "12–20 years of German legal practice; German-qualified Volljurist.",
       "Personally held, portable book of business of €1M+ (commercial, IT & data, corporate/VC, regulatory).",
       "Strong network into private equity, VC or mid-market companies.",
-      "Native-level German and professional English; Germany-based."
+      "Recurring, automatable work in the book (commercial contracts, IT & data, corporate/VC, regulatory), not litigation-only.",
+      "Native-level German for client work and professional English; Germany-based."
     ],
-    compensation: "€200K – €300K base + share of personal book revenue (OTE €400K – €700K) + 1–5% founding equity. In person in Berlin preferred."
+    compensation: "€200K – €300K base + share of personal book revenue (OTE €400K – €700K) + 1–5% founding equity. In person in Berlin preferred. Interview: Initial call with Marko (60 min) → Working session on legal depth and AI fluency with Julian and Mohit (60 min) → References (45 min)."
   },
   {
     id: "fonoa-solutions-engineer-london",
