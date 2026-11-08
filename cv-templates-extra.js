@@ -22,6 +22,7 @@
     ".tpv-x{width:36px;height:36px;border:0;border-radius:50%;background:#eef1ff;color:#141a52;font-size:1.15rem;font-weight:800;cursor:pointer;flex:none}" +
     ".tpv-b{overflow:auto;background:#eef0ff;padding:18px}.tpv-b img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 10px 30px -12px rgba(20,26,82,.4);background:#fff}" +
     ".tpv-f{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1.5px solid #e6e9ff}.tpv-f span{color:#15803d;font-weight:800;font-size:.9rem}" +
+    ".tpv-tip{padding:10px 18px;background:#fff6cc;border-top:1.5px solid #f5d77a;color:#5a4a1a;font-size:.88rem;font-weight:600}.tpv-tip a{color:#0112ff;font-weight:800}" +
     "@media (max-width:560px){.tpv-b{padding:10px}.tpv-f{flex-direction:column;align-items:stretch}.tpv-f .btn{text-align:center}}";
   document.head.appendChild(st);
   let ov = null;
@@ -29,7 +30,7 @@
   function open(tpl, name) {
     close();
     ov = document.createElement("div"); ov.className = "tpv-ov";
-    ov.innerHTML = `<div class="tpv" role="dialog" aria-modal="true" aria-label="${name} CV template preview"><div class="tpv-h"><b>${name} CV template</b><button type="button" class="tpv-x" aria-label="Close">×</button></div><div class="tpv-b"><img src="cv-template-${tpl}-full.jpg" alt="${name} CV template, full page"></div><div class="tpv-f"><span>✓ Passes every ATS · Word format · Free</span><a class="btn btn-primary" href="cv-template-${tpl}.docx" download>Download Word</a></div></div>`;
+    ov.innerHTML = `<div class="tpv" role="dialog" aria-modal="true" aria-label="${name} CV template preview"><div class="tpv-h"><b>${name} CV template</b><button type="button" class="tpv-x" aria-label="Close">×</button></div><div class="tpv-b"><img src="cv-template-${tpl}-full.jpg" alt="${name} CV template, full page"></div><div class="tpv-tip">Before you apply, scan your finished CV against the job ad: <a href="https://skillsyncer.com/?via=uhirable" target="_blank" rel="noopener sponsored" data-aff="skillsyncer-preview">see missing keywords with SkillSyncer (free plan)</a></div><div class="tpv-f"><span>✓ Passes every ATS · Word format · Free</span><a class="btn btn-primary" href="cv-template-${tpl}.docx" download>Download Word</a></div></div>`;
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".tpv-x")) close(); else if (e.target.closest("a[download]")) setTimeout(close, 50); });
     document.body.appendChild(ov); document.body.style.overflow = "hidden";
     count("preview/" + tpl, "Preview CV template: " + name);

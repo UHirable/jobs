@@ -62,22 +62,6 @@ if (typedEl) {
   }
 }
 
-// ---------- Intro video modal ----------
-const introBtn = document.getElementById("play-intro");
-const introModal = document.getElementById("intro-modal");
-const introVideo = document.getElementById("intro-video");
-if (introBtn && introModal && introVideo) {
-  const close = () => { introVideo.pause(); introModal.hidden = true; };
-  introBtn.addEventListener("click", () => {
-    introModal.hidden = false;
-    introVideo.currentTime = 0;
-    introVideo.play().catch(() => {});
-  });
-  document.getElementById("close-intro").addEventListener("click", close);
-  introModal.addEventListener("click", (e) => { if (e.target === introModal) close(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !introModal.hidden) close(); });
-}
-
 // ---------- Reveal on scroll ----------
 const io = "IntersectionObserver" in window
   ? new IntersectionObserver((entries) => {
@@ -284,7 +268,7 @@ if (list && typeof JOBS !== "undefined") {
       return matchCountry && (!q || text.includes(q));
     });
 
-    countEl.textContent = `${filtered.length} open position${filtered.length === 1 ? "" : "s"}`;
+    countEl.textContent = filtered.length ? `${filtered.length} open position${filtered.length === 1 ? "" : "s"}` : "";
 
     if (filtered.length === 0) {
       list.innerHTML = `
