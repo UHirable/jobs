@@ -19,18 +19,16 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png">
   <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="amel-3d-v2.webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css?v=58">
 <style>
-.me-stage{padding-top:100px}
-.me-bubble.cloud{left:50%;right:auto;top:0;transform:translateX(-50%);width:max-content;max-width:92%;text-align:center;
- border-radius:20px;padding:14px 22px;min-height:0;animation:cloudfloat 6s ease-in-out infinite;
- box-shadow:0 18px 34px -12px rgba(0,0,40,.45)}
-.me-bubble.cloud::after{left:50%;bottom:-13px;width:26px;height:16px;transform:translateX(-50%);clip-path:polygon(0 0,100% 0,50% 100%)}
-@keyframes cloudfloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
-#typed{display:inline-block;transition:opacity .45s ease,transform .45s ease}
-#typed.out{opacity:0;transform:translateY(6px)}
-@media (max-width:720px){.me-bubble.cloud{font-size:.9rem;padding:12px 18px;max-width:94%}.me-stage{padding-top:110px}}
+.hx{max-width:480px;margin:0 auto}
+.hx-art svg{display:block;width:100%;height:auto;overflow:visible}
+.hx .qglow{animation:qg 4s ease-in-out infinite}@keyframes qg{50%{opacity:.6}}
+.hq{position:relative;margin:-6px auto 0;max-width:400px;padding:14px 20px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-weight:700;font-size:1.02rem;line-height:1.45;text-align:center;min-height:3.2em;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px -20px rgba(5,11,63,.6)}
+.hq::before{content:"\201C";position:absolute;left:14px;top:-18px;font-size:3.4rem;line-height:1;color:#ffc93c;font-family:Georgia,serif}
+.hq span{transition:opacity .45s}.hq span.out{opacity:0}.hq b{color:#ffc93c}
+@media (max-width:920px){.hx{max-width:340px;margin-top:10px}.hq{font-size:.95rem}}
+@media (prefers-reduced-motion:reduce){.hx .qglow{animation:none}}
 </style>  <script type="application/ld+json" id="ld-schema">{"@context": "https://schema.org", "@type": "Organization", "name": "U Hirable", "url": "https://uhirable.github.io/jobs/", "logo": "https://uhirable.github.io/jobs/favicon.png", "slogan": "One hub for every side of hiring", "email": "u.hirable@proton.me", "sameAs": ["https://www.linkedin.com/company/uhirable"]}</script>
   <script type="application/ld+json" id="ld-website">{"@context": "https://schema.org", "@type": "WebSite", "name": "U Hirable", "alternateName": "The Hiring Hub", "url": "https://uhirable.github.io/jobs/", "description": "One hub for every side of hiring: open roles, job sites, CV tools, career tools and hiring events.", "publisher": {"@type": "Organization", "name": "U Hirable", "url": "https://uhirable.github.io/jobs/"}}</script>
 </head>
@@ -69,16 +67,36 @@
           <a class="hero-match" href="cv-match.html"><span class="scan"><span class="scan-doc"><u></u><u class="s"></u><u></u><u class="s"></u><u class="m"></u><i class="beam"></i></span><span class="scan-out"><b>72%</b><em>MATCH</em></span></span><span class="hm-t"><b>Is your CV the right fit?</b><small>Snap it to the job ad, get your score in 30 seconds</small></span><span class="hm-trust"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>100% Private</i><i><b>$0</b>Free forever</i></span><span class="hm-go">Scan now →</span></a>
         </div>
 
-        <div class="hero-visual" data-tilt data-tilt-max="6">
-          <div class="me-stage">
-            <div class="me-glow" aria-hidden="true"></div>
-            <div class="me-arch">
-              <img fetchpriority="high" src="amel-3d-v2.webp" width="641" height="800" alt="Amel Moussa, Global Talent Acquisition Partner">
-            </div>
-            <div class="me-podium" aria-hidden="true"></div>
-            <div class="me-bubble cloud" aria-live="polite"><span id="typed">Hi, I'm Amel 👋</span></div>
-            
-          </div>
+        <div class="hero-visual hx">
+          <div class="hx-art" data-tilt data-tilt-max="6"><svg role="img" aria-label="A white chess pawn whose shadow on the wall is a queen" viewBox="0 0 480 470"><defs><linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#6c76c9"/><stop offset=".22" stop-color="#e9ecff"/><stop offset=".38" stop-color="#ffffff"/><stop offset=".7" stop-color="#c3c9f3"/><stop offset="1" stop-color="#5a64bd"/></linearGradient>
+<linearGradient id="rim" x1="0" x2="1"><stop offset="0" stop-color="#b9c0f0"/><stop offset=".4" stop-color="#ffffff"/><stop offset="1" stop-color="#aab2ea"/></linearGradient>
+<radialGradient id="sph" cx=".36" cy=".3" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#e6e9ff"/><stop offset=".85" stop-color="#8f98da"/><stop offset="1" stop-color="#6c76c9"/></radialGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".45" stop-color="#ffc93c"/><stop offset="1" stop-color="#c78f00"/></linearGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="ds" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#030733" flood-opacity=".55"/></filter>
+<linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".0"/><stop offset=".3" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient>
+<radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#9fb0ff" stop-opacity=".55"/><stop offset="1" stop-color="#9fb0ff" stop-opacity="0"/></radialGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0112ff" stop-opacity="0"/><stop offset="1" stop-color="#0112ff" stop-opacity="1"/></linearGradient></defs>
+<radialGradient id="bfade" cx=".5" cy=".35" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<mask id="bm" maskUnits="userSpaceOnUse" x="-100" y="300" width="680" height="200"><ellipse cx="185" cy="410" rx="270" ry="90" fill="url(#bfade)"/></mask>
+<g mask="url(#bm)"><polygon points="-249.0,470.0 -187.0,470.0 -94.0,438.8 -140.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="-187.0,470.0 -125.0,470.0 -47.5,438.8 -94.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="-125.0,470.0 -63.0,470.0 -1.0,438.8 -47.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="-63.0,470.0 -1.0,470.0 45.5,438.8 -1.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="-1.0,470.0 61.0,470.0 92.0,438.8 45.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="61.0,470.0 123.0,470.0 138.5,438.8 92.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="123.0,470.0 185.0,470.0 185.0,438.8 138.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="185.0,470.0 247.0,470.0 231.5,438.8 185.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="247.0,470.0 309.0,470.0 278.0,438.8 231.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="309.0,470.0 371.0,470.0 324.5,438.8 278.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="371.0,470.0 433.0,470.0 371.0,438.8 324.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="433.0,470.0 495.0,470.0 417.5,438.8 371.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="495.0,470.0 557.0,470.0 464.0,438.8 417.5,438.8" fill="#2a36e0" opacity="1.00"/><polygon points="557.0,470.0 619.0,470.0 510.5,438.8 464.0,438.8" fill="#060c66" opacity="1.00"/><polygon points="-140.5,438.8 -94.0,438.8 -38.2,420.0 -75.4,420.0" fill="#060c66" opacity="0.85"/><polygon points="-94.0,438.8 -47.5,438.8 -1.0,420.0 -38.2,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="-47.5,438.8 -1.0,438.8 36.2,420.0 -1.0,420.0" fill="#060c66" opacity="0.85"/><polygon points="-1.0,438.8 45.5,438.8 73.4,420.0 36.2,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="45.5,438.8 92.0,438.8 110.6,420.0 73.4,420.0" fill="#060c66" opacity="0.85"/><polygon points="92.0,438.8 138.5,438.8 147.8,420.0 110.6,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="138.5,438.8 185.0,438.8 185.0,420.0 147.8,420.0" fill="#060c66" opacity="0.85"/><polygon points="185.0,438.8 231.5,438.8 222.2,420.0 185.0,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="231.5,438.8 278.0,438.8 259.4,420.0 222.2,420.0" fill="#060c66" opacity="0.85"/><polygon points="278.0,438.8 324.5,438.8 296.6,420.0 259.4,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="324.5,438.8 371.0,438.8 333.8,420.0 296.6,420.0" fill="#060c66" opacity="0.85"/><polygon points="371.0,438.8 417.5,438.8 371.0,420.0 333.8,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="417.5,438.8 464.0,438.8 408.2,420.0 371.0,420.0" fill="#060c66" opacity="0.85"/><polygon points="464.0,438.8 510.5,438.8 445.4,420.0 408.2,420.0" fill="#2a36e0" opacity="0.85"/><polygon points="-75.4,420.0 -38.2,420.0 -1.0,407.5 -32.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="-38.2,420.0 -1.0,420.0 30.0,407.5 -1.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="-1.0,420.0 36.2,420.0 61.0,407.5 30.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="36.2,420.0 73.4,420.0 92.0,407.5 61.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="73.4,420.0 110.6,420.0 123.0,407.5 92.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="110.6,420.0 147.8,420.0 154.0,407.5 123.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="147.8,420.0 185.0,420.0 185.0,407.5 154.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="185.0,420.0 222.2,420.0 216.0,407.5 185.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="222.2,420.0 259.4,420.0 247.0,407.5 216.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="259.4,420.0 296.6,420.0 278.0,407.5 247.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="296.6,420.0 333.8,420.0 309.0,407.5 278.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="333.8,420.0 371.0,420.0 340.0,407.5 309.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="371.0,420.0 408.2,420.0 371.0,407.5 340.0,407.5" fill="#2a36e0" opacity="0.70"/><polygon points="408.2,420.0 445.4,420.0 402.0,407.5 371.0,407.5" fill="#060c66" opacity="0.70"/><polygon points="-32.0,407.5 -1.0,407.5 25.6,398.6 -1.0,398.6" fill="#060c66" opacity="0.55"/><polygon points="-1.0,407.5 30.0,407.5 52.1,398.6 25.6,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="30.0,407.5 61.0,407.5 78.7,398.6 52.1,398.6" fill="#060c66" opacity="0.55"/><polygon points="61.0,407.5 92.0,407.5 105.3,398.6 78.7,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="92.0,407.5 123.0,407.5 131.9,398.6 105.3,398.6" fill="#060c66" opacity="0.55"/><polygon points="123.0,407.5 154.0,407.5 158.4,398.6 131.9,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="154.0,407.5 185.0,407.5 185.0,398.6 158.4,398.6" fill="#060c66" opacity="0.55"/><polygon points="185.0,407.5 216.0,407.5 211.6,398.6 185.0,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="216.0,407.5 247.0,407.5 238.1,398.6 211.6,398.6" fill="#060c66" opacity="0.55"/><polygon points="247.0,407.5 278.0,407.5 264.7,398.6 238.1,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="278.0,407.5 309.0,407.5 291.3,398.6 264.7,398.6" fill="#060c66" opacity="0.55"/><polygon points="309.0,407.5 340.0,407.5 317.9,398.6 291.3,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="340.0,407.5 371.0,407.5 344.4,398.6 317.9,398.6" fill="#060c66" opacity="0.55"/><polygon points="371.0,407.5 402.0,407.5 371.0,398.6 344.4,398.6" fill="#2a36e0" opacity="0.55"/><polygon points="-1.0,398.6 25.6,398.6 45.5,391.9 22.3,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="25.6,398.6 52.1,398.6 68.8,391.9 45.5,391.9" fill="#060c66" opacity="0.40"/><polygon points="52.1,398.6 78.7,398.6 92.0,391.9 68.8,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="78.7,398.6 105.3,398.6 115.3,391.9 92.0,391.9" fill="#060c66" opacity="0.40"/><polygon points="105.3,398.6 131.9,398.6 138.5,391.9 115.3,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="131.9,398.6 158.4,398.6 161.8,391.9 138.5,391.9" fill="#060c66" opacity="0.40"/><polygon points="158.4,398.6 185.0,398.6 185.0,391.9 161.8,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="185.0,398.6 211.6,398.6 208.2,391.9 185.0,391.9" fill="#060c66" opacity="0.40"/><polygon points="211.6,398.6 238.1,398.6 231.5,391.9 208.2,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="238.1,398.6 264.7,398.6 254.8,391.9 231.5,391.9" fill="#060c66" opacity="0.40"/><polygon points="264.7,398.6 291.3,398.6 278.0,391.9 254.8,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="291.3,398.6 317.9,398.6 301.2,391.9 278.0,391.9" fill="#060c66" opacity="0.40"/><polygon points="317.9,398.6 344.4,398.6 324.5,391.9 301.2,391.9" fill="#2a36e0" opacity="0.40"/><polygon points="344.4,398.6 371.0,398.6 347.8,391.9 324.5,391.9" fill="#060c66" opacity="0.40"/></g>
+
+<polygon points="150,-10 210,-10 330,400 60,400" fill="url(#cone)"/>
+<g transform="translate(300 385) scale(1.18)" fill="#030a55" opacity="0.78" filter="url(#soft)" transform-origin="300 385"><path d="M-64 0H64V-14Q64-24 52-26H-52Q-64-24-64-14Z M-46-26Q-30-70-24-140H24Q30-70 46-26Z M-38-140H38Q42-147 34-152H-34Q-42-147-38-140Z M-20-152Q-12-185-32-218H32Q12-185 20-152Z M-36-218H36V-227H-36Z M-38-227L-52-264L-31-238L-21-272L-9-240L0-278L9-240L21-272L31-238L52-264L38-227Z"/><circle cx="-52" cy="-268" r="5"/><circle cx="-21" cy="-277" r="5"/><circle cx="0" cy="-284" r="5"/><circle cx="21" cy="-277" r="5"/><circle cx="52" cy="-268" r="5"/><circle cx="0" cy="-298" r="9"/></g>
+<ellipse cx="185" cy="392" rx="95" ry="20" fill="url(#pool)"/>
+<ellipse cx="185" cy="392" rx="60" ry="11" fill="#030733" opacity=".55" filter="url(#soft)"/>
+<g transform="translate(185 390) scale(1.05)" >
+<ellipse cx="0" cy="0" rx="58" ry="12" fill="url(#cyl)"/>
+<path d="M-58 0L-58-14Q-58-24-46-28L-38-32Q-26-60-18-100L-30-102Q-34-108-30-114L-16-118L16-118L30-114Q34-108 30-102L18-100Q26-60 38-32L46-28Q58-24 58-14L58 0Z" fill="url(#cyl)"/>
+<ellipse cx="0" cy="-27" rx="46" ry="9" fill="url(#rim)" opacity=".9"/>
+<ellipse cx="0" cy="-115" rx="30" ry="6" fill="url(#rim)"/>
+<circle cx="0" cy="-150" r="34" fill="url(#sph)"/>
+<ellipse cx="-11" cy="-162" rx="9" ry="6" fill="#fff" opacity=".9" transform="rotate(-30 -11 -162)"/>
+
+<text x="0" y="-9" text-anchor="middle" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="15" fill="url(#gold)">U</text></g>
+</svg></div>
+          <div class="hq" aria-live="polite"><span id="hq-t">The right job changes more than a career&hellip;</span></div>
         </div>
       </div>
 
@@ -125,7 +143,7 @@
         <nav aria-label="For companies"><h4>For Companies</h4><a href="partners.html">Hiring Partners</a><a href="employer.html">Hire Talent</a></nav>
         <nav aria-label="U Hirable"><h4>U Hirable</h4><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="disclosure.html">Affiliate Disclosure</a></nav>
       </div>
-      <div class="fbot"><small>© <span id="year"></span> U Hirable. All rights reserved.</small><small>Some links on this site are affiliate or referral links. U Hirable may earn a commission at no extra cost to you.</small></div>
+      <div class="fbot"><small>© <span id="year"></span> U Hirable. All rights reserved.</small></div>
     </div>
   </footer>
 
@@ -134,9 +152,9 @@
 
   <script src="script.js?v=42"></script>
 <script>
-(function(){const el=document.getElementById("typed");if(!el)return;
-const lines=["Hi, I'm Amel 👋","I've always believed the right job changes more than a career…","…it can change the life of an entire family.","As a Global Talent Acquisition Partner, I see it every day.","That's why I built U Hirable…","…to help job seekers get hired, companies hire great talent, and everyone grow their careers."];
-let i=0;setInterval(()=>{el.classList.add("out");setTimeout(()=>{i=(i+1)%lines.length;el.textContent=lines[i];el.classList.remove("out")},450)},3200);})();
+(function(){var el=document.getElementById("hq-t");if(!el)return;
+var L=["The right job changes more than a career\u2026","\u2026it can change the life of an <b>entire family</b>.","That\u2019s why <b>U Hirable</b> exists."],i=0;
+setInterval(function(){el.classList.add("out");setTimeout(function(){i=(i+1)%L.length;el.innerHTML=L[i];el.classList.remove("out")},450)},3600);})();
 </script>  <script data-goatcounter="https://uhirable.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>(function(){const P=[["Any remote jobs for me?","12 remote roles right now. Want them?"],["Who sponsors visas?","16 companies do. Here\u2019s the list."],["Is my CV ATS-friendly?","Let\u2019s check it, free."],["Best job sites in UAE?","Bayt, GulfTalent, Naukrigulf and more."]];let i=0;const m=document.getElementById("ab-man"),b=document.getElementById("ab-bot");setInterval(()=>{i=(i+1)%P.length;m.classList.add("sw");b.classList.add("sw");setTimeout(()=>{m.textContent=P[i][0];b.textContent=P[i][1];m.classList.remove("sw");b.classList.remove("sw")},350)},3200);document.getElementById("ask-open").addEventListener("click",()=>document.getElementById("ua-btn").click());})();</script></body>
 </html>
